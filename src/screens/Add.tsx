@@ -24,7 +24,7 @@ export default function Add() {
   }
 
   return (
-    <Page title={t('add.title')} back="/debt">
+    <Page title={t('add.title')} desc={t('desc.add')} back="/debt">
       <div className="card">
         <div className="list">
           <Row icon={busy ? 'hourglass-split' : 'file-earmark-arrow-up'} title={busy ? t('common.loading') : t('add.upload')} sub={t('add.uploadHint')} onClick={() => !busy && file.current?.click()} />

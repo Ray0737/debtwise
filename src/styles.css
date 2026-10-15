@@ -432,3 +432,8 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 /* Header rhythm: 24 above the bar, 24 between bar and hero, about 32 under the hero */
 .top { padding-bottom: 56px; }
 .top.compact { padding-bottom: 48px; }
+
+/* Page description under the header title */
+.top-text { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.top-desc { font-size: 0.8rem; color: rgba(255, 255, 255, 0.72); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

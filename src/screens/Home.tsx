@@ -51,6 +51,7 @@ export default function Home() {
     <Page
       icon="house"
       title={t('home.greeting', { name: profile.displayName || t('app.name') })}
+      desc={t('desc.home')}
       hero={
         <>
           <span className="small">{short ? t('plan.shortfall') : t('home.left')} · {t('home.thisMonth')}</span>

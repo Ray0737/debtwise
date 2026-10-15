@@ -15,6 +15,7 @@ export default function Tax() {
     <Page
       icon="receipt"
       title={t('nav.tax')}
+      desc={t('desc.tax')}
       hero={est ? (
         <>
           <span className="small">{t('tax.due')} · {t('tax.year')} {SAMPLE_TAX_YEAR}</span>
@@ -27,7 +28,7 @@ export default function Tax() {
         <Card><p className="muted">{t('tax.missing')}</p></Card>
       ) : (
         <>
-          <Card title={t('tax.assumptions')} icon="list-ul">
+          <Card title={t('tax.assumptions')} icon="list-ul" tone="line">
             <div className="kv"><span className="muted">{t('tax.annualIncome')}</span><span className="num strong">{formatBaht(income)}</span></div>
             <ul className="stack small">{est.assumptions.map((a) => <li key={a}>{a}</li>)}</ul>
           </Card>

@@ -21,6 +21,7 @@ export default function Debt() {
     <Page
       icon="credit-card-2-front"
       title={t('nav.debt')}
+      desc={t('desc.debt')}
       action={<button className="circle" aria-label={t('debt.add')} onClick={() => nav('/debt/add')}><Icon n="plus-lg" /></button>}
       hero={
         <>

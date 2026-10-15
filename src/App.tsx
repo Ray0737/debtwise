@@ -22,13 +22,13 @@ import { supabase } from './lib/supabase'
 import { useApp } from './store/useApp'
 import { Icon } from './ui'
 
-const NAV: { to: string; icon: string; key: Key }[] = [
-  { to: '/', icon: 'house', key: 'nav.home' },
-  { to: '/chat', icon: 'chat-dots', key: 'nav.chat' },
-  { to: '/invest', icon: 'graph-up-arrow', key: 'nav.invest' },
-  { to: '/tax', icon: 'receipt', key: 'nav.tax' },
-  { to: '/debt', icon: 'credit-card-2-front', key: 'nav.debt' },
-  { to: '/profile', icon: 'person', key: 'nav.profile' },
+const NAV: { to: string; icon: string; key: Key; desc: Key }[] = [
+  { to: '/', icon: 'house', key: 'nav.home', desc: 'desc.home' },
+  { to: '/chat', icon: 'chat-dots', key: 'nav.chat', desc: 'desc.chat' },
+  { to: '/invest', icon: 'graph-up-arrow', key: 'nav.invest', desc: 'desc.invest' },
+  { to: '/tax', icon: 'receipt', key: 'nav.tax', desc: 'desc.tax' },
+  { to: '/debt', icon: 'credit-card-2-front', key: 'nav.debt', desc: 'desc.debt' },
+  { to: '/profile', icon: 'person', key: 'nav.profile', desc: 'desc.profile' },
 ]
 
 const compact = (n: number) => new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)
@@ -47,7 +47,7 @@ function Shell() {
     })
   }, [])
   const links = NAV.map((n) => (
-    <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => (isActive ? 'active' : '')}>
+    <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => (isActive ? 'active' : '')} title={t(n.desc)}>
       <Icon n={n.icon} /><span className="grow">{t(n.key)}</span>
       {n.to === '/debt' && debts.length > 0 && <span className="count">{debts.length}</span>}
     </NavLink>
@@ -91,7 +91,7 @@ function Shell() {
       </aside>
       <main className="main"><Outlet /></main>
       <nav className="tabs" aria-label="Main">{NAV.map((n) => (
-        <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => (isActive ? 'active' : '')} aria-label={t(n.key)} title={t(n.key)}><Icon n={n.icon} /></NavLink>
+        <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => (isActive ? 'active' : '')} aria-label={t(n.key)} title={`${t(n.key)}: ${t(n.desc)}`}><Icon n={n.icon} /></NavLink>
       ))}</nav>
     </div>
   )

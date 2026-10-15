@@ -54,6 +54,7 @@ export default function Plan() {
   return (
     <Page
       title={t('plan.title')}
+      desc={t('desc.plan')}
       back
       hero={
         <>

@@ -33,7 +33,7 @@ export default function Review() {
   }
 
   return (
-    <Page title={t('review.title')} back="/debt/add" hero={<span className="small">{rows.length ? t('review.line') : ''}</span>}>
+    <Page title={t('review.title')} desc={t('desc.review')} back="/debt/add" hero={<span className="small">{rows.length ? t('review.line') : ''}</span>}>
       {!rows.length && <Card><p className="muted">{t('review.none')}</p></Card>}
       {rows.map((r, i) => (
         <Card key={i}>

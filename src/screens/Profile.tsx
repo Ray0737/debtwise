@@ -45,7 +45,7 @@ export default function Profile() {
   const thisYear = new Date().getFullYear()
 
   return (
-    <Page icon="person" title={t('profile.title')} hero={<><span className="big">{profile.displayName || t('app.name')}</span><span className="small">{t('profile.dataLine')}</span></>}>
+    <Page icon="person" title={t('profile.title')} desc={t('desc.profile')} hero={<><span className="big">{profile.displayName || t('app.name')}</span><span className="small">{t('profile.dataLine')}</span></>}>
       <Card title={t('profile.title')} icon="person">
         <Field label={t('field.displayName')}><TextInput value={draft.displayName ?? ''} onChange={(v) => set('displayName', v)} placeholder={t('ph.name')} /></Field>
         <Field label={t('field.birthYear')} error={err('birthYear')}>

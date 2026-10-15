@@ -21,6 +21,7 @@ export default function Invest() {
     <Page
       icon="graph-up-arrow"
       title={t('nav.invest')}
+      desc={t('desc.invest')}
       hero={<><span className="small">{t('invest.title')}</span><span className="small"><SampleTag /></span></>}
     >
       <p className="small"><Icon n="info-circle" /> {t('invest.context', { amount: formatBaht(left) })}</p>
