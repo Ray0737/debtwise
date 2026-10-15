@@ -39,10 +39,10 @@ test('an injected instruction inside a field cannot add rows or fields', () => {
 })
 test('parseConsult accepts only the allowed proposal field and a finite value', () => {
   expect(parseConsult({ reply: 'hi', proposal: { field: 'monthlyEssentials', value: 30000, note: 'tuition' } }))
-    .toEqual({ reply: 'hi', proposal: { field: 'monthlyEssentials', value: 30000, note: 'tuition' } })
+    .toEqual({ reply: 'hi', proposal: { field: 'monthlyEssentials', value: 30000, note: 'tuition' }, cites: [] })
   expect(parseConsult({ reply: 'hi', proposal: { field: 'monthlyIncome', value: 1 } }).proposal).toBeNull()
   expect(parseConsult({ reply: 'hi', proposal: { field: 'monthlyEssentials', value: -5 } }).proposal).toBeNull()
-  expect(parseConsult(42)).toEqual({ reply: '', proposal: null })
+  expect(parseConsult(42)).toEqual({ reply: '', proposal: null, cites: [] })
 })
 test('collectNumbers walks nested objects and arrays', () => {
   expect(collectNumbers({ a: 1, b: [2, { c: 3 }], d: 'x', e: null }).sort()).toEqual([1, 2, 3])
@@ -51,4 +51,16 @@ test('consult prompt carries the facts and the no advice rules', () => {
   const p = consultSystem('en', { available: 100 })
   expect(p).toContain('"available":100')
   expect(p).toContain('never say safe')
+})
+
+test('parseConsult accepts a one-off bill and keeps only known programme ids', () => {
+  const r = parseConsult({ reply: 'ok', proposal: { field: 'oneOff', value: 15000, note: 'tuition' }, cites: ['debt-clinic', 'made-up', 'debt-clinic', 7] })
+  expect(r.proposal).toEqual({ field: 'oneOff', value: 15000, note: 'tuition' })
+  expect(r.cites).toEqual(['debt-clinic'])
+})
+test('consult prompt lists the public programmes and the one-off rule', () => {
+  const p = consultSystem('th', {})
+  expect(p).toContain('Debt Clinic')
+  expect(p).toContain('oneOff')
+  expect(p).toContain('never say they qualify')
 })

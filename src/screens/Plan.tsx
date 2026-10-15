@@ -3,7 +3,7 @@ import { OFFERS } from '../data/sample/offers'
 import { formatBaht, refinance, type Debt } from '../engine'
 import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
-import { useApp } from '../store/useApp'
+import { oneOffTotal, useApp } from '../store/useApp'
 import { Card, Icon, Page, Row, SampleTag } from '../ui'
 
 function Refi({ debt }: { debt: Debt }) {
@@ -39,10 +39,10 @@ function Refi({ debt }: { debt: Debt }) {
 
 export default function Plan() {
   const t = useT()
-  const { profile, debts, store } = useApp()
+  const { profile, debts, store, oneOffs } = useApp()
   const [saved, setSaved] = useState(false)
   if (!profile) return null
-  const s = summarize(profile, debts)
+  const s = summarize(profile, debts, oneOffTotal(oneOffs))
   const byId = new Map(debts.map((d) => [d.id, d]))
   const hasRefi = debts.some((d) => d.ratePct != null && d.termMonthsLeft && OFFERS.some((o) => o.forTypes.includes(d.type)))
 

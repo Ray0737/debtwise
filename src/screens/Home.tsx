@@ -4,17 +4,18 @@ import { formatBaht } from '../engine'
 import { useT } from '../i18n'
 import { daysUntilDue, summarize } from '../lib/derive'
 import { buildIcs } from '../lib/ics'
-import { useApp } from '../store/useApp'
+import { oneOffTotal, useApp } from '../store/useApp'
 import { Card, Icon, Page } from '../ui'
 import { Consultant } from './Consultant'
 
 export default function Home() {
   const t = useT()
   const nav = useNavigate()
-  const { profile, debts, store } = useApp()
+  const { profile, debts, store, oneOffs, clearOneOffs } = useApp()
+  const oneOff = oneOffTotal(oneOffs)
   const [monthly, setMonthly] = useState(false)
   const justAdded = (useLocation().state as { justAdded?: number } | null)?.justAdded ?? 0
-  const s = profile ? summarize(profile, debts) : null
+  const s = profile ? summarize(profile, debts, oneOff) : null
   const month = new Date().toISOString().slice(0, 7)
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function Home() {
   const lines: [string, string, number][] = [
     ['cash-stack', t('home.income'), (profile.monthlyIncome ?? 0) + profile.otherIncome],
     ['house-door', t('home.essentials'), profile.monthlyEssentials ?? 0],
+    ...(oneOff > 0 ? ([['receipt-cutoff', t('home.oneOff'), oneOff]] as [string, string, number][]) : []),
     ['credit-card', t('home.debts'), s.minimums],
     ['receipt', t('home.tax'), s.taxSetAside],
   ]
@@ -79,6 +81,7 @@ export default function Home() {
         ))}
         <div className="wrap">
           <button className="btn" onClick={() => nav('/plan')}><Icon n="list-check" />{t('home.openPlan')}</button>
+          {oneOff > 0 && <button className="btn soft" onClick={clearOneOffs}><Icon n="x-lg" />{t('home.clearOneOff')}</button>}
           <button className="btn soft" onClick={() => nav('/debt/add')}><Icon n="plus-lg" />{t('debt.add')}</button>
           {debts.some((d) => d.dueDay) && <button className="btn soft" onClick={downloadIcs}><Icon n="calendar-plus" />{t('home.calendar')}</button>}
         </div>

@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { findUnknownFigures } from '../src/engine/guard.js'
 import { mask } from '../src/engine/mask.js'
 import { requireUser } from './_lib/auth.js'
-import { EXTRACT_SYSTEM, collectNumbers, consultSystem, parseCandidates, parseConsult } from './_lib/prompts.js'
+import { EXTRACT_SYSTEM, PROGRAMME_NUMBERS, collectNumbers, consultSystem, parseCandidates, parseConsult } from './_lib/prompts.js'
 import { pickProvider } from './_lib/providers.js'
 
 const MAX_INLINE = 4_000_000
@@ -35,7 +35,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (!messages.length) return res.status(400).json({ error: 'input' })
       const out = await provider.generate({ system: consultSystem(lang, b.facts ?? {}), messages })
       const parsed = parseConsult(safeJson(out))
-      const flagged = findUnknownFigures(parsed.reply, collectNumbers(b.facts))
+      // Figures the person typed themselves (a bill amount) and public programme figures are allowed in a reply.
+      const typed = messages.filter((m) => m.role === 'user').flatMap((m) => (m.text.match(/\d[\d,]*(?:\.\d+)?/g) ?? []).map((x) => parseFloat(x.replace(/,/g, ''))))
+      const flagged = findUnknownFigures(parsed.reply, [...collectNumbers(b.facts), ...PROGRAMME_NUMBERS, ...typed])
       return res.status(200).json({ ...parsed, flagged, maskedPayload: messages })
     }
     return res.status(400).json({ error: 'action' })

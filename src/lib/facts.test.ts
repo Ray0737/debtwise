@@ -27,3 +27,9 @@ test('facts contain no names or ids', () => {
   const s = JSON.stringify(buildFacts({ ...profile, displayName: 'Somchai' }, debts))
   expect(s.includes('Somchai')).toBe(false)
 })
+
+test('facts tell the consultant about a one-off bill this month', () => {
+  const f = buildFacts(profile, debts, 15000)
+  expect(f.oneOffThisMonth).toBe(15000)
+  expect(buildFacts(profile, debts).oneOffThisMonth).toBe(0)
+})

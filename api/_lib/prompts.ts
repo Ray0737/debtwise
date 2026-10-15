@@ -1,3 +1,4 @@
+import { BOT_MEASURES } from '../../src/data/public/botMeasures.js'
 import type { DebtType } from '../../src/engine/types'
 
 const TYPES: DebtType[] = ['credit_card', 'personal', 'car', 'home', 'student', 'informal']
@@ -22,18 +23,31 @@ Use null when a value is not in the document. Never invent values.
 lineText must be copied exactly from the document, the line that shows the balance.
 confidence is between 0 and 1. Amounts are in Thai baht as plain numbers.`
 
+const MEASURE_IDS = BOT_MEASURES.map((m) => m.id)
+
+// Numbers that appear in the public programme text. A reply may repeat them without being flagged.
+export const PROGRAMME_NUMBERS = [60, 120, 2000000, 10000, 20000]
+
+function programmesBlock(): string {
+  return BOT_MEASURES.map((m) => `- id ${m.id}: ${m.name.en}. Who: ${m.who.en}. Terms: ${m.terms.en}`).join('\n')
+}
+
 export function consultSystem(lang: 'th' | 'en', facts: unknown): string {
   return `You are Debtwise, a calm assistant that helps a person in Thailand understand their debts.
 Reply in ${lang === 'th' ? 'Thai' : 'English'}, in plain short sentences.
-FACTS computed by the app. These are the only money figures you may state:
+FACTS computed by the app. These are the only money figures you may state about the person:
 ${JSON.stringify(facts)}
+PUBLIC PROGRAMMES from the Bank of Thailand (public information, not about this person):
+${programmesBlock()}
 Rules:
-- Never calculate money yourself. Quote only figures from FACTS.
+- Never calculate money yourself. Quote only figures from FACTS, or figures the person just told you.
 - Say what the numbers show and what the options are. Never say you should do something, never say safe, never promise savings.
 - Mention that an estimate is an estimate. You cannot move money or contact a lender.
 - Suggest talking to the lender early when payments cannot be met.
-- If the person describes a change in monthly essential spending, you may propose it.
-Return JSON only: {"reply":string,"proposal":null | {"field":"monthlyEssentials","value":number,"note":string}}.`
+- When money is short, you may name a programme that could be relevant. Say it depends on the person's situation and the lender's decision, never say they qualify, and list the ids you used in "cites".
+- If the person describes a change in monthly essential spending, you may propose field "monthlyEssentials".
+- If the person mentions a one-time bill this month with an amount (tuition, medical, repair), propose field "oneOff" with value set to exactly the amount the person said, and a short note naming the bill. Do not add or subtract anything.
+Return JSON only: {"reply":string,"proposal":null | {"field":"monthlyEssentials"|"oneOff","value":number,"note":string},"cites":string[]}.`
 }
 
 const str = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
@@ -66,14 +80,19 @@ export function parseCandidates(raw: unknown): Candidate[] {
   return out
 }
 
-export function parseConsult(raw: unknown): { reply: string; proposal: { field: 'monthlyEssentials'; value: number; note: string } | null } {
-  if (!raw || typeof raw !== 'object') return { reply: '', proposal: null }
+export type ConsultProposal = { field: 'monthlyEssentials' | 'oneOff'; value: number; note: string }
+
+export function parseConsult(raw: unknown): { reply: string; proposal: ConsultProposal | null; cites: string[] } {
+  if (!raw || typeof raw !== 'object') return { reply: '', proposal: null, cites: [] }
   const o = raw as Record<string, unknown>
   const p = o.proposal as Record<string, unknown> | null | undefined
-  const ok = p && p.field === 'monthlyEssentials' && typeof p.value === 'number' && Number.isFinite(p.value) && p.value >= 0
+  const field = p && (p.field === 'monthlyEssentials' || p.field === 'oneOff') ? (p.field as ConsultProposal['field']) : null
+  const ok = field && typeof p!.value === 'number' && Number.isFinite(p!.value) && (p!.value as number) >= 0
+  const cites = Array.isArray(o.cites) ? [...new Set(o.cites.filter((c): c is string => typeof c === 'string' && MEASURE_IDS.includes(c)))] : []
   return {
     reply: str(o.reply, 2000),
-    proposal: ok ? { field: 'monthlyEssentials', value: p!.value as number, note: str(p!.note, 200) } : null,
+    proposal: ok ? { field: field!, value: p!.value as number, note: str(p!.note, 200) } : null,
+    cites,
   }
 }
 

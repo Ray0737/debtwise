@@ -10,14 +10,14 @@ export function monthlyTaxSetAside(p: Profile): number {
   return Math.round(t.tax / 12)
 }
 
-export function summarize(p: Profile, debts: Debt[]): {
+export function summarize(p: Profile, debts: Debt[], oneOff = 0): {
   taxSetAside: number; minimums: number; cash: Cashflow; plan: PlanResult; essentialsMissing: boolean
 } {
   const taxSetAside = monthlyTaxSetAside(p)
   const minimums = debts.reduce((s, d) => s + d.minPayment, 0)
   const cash = cashflow({
     monthlyIncome: p.monthlyIncome ?? 0, otherIncome: p.otherIncome ?? 0,
-    essentials: p.monthlyEssentials ?? 0, taxSetAside, minimums,
+    essentials: (p.monthlyEssentials ?? 0) + oneOff, taxSetAside, minimums,
   })
   return { taxSetAside, minimums, cash, plan: buildPlan(debts, cash.available), essentialsMissing: p.monthlyEssentials == null }
 }

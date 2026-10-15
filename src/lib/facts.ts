@@ -2,13 +2,14 @@ import type { Debt } from '../engine'
 import type { Profile } from '../store/types'
 import { summarize } from './derive'
 
-export function buildFacts(p: Profile, debts: Debt[]) {
-  const s = summarize(p, debts)
+export function buildFacts(p: Profile, debts: Debt[], oneOff = 0) {
+  const s = summarize(p, debts, oneOff)
   const planned = new Map(s.plan.allocations.map((a) => [a.debtId, a.amount]))
   return {
     monthlyIncome: p.monthlyIncome ?? 0,
     otherIncome: p.otherIncome ?? 0,
     essentials: p.monthlyEssentials ?? 0,
+    oneOffThisMonth: oneOff,
     taxSetAside: s.taxSetAside,
     available: s.cash.available,
     minimums: s.minimums,

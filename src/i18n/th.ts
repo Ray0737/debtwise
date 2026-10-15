@@ -78,5 +78,5 @@ export const th: Record<Key, string> = {
   'profile.loadDemo': 'โหลดครอบครัวตัวอย่าง', 'profile.removeDemo': 'ลบข้อมูลสาธิต', 'profile.signOut': 'ออกจากระบบ', 'profile.saved': 'บันทึกแล้ว',
   'nav.profile': 'โปรไฟล์', 'common.edit': 'แก้ไข', 'common.close': 'ปิด', 'common.or': 'หรือ',
   'loan.deleteConfirm': 'ลบหนี้นี้หรือไม่ การลบไม่สามารถย้อนกลับได้', 'loan.details': 'รายละเอียด',
-  'nav.shortcuts': 'ทางลัด', 'debt.loans': 'จำนวน {n} รายการ', 'home.ask': 'ถาม Debtwise',
+  'home.oneOff': 'บิลครั้งเดียวเดือนนี้', 'home.clearOneOff': 'ล้างบิลครั้งเดียว', 'talk.applied': 'ฉันเพิ่มบิลครั้งเดียว {amount} ({note}) สำหรับเดือนนี้แล้ว ฉันมีทางเลือกอะไรบ้าง', 'talk.source': 'แหล่งที่มา', 'nav.shortcuts': 'ทางลัด', 'debt.loans': 'จำนวน {n} รายการ', 'home.ask': 'ถาม Debtwise',
 }

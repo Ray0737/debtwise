@@ -6,7 +6,8 @@ import { supabase } from './supabase'
 export type { Candidate }
 export interface ConsultResult {
   reply: string
-  proposal: { field: 'monthlyEssentials'; value: number; note: string } | null
+  proposal: { field: 'monthlyEssentials' | 'oneOff'; value: number; note: string } | null
+  cites: string[]
   flagged: string[]
   maskedPayload: unknown
 }

@@ -2,15 +2,15 @@ import { formatBaht, formatDate } from '../engine'
 import { TOKEN_EVENTS, WATCHLIST } from '../data/sample/tokenomist'
 import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
-import { useApp } from '../store/useApp'
+import { oneOffTotal, useApp } from '../store/useApp'
 import { Icon, Page, Row, SampleTag } from '../ui'
 
 const KIND_ICON = { unlock: 'unlock', vesting: 'hourglass-split', emission: 'droplet' } as const
 
 export default function Invest() {
   const t = useT()
-  const { profile, debts, lang } = useApp()
-  const left = profile ? Math.max(0, summarize(profile, debts).plan.leftover) : 0
+  const { profile, debts, lang, oneOffs } = useApp()
+  const left = profile ? Math.max(0, summarize(profile, debts, oneOffTotal(oneOffs)).plan.leftover) : 0
   const events = [...TOKEN_EVENTS].sort((a, b) => a.date.localeCompare(b.date))
   const watched = events.filter((e) => WATCHLIST.includes(e.token))
   const row = (e: (typeof events)[number]) => (

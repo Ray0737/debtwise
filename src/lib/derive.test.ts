@@ -36,3 +36,10 @@ test('days until due counts to the next occurrence', () => {
 test('days until due clamps to the end of a short month', () => {
   expect(daysUntilDue(31, new Date(Date.UTC(2026, 10, 5)))).toBe(25)
 })
+
+test('a one-off bill lowers what is available and grows the shortfall by the same amount', () => {
+  const base = summarize(profile, debts)
+  const tuition = summarize(profile, debts, 15000)
+  expect(base.cash.available - tuition.cash.available).toBe(15000)
+  expect(tuition.plan.shortfall).toBeGreaterThanOrEqual(base.plan.shortfall)
+})

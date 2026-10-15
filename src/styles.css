@@ -391,3 +391,7 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .main:not(.pub):not(.solo) .msg + .msg, .main:not(.pub):not(.solo) .chat > .msg:not(:first-child) { border-top: 1px solid var(--line); }
 .main:not(.pub):not(.solo) .msg.user { border-left: 2px solid var(--main); padding-left: var(--s3); }
 .main:not(.pub):not(.solo) .chat { gap: 0; }
+
+/* Public programme sources under a consultant reply */
+.cites { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); margin-top: var(--s2); color: var(--muted); }
+.cites .link { color: var(--main); }
