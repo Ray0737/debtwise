@@ -31,6 +31,7 @@ export const th: Record<Key, string> = {
   'debt.share': 'ของยอดรวม',
   'add.title': 'เพิ่มหนี้', 'add.upload': 'อัปโหลดใบแจ้งหนี้', 'add.uploadHint': 'รูปภาพหรือ PDF คุณตรวจสอบทุกตัวเลข',
   'add.talk': 'พูดคุยเพื่อเพิ่ม', 'add.form': 'กรอกเอง',
+  'add.uploadNote': 'ไฟล์จะถูกส่งให้เอไออ่าน และไม่ถูกจัดเก็บ',
   'review.title': 'ตรวจสอบตัวเลข', 'review.line': 'ทุกค่ามาจากบรรทัดในเอกสารของคุณ ยืนยันรายการที่ตรงกัน',
   'review.matches': 'ตรงกับเอกสารของฉัน', 'review.saveChecked': 'บันทึกหนี้ที่ยืนยันแล้ว', 'review.sourceLine': 'บรรทัดต้นฉบับ',
   'review.confidence': 'ความมั่นใจ', 'review.none': 'ไม่พบข้อมูลในไฟล์นี้ ลองไฟล์อื่นหรือกรอกเอง',

@@ -29,6 +29,7 @@ export const en = {
   'debt.share': 'of total',
   'add.title': 'Add a debt', 'add.upload': 'Upload a statement', 'add.uploadHint': 'Photo or PDF. You check every number.',
   'add.talk': 'Talk it through', 'add.form': 'Enter by hand',
+  'add.uploadNote': 'The file is sent to the AI to be read. It is not stored.',
   'review.title': 'Check the numbers', 'review.line': 'Each value comes from a line in your document. Confirm the ones that match.',
   'review.matches': 'This matches my document', 'review.saveChecked': 'Save confirmed debts', 'review.sourceLine': 'Source line',
   'review.confidence': 'Confidence', 'review.none': 'Nothing was found in this file. Try another or enter by hand.',

@@ -9,7 +9,7 @@ import { useApp } from '../store/useApp'
 export default function AddDebt() {
   const t = useT()
   const nav = useNavigate()
-  const { store, refresh } = useApp()
+  const { store, refresh, lang } = useApp()
   const [form, setForm] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(false)
@@ -20,7 +20,7 @@ export default function AddDebt() {
     setBusy(true); setError(false)
     try {
       const { extractDocument } = await import('../lib/ai')
-      const candidates = await extractDocument(f)
+      const candidates = await extractDocument(f, lang)
       nav('/debt/review', { state: { candidates, fileName: f.name } })
     } catch { setError(true) } finally { setBusy(false) }
   }
@@ -31,7 +31,7 @@ export default function AddDebt() {
       <h1 className="h1">{t('add.title')}</h1>
       <div className="joined">
         <div className="row" role="button" tabIndex={0} onClick={() => file.current?.click()}>
-          <Icon name="upload" size={28} /><div className="grow"><div>{t('add.upload')}</div><div className="muted small">{t('add.uploadHint')}</div></div>
+          <Icon name="upload" size={28} /><div className="grow"><div>{t('add.upload')}</div><div className="muted small">{t('add.uploadHint')}</div><div className="muted small">{t('add.uploadNote')}</div></div>
         </div>
         <div className="row" role="button" tabIndex={0} onClick={() => nav('/talk')}>
           <Icon name="mic" size={28} /><div className="grow">{t('add.talk')}</div>
