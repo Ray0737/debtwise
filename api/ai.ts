@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { findUnknownFigures } from '../src/engine/guard'
-import { mask } from '../src/engine/mask'
-import { requireUser } from './_lib/auth'
-import { EXTRACT_SYSTEM, collectNumbers, consultSystem, parseCandidates, parseConsult } from './_lib/prompts'
-import { pickProvider } from './_lib/providers'
+import { findUnknownFigures } from '../src/engine/guard.js'
+import { mask } from '../src/engine/mask.js'
+import { requireUser } from './_lib/auth.js'
+import { EXTRACT_SYSTEM, collectNumbers, consultSystem, parseCandidates, parseConsult } from './_lib/prompts.js'
+import { pickProvider } from './_lib/providers.js'
 
 const MAX_INLINE = 4_000_000
 
