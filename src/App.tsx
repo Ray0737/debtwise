@@ -3,6 +3,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Shell } from './components/Shell'
 import { useT } from './i18n'
 import { useApp } from './store/useApp'
+import SignIn from './screens/SignIn'
+import Onboarding from './screens/Onboarding'
+import ProfileScreen from './screens/Profile'
 
 const Todo = ({ name }: { name: string }) => <p className="muted">{name}</p>
 
@@ -23,14 +26,14 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/signin" element={<Todo name="signin" />} />
-        <Route path="/onboarding/:step" element={<Todo name="onboarding" />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/onboarding/:step" element={<Onboarding />} />
         <Route element={<Guard><Shell /></Guard>}>
           <Route index element={<Todo name="home" />} />
           <Route path="invest" element={<Todo name="invest" />} />
           <Route path="tax" element={<Todo name="tax" />} />
           <Route path="debt" element={<Todo name="debt" />} />
-          <Route path="profile" element={<Todo name="profile" />} />
+          <Route path="profile" element={<ProfileScreen />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
