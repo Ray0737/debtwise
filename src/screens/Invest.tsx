@@ -19,6 +19,7 @@ export default function Invest() {
   )
   return (
     <Page
+      icon="graph-up-arrow"
       title={t('nav.invest')}
       hero={<><span className="small">{t('invest.title')}</span><span className="small"><SampleTag /></span></>}
     >

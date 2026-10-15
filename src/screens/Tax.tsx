@@ -13,6 +13,7 @@ export default function Tax() {
   const ideas = est ? suggestDeductions(est.marginalRate) : []
   return (
     <Page
+      icon="receipt"
       title={t('nav.tax')}
       hero={est ? (
         <>

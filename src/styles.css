@@ -423,3 +423,12 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .chatlist .composer { position: fixed; left: 0; right: 0; bottom: calc(var(--tabs-h) + env(safe-area-inset-bottom)); z-index: 15; padding: var(--s2) 0 var(--s3); background: var(--bg); border-top: 1px solid var(--line); }
 @media (min-width: 1024px) { .chatlist .composer { left: 288px; bottom: 0; } }
 .chatlist .composer-box { padding-left: var(--s4); }
+
+/* Lead icon on pages without a back button */
+.circle.lead { cursor: default; background: rgba(255, 255, 255, 0.16); }
+.circle.lead:hover { background: rgba(255, 255, 255, 0.16); }
+.top-bar { column-gap: var(--s3); }
+
+/* Header rhythm: 24 above the bar, 24 between bar and hero, about 32 under the hero */
+.top { padding-bottom: 56px; }
+.top.compact { padding-bottom: 48px; }

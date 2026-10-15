@@ -29,8 +29,8 @@ function SignOutButton() {
   )
 }
 
-export function Page({ title, back, action, hero, compact, children }: {
-  title: string; back?: boolean | string; action?: ReactNode; hero?: ReactNode; compact?: boolean; children: ReactNode
+export function Page({ title, back, icon, action, hero, compact, children }: {
+  title: string; back?: boolean | string; icon?: string; action?: ReactNode; hero?: ReactNode; compact?: boolean; children: ReactNode
 }) {
   const t = useT()
   const nav = useNavigate()
@@ -43,7 +43,7 @@ export function Page({ title, back, action, hero, compact, children }: {
               <button className="circle" aria-label={t('common.back')} onClick={() => (typeof back === 'string' ? nav(back) : nav(-1))}>
                 <Icon n="chevron-left" />
               </button>
-            ) : <span />}
+            ) : <span className="circle lead" aria-hidden="true"><Icon n={icon ?? 'wallet2'} /></span>}
             <h1 className="top-title">{title}</h1>
             <div className="top-act">{action}<LangButton /><SignOutButton /></div>
           </div>

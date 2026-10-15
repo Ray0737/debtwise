@@ -49,6 +49,7 @@ export default function Home() {
 
   return (
     <Page
+      icon="house"
       title={t('home.greeting', { name: profile.displayName || t('app.name') })}
       hero={
         <>
