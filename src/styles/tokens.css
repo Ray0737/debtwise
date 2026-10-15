@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'line_seed_sans_th';
+  src: url('/fonts/lineseedsansth_rg.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --bg: #EEE9DF; --surface: #DDD7CA; --surface-2: #C9C1B1;
+  --card-dark: #2C3B4D; --card-dark-2: #3D4B5B;
+  --text: #1B2632; --muted: rgba(27, 38, 50, .72); --line: rgba(27, 38, 50, .16);
+  --on-dark: #EEE9DF; --on-dark-muted: rgba(238, 233, 223, .72); --line-dark: rgba(238, 233, 223, .16);
+  --accent: #FFB162; --warn: #A35139; --good: #2C3B4D; --chart-5: #7D7769;
+  --radius: 14px; --radius-lg: 22px;
+  --ease: cubic-bezier(.4, 0, .2, 1); --dur: .16s;
+  --font: 'line_seed_sans_th', 'Inter', 'IBM Plex Sans Thai', system-ui, sans-serif;
+}
