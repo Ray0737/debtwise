@@ -11,6 +11,7 @@ import DebtGroup from './screens/DebtGroup'
 import LoanDetail from './screens/LoanDetail'
 import AddDebt from './screens/AddDebt'
 import Review from './screens/Review'
+import Plan from './screens/Plan'
 
 const Todo = ({ name }: { name: string }) => <p className="muted">{name}</p>
 
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="debt" element={<Debt />} />
           <Route path="debt/add" element={<AddDebt />} />
           <Route path="debt/review" element={<Review />} />
+          <Route path="plan" element={<Plan />} />
           <Route path="debt/group/:by/:key" element={<DebtGroup />} />
           <Route path="debt/loan/:id" element={<LoanDetail />} />
           <Route path="profile" element={<ProfileScreen />} />
