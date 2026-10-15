@@ -31,7 +31,8 @@ export default function Home() {
     .filter((d) => d.dueDay)
     .map((d) => ({ d, days: daysUntilDue(d.dueDay!) }))
     .sort((a, b) => a.days - b.days)[0]
-  const status = s.plan.shortfall > 0
+  const short = s.plan.shortfall > 0
+  const status = short
     ? t('home.notice.short', { amount: formatBaht(s.plan.shortfall) })
     : t('home.notice.ok', { amount: formatBaht(s.plan.leftover) })
   const lead = justAdded ? t('home.notice.added', { n: justAdded }) : monthly ? t('home.notice.month') : ''
@@ -47,20 +48,20 @@ export default function Home() {
 
   return (
     <>
-      <div className="card card-dark">
-        <span className="muted">{t('home.thisMonth')}</span>
-        <span className="display accent num">
-          {s.plan.shortfall > 0 ? `${t('plan.shortfall')} ${formatBaht(s.plan.shortfall)}` : formatBaht(s.plan.leftover)}
+      <div className={`card ${short ? 'card-red' : 'card-dark'}`}>
+        <span className="muted section-title"><Icon name={short ? 'warn' : 'check'} size={16} />{t('home.thisMonth')}</span>
+        <span className={`display num${short ? '' : ' accent'}`}>
+          {short ? `${t('plan.shortfall')} ${formatBaht(s.plan.shortfall)}` : formatBaht(s.plan.leftover)}
         </span>
         {next && (
-          <span className="muted small">
-            {t('home.nextDue')}: {next.d.label}, <span className="num">{formatBaht(next.d.minPayment)}</span>, {t('home.dueIn', { n: next.days })}
+          <span className="muted small section-title">
+            <Icon name="calendar" size={14} />{t('home.nextDue')}: {next.d.label}, <b className="num">{formatBaht(next.d.minPayment)}</b>, {t('home.dueIn', { n: next.days })}
           </span>
         )}
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button className="btn btn-secondary" style={{ width: 'auto' }} onClick={() => nav('/plan')}>{t('home.openPlan')}</button>
-          <button className="btn btn-secondary" style={{ width: 'auto' }} onClick={() => nav('/debt/add')}><Icon name="plus" size={20} />{t('debt.add')}</button>
-          {debts.some((d) => d.dueDay) && <button className="btn btn-secondary" style={{ width: 'auto' }} onClick={downloadIcs}>{t('home.calendar')}</button>}
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          <button className="btn btn-sm btn-secondary" onClick={() => nav('/plan')}><Icon name="chart" size={14} />{t('home.openPlan')}</button>
+          <button className="btn btn-sm btn-secondary" onClick={() => nav('/debt/add')}><Icon name="plus" size={14} />{t('debt.add')}</button>
+          {debts.some((d) => d.dueDay) && <button className="btn btn-sm btn-secondary" onClick={downloadIcs}><Icon name="bell" size={14} />{t('home.calendar')}</button>}
         </div>
       </div>
       <Consultant notice={notice} />

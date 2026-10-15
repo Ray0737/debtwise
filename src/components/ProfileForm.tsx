@@ -1,7 +1,8 @@
 import { useT } from '../i18n'
 import type { ProfileField } from '../lib/validate'
 import type { Profile } from '../store/types'
-import { Field, NumInput } from './Field'
+import { Field, NumInput, TextInput } from './Field'
+import { DayPicker, YearPicker } from './Pickers'
 
 interface Props {
   fields: ProfileField[]
@@ -17,17 +18,17 @@ export function ProfileForm({ fields, value, onChange, errors }: Props) {
     <>
       {has('displayName') && (
         <Field label={t('field.displayName')} error={errors.displayName}>
-          <input className="input" value={value.displayName ?? ''} onChange={(e) => onChange({ displayName: e.target.value })} />
+          <TextInput icon="person" placeholder={t('ph.name')} value={value.displayName} onChange={(v) => onChange({ displayName: v })} />
         </Field>
       )}
       {has('birthYear') && (
         <Field label={t('field.birthYear')} error={errors.birthYear}>
-          <NumInput value={value.birthYear} onChange={(v) => onChange({ birthYear: v })} placeholder="1990" />
+          <YearPicker value={value.birthYear} onChange={(v) => onChange({ birthYear: v })} />
         </Field>
       )}
       {has('householdSize') && (
         <Field label={t('field.household')} error={errors.householdSize}>
-          <NumInput value={value.householdSize} onChange={(v) => onChange({ householdSize: v })} />
+          <NumInput icon="people" value={value.householdSize} onChange={(v) => onChange({ householdSize: v })} />
         </Field>
       )}
       {has('incomeType') && (
@@ -43,32 +44,32 @@ export function ProfileForm({ fields, value, onChange, errors }: Props) {
       )}
       {has('monthlyIncome') && (
         <Field label={t('field.monthlyIncome')} error={errors.monthlyIncome}>
-          <NumInput value={value.monthlyIncome} onChange={(v) => onChange({ monthlyIncome: v })} />
+          <NumInput icon="coins" unit="฿" value={value.monthlyIncome} onChange={(v) => onChange({ monthlyIncome: v })} />
         </Field>
       )}
       {has('otherIncome') && (
         <Field label={t('field.otherIncome')} error={errors.otherIncome}>
-          <NumInput value={value.otherIncome} onChange={(v) => onChange({ otherIncome: v ?? 0 })} />
+          <NumInput icon="coins" unit="฿" value={value.otherIncome} onChange={(v) => onChange({ otherIncome: v ?? 0 })} />
         </Field>
       )}
       {has('payDay') && (
         <Field label={t('field.payDay')} error={errors.payDay}>
-          <NumInput value={value.payDay} onChange={(v) => onChange({ payDay: v })} />
+          <DayPicker value={value.payDay} onChange={(v) => onChange({ payDay: v })} optional />
         </Field>
       )}
       {has('retireAge') && (
         <Field label={t('field.retireAge')} error={errors.retireAge}>
-          <NumInput value={value.retireAge} onChange={(v) => onChange({ retireAge: v })} placeholder="60" />
+          <NumInput icon="clock" placeholder="60" value={value.retireAge} onChange={(v) => onChange({ retireAge: v })} />
         </Field>
       )}
       {has('postRetireIncome') && (
         <Field label={t('field.postRetire')} error={errors.postRetireIncome}>
-          <NumInput value={value.postRetireIncome} onChange={(v) => onChange({ postRetireIncome: v })} />
+          <NumInput icon="coins" unit="฿" value={value.postRetireIncome} onChange={(v) => onChange({ postRetireIncome: v })} />
         </Field>
       )}
       {has('monthlyEssentials') && (
         <Field label={t('field.essentials')} error={errors.monthlyEssentials}>
-          <NumInput value={value.monthlyEssentials} onChange={(v) => onChange({ monthlyEssentials: v })} />
+          <NumInput icon="home" unit="฿" value={value.monthlyEssentials} onChange={(v) => onChange({ monthlyEssentials: v })} />
         </Field>
       )}
     </>

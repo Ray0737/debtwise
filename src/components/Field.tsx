@@ -9,15 +9,31 @@ export function Field({ label, error, children }: { label: string; error?: 'requ
       <label>{label}</label>
       {children}
       {error && (
-        <span className="err" role="alert"><Icon name="warn" size={18} />{t(error === 'required' ? 'field.required' : 'field.invalid')}</span>
+        <span className="err" role="alert"><Icon name="warn" size={14} />{t(error === 'required' ? 'field.required' : 'field.invalid')}</span>
       )}
     </div>
   )
 }
 
-export function NumInput({ value, onChange, ...rest }: { value: number | null | undefined; onChange: (v: number | null) => void } & Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>) {
+type Base = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> & { icon?: string; unit?: string }
+
+export function TextInput({ value, onChange, icon, unit, ...rest }: Base & { value: string | null | undefined; onChange: (v: string) => void }) {
   return (
-    <input className="input num" inputMode="decimal" value={value ?? ''}
-      onChange={(e) => { const s = e.target.value; onChange(s === '' ? null : Number(s)) }} {...rest} />
+    <label className="ctl">
+      {icon && <Icon name={icon} size={16} />}
+      <input value={value ?? ''} onChange={(e) => onChange(e.target.value)} {...rest} />
+      {unit && <span className="unit">{unit}</span>}
+    </label>
+  )
+}
+
+export function NumInput({ value, onChange, icon, unit, ...rest }: Base & { value: number | null | undefined; onChange: (v: number | null) => void }) {
+  return (
+    <label className="ctl">
+      {icon && <Icon name={icon} size={16} />}
+      <input className="num" inputMode="decimal" value={value ?? ''} placeholder="0"
+        onChange={(e) => { const s = e.target.value; onChange(s === '' ? null : Number(s)) }} {...rest} />
+      {unit && <span className="unit">{unit}</span>}
+    </label>
   )
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { IconTile } from '../components/Icon'
 import { TOKEN_EVENTS, WATCHLIST } from '../data/sample/tokenomist'
 import { formatBaht, formatDate } from '../engine'
 import { useT } from '../i18n'
@@ -29,8 +30,9 @@ export default function Invest() {
       <div className="joined">
         {events.map((e) => (
           <div key={e.id} className="row" style={{ cursor: 'default' }}>
+            <IconTile name="chart" />
             <div className="grow">
-              <div>{e.token}, {t(`invest.kind.${e.kind}` as const)}</div>
+              <div className="strong">{e.token}, {t(`invest.kind.${e.kind}` as const)}</div>
               <div className="muted small">{formatDate(e.date, lang)}, {t('common.sample')} {e.asOf}</div>
             </div>
             <div className="val"><div className="num">{e.amountTokens.toLocaleString('en-US')}</div><div className="muted small num">{e.shareOfSupplyPct}% {t('invest.share')}</div></div>

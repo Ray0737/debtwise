@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DebtForm } from '../components/DebtForm'
-import { Icon } from '../components/Icon'
+import { Icon, IconTile } from '../components/Icon'
 import { Sheet } from '../components/Sheet'
 import { useT } from '../i18n'
 import { useApp } from '../store/useApp'
@@ -27,17 +27,18 @@ export default function AddDebt() {
 
   return (
     <>
-      <button className="btn btn-text" style={{ alignSelf: 'flex-start' }} onClick={() => nav('/debt')}>{t('common.back')}</button>
+      <button className="btn btn-text" style={{ alignSelf: 'flex-start' }} onClick={() => nav('/debt')}><Icon name="back" size={14} />{t('common.back')}</button>
       <h1 className="h1">{t('add.title')}</h1>
       <div className="joined">
         <div className="row" role="button" tabIndex={0} onClick={() => file.current?.click()}>
-          <Icon name="upload" size={28} /><div className="grow"><div>{t('add.upload')}</div><div className="muted small">{t('add.uploadHint')}</div><div className="muted small">{t('add.uploadNote')}</div></div>
+          <IconTile name="upload" tone="red" />
+          <div className="grow"><div className="strong">{t('add.upload')}</div><div className="muted small">{t('add.uploadHint')}</div><div className="muted small">{t('add.uploadNote')}</div></div>
         </div>
-        <div className="row" role="button" tabIndex={0} onClick={() => nav('/talk')}>
-          <Icon name="mic" size={28} /><div className="grow">{t('add.talk')}</div>
+        <div className="row" role="button" tabIndex={0} onClick={() => nav('/')}>
+          <IconTile name="mic" tone="red" /><div className="grow strong">{t('add.talk')}</div>
         </div>
         <div className="row" role="button" tabIndex={0} onClick={() => setForm(true)}>
-          <Icon name="edit" size={28} /><div className="grow">{t('add.form')}</div>
+          <IconTile name="edit" tone="red" /><div className="grow strong">{t('add.form')}</div>
         </div>
       </div>
       <input ref={file} type="file" accept="image/*,application/pdf" hidden onChange={(e) => onFile(e.target.files?.[0])} />

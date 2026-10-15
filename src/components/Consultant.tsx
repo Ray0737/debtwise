@@ -83,10 +83,13 @@ export function Consultant({ notice }: { notice?: string }) {
         <div ref={end} />
       </div>
       {error && <p className="err" role="alert">{t('common.error')}</p>}
-      <div style={{ display: 'flex', gap: 8, position: 'sticky', bottom: 80 }}>
-        <input className="input" value={text} placeholder={t('talk.placeholder')} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send(text)} />
-        <button className="btn btn-secondary" style={{ width: 56 }} aria-label={t('talk.mic')} aria-pressed={!!recording} onClick={mic}><Icon name="mic" size={24} /></button>
-        <button className="btn btn-primary" style={{ width: 56 }} aria-label={t('talk.send')} disabled={busy} onClick={() => send(text)}><Icon name="send" size={24} /></button>
+      <div className="composer">
+        <label className="ctl">
+          <Icon name="chat" size={16} />
+          <input value={text} placeholder={t('talk.placeholder')} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send(text)} />
+        </label>
+        <button className={`btn ${recording ? 'btn-primary' : 'btn-secondary'}`} aria-label={t('talk.mic')} aria-pressed={!!recording} onClick={mic}><Icon name="mic" size={18} /></button>
+        <button className="btn btn-primary" aria-label={t('talk.send')} disabled={busy} onClick={() => send(text)}><Icon name="send" size={18} /></button>
       </div>
     </>
   )

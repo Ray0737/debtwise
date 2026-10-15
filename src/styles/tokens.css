@@ -9,8 +9,12 @@
   --card-dark: #2C3B4D; --card-dark-2: #3D4B5B;
   --text: #1B2632; --muted: rgba(27, 38, 50, .72); --line: rgba(27, 38, 50, .16);
   --on-dark: #EEE9DF; --on-dark-muted: rgba(238, 233, 223, .72); --line-dark: rgba(238, 233, 223, .16);
-  --accent: #FFB162; --warn: #A35139; --good: #2C3B4D; --chart-5: #7D7769;
-  --radius: 14px; --radius-lg: 22px;
+  --accent: #FFB162;
+  --red: #BF3520;          /* buttons, active states, text capable (4.6:1 with Palladian text) */
+  --red-bright: #E8472B;   /* dots, icon tile fills, decorative accents */
+  --red-soft: rgba(232, 71, 43, .14);
+  --warn: #BF3520; --good: #2C3B4D; --chart-5: #7D7769;
+  --radius: 12px; --radius-lg: 18px;
   --ease: cubic-bezier(.4, 0, .2, 1); --dur: .16s;
   --font: 'line_seed_sans_th', 'Inter', 'IBM Plex Sans Thai', system-ui, sans-serif;
 }

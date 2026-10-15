@@ -26,12 +26,12 @@ Contents
 ## 1. Principles
 
 1. **Palladian, blue, flame, truffle.** Six colours from one palette and nothing else. Palladian is the page, Blue Fantastic carries the nav and secondary cards, Abyssal carries the text.
-2. **One weight.** Every piece of text is regular (400). Hierarchy comes from size and brightness, never from bold.
+2. **Two weights.** Regular (400) for text, bold (700) for titles, numbers, buttons and active states. Bold is a faux bold of LINE Seed Sans TH Regular until a real bold file is self hosted.
 3. **Rounded, joined, quiet.** Rounded cards, joined card blocks with 1px dividers, no shadows, no gradients, no outlines.
 4. **Colour means state.** Flame is for the main action and highlights. Truffle means attention (due soon, shortfall, needs review). Blue means progress and good standing. Colour is never decoration and never the only signal.
 5. **Every number has a source.** The UI shows where a figure came from and how sure we are (see section 9).
 6. **Phone first.** Design at 390px wide, then widen. One thumb, one task per screen.
-7. **Plain words.** Short sentences, no jargon, no pressure. No em dash, no all caps, no bold, no exclamation marks.
+7. **Plain words.** Short sentences, no jargon, no pressure. No em dash, no all caps, no exclamation marks.
 8. **Local first.** Fonts and icons are self hosted. No third party requests from the UI.
 
 ---
@@ -65,7 +65,10 @@ Tokens (CSS custom properties on `:root`):
 | `--on-dark-muted` | `rgba(238,233,223,.72)` | Secondary text on dark cards |
 | `--line-dark` | `rgba(238,233,223,.16)` | Hairlines on dark cards |
 | `--accent` | `#FFB162` | Primary button fill, active nav item, highlight icons on dark |
-| `--warn` | `#A35139` | Attention fills and icons on light surfaces |
+| `--red` | `#BF3520` | Primary button, active chip, red cards, attention. Text capable: 4.6:1 with Palladian text, 4.6:1 as text on Palladian |
+| `--red-bright` | `#E8472B` | Dots, step dots, tab indicator, decorative accents. Not for text |
+| `--red-soft` | `rgba(232,71,43,.14)` | Icon tile background on light surfaces |
+| `--warn` | `#BF3520` | Alias of `--red` for attention states |
 | `--good` | `#2C3B4D` | Progress fill and good standing |
 | `--chart-5` | `#7D7769` | Sixth chart colour (Oatmeal mixed with 40% Abyssal) |
 
@@ -94,7 +97,7 @@ Rules that follow: no pure white text anywhere. Abyssal is the text colour on li
 ## 3. Typography
 
 - **Family.** LINE Seed Sans TH, regular only, for Thai and Latin. Self hosted `woff2`, `font-display: swap`, preloaded. Fallback: `'Inter', 'IBM Plex Sans Thai', system-ui, sans-serif`.
-- **One weight.** `* { font-weight: 400; font-synthesis: none; text-transform: none; }`.
+- **Two weights.** `font-weight: 700` on `.h1`, `.h2`, `.display`, buttons, row values and chips that are on. Everything else is 400.
 - **Numbers.** Use tabular figures for money so columns line up.
 
 | Role | Phone | Wide screen |
@@ -348,3 +351,16 @@ Still open:
 3. **Storage.** Local, Supabase, or both. The code uses one storage interface so either can plug in. The UI makes no storage claim until decided.
 4. **Light theme.** None for now.
 5. **Name and logo.** `Debtwise` text only until a logo exists.
+
+---
+
+## 15. Compact pass and red accent (current, overrides earlier sizes)
+
+- **Red.** Truffle Trouble was too quiet, so the UI now uses a vibrant brick red. `--red #BF3520` carries the primary button, selected chips, user chat bubbles, the shortfall card and the Debt total card. `--red-bright #E8472B` is for dots and the tab indicator. Burning Flame stays for the active tab and figures on dark cards, and for the secondary `btn-accent`.
+- **Primary button.** Red fill, Palladian bold text, 42px high. This replaces the earlier Flame primary button.
+- **Smaller everything.** Body 14px, `.small` 12px, `.h1` 20px bold, `.h2` 15px bold, `.display` 30px bold (40px from 1200px). Top bar 48px, bottom nav 56px, inputs 40px, chips 30px, rows 44px, card padding 14px, radius 12px and 18px.
+- **Bubbles and placeholders shorter.** Chat bubbles use 8px by 12px padding. Inputs have a leading icon and a placeholder. Money inputs show a trailing unit (`฿`, `%`).
+- **Icon tiles.** A 32px rounded square (`.tile`) with a red icon on a soft red fill, used in rows and cards. Dark variant for dark cards, solid red variant for add-debt actions. Debt types have their own icons: card, coins, car, house, book, people.
+- **Custom pickers.** Dates never use the browser picker. Day of month (pay day, due day) opens a bottom sheet with a 1 to 31 grid, days after the 28th dimmed with a note. Birth year opens a scrolling year grid, newest first. Both use `Pickers.tsx`, a trigger that looks like an input with a calendar icon, red for the selected value, and `Clear` for optional fields.
+- **Brand mark.** A red rounded square with a check icon beside the app name in the top bar and on sign in.
+- **Contrast.** Red on Surface is 3.9:1, so red is used as text only on Palladian. Red on the dark Blue is 2.0:1, so never place red text or icons on dark cards. Use Flame there.

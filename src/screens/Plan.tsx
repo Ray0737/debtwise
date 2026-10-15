@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Icon, IconTile } from '../components/Icon'
 import { OFFERS } from '../data/sample/offers'
 import { formatBaht, refinance, type Debt } from '../engine'
 import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
+import { TYPE_ICON } from '../lib/group'
 import { useApp } from '../store/useApp'
 
 function Refi({ debt }: { debt: Debt }) {
@@ -54,11 +56,11 @@ export default function Plan() {
 
   return (
     <>
-      <button className="btn btn-text" style={{ alignSelf: 'flex-start' }} onClick={() => nav(-1)}>{t('common.back')}</button>
+      <button className="btn btn-text" style={{ alignSelf: 'flex-start' }} onClick={() => nav(-1)}><Icon name="back" size={14} />{t('common.back')}</button>
       <h1 className="h1">{t('plan.title')}</h1>
-      <div className="card card-dark">
+      <div className={`card ${s.plan.shortfall > 0 ? 'card-red' : 'card-dark'}`}>
         <span className="muted">{t('plan.available')}</span>
-        <span className="display accent num">{formatBaht(s.cash.available)}</span>
+        <span className={`display num${s.plan.shortfall > 0 ? '' : ' accent'}`}>{formatBaht(s.cash.available)}</span>
         <span className="muted num">{t('plan.minimums')}: {formatBaht(s.minimums)}</span>
         {s.plan.shortfall > 0
           ? <span className="num">{t('plan.shortfall')}: {formatBaht(s.plan.shortfall)}</span>
@@ -71,14 +73,15 @@ export default function Plan() {
           const d = byId.get(a.debtId)
           if (!d) return null
           return (
-            <div key={a.debtId} className="row">
-              <div className="grow"><div>{d.label}, {d.lender}</div><div className={`small ${a.reason === 'unpaid' || a.reason === 'partial_minimum' ? 'warn' : 'muted'}`}>{t(`plan.reason.${a.reason}` as const)}</div></div>
+            <div key={a.debtId} className="row" style={{ cursor: 'default' }}>
+              <IconTile name={TYPE_ICON[d.type]} />
+              <div className="grow"><div className="strong">{d.label}, {d.lender}</div><div className={`small ${a.reason === 'unpaid' || a.reason === 'partial_minimum' ? 'warn' : 'muted'}`}>{t(`plan.reason.${a.reason}` as const)}</div></div>
               <div className="val num">{formatBaht(a.amount)}</div>
             </div>
           )
         })}
       </div>
-      <button className="btn btn-primary" onClick={save}>{t('plan.save')}</button>
+      <button className="btn btn-primary" onClick={save}><Icon name="check" size={16} />{t('plan.save')}</button>
       {saved && <p role="status">{t('plan.saved')}</p>}
       <h2 className="h2">{t('refi.title')}</h2>
       <p className="muted">{t('refi.line')}</p>

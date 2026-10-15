@@ -17,16 +17,16 @@ export function Shell() {
   return (
     <div className="app">
       <header className="topbar">
-        <span className="h2">{t('app.name')}</span>
+        <span className="brand"><span className="brand-mark"><Icon name="check" size={16} /></span>{t('app.name')}</span>
         <button className="avatar" aria-label={t('profile.title')} onClick={() => nav('/profile')}>
-          {name ? name.slice(0, 1) : <Icon name="person" size={20} />}
+          {name ? name.slice(0, 1) : <Icon name="person" size={16} />}
         </button>
       </header>
       <main className="main"><Outlet /></main>
       <nav className="tabbar" aria-label="Main">
         {TABS.map((x) => (
           <NavLink key={x.to} to={x.to} end={x.to === '/'} className={({ isActive }) => `tab${isActive ? ' active' : ''}`}>
-            <Icon name={x.icon} size={28} />
+            <Icon name={x.icon} size={22} />
             <span>{t(x.label)}</span>
           </NavLink>
         ))}
