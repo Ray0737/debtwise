@@ -91,7 +91,7 @@ function Shell() {
       </aside>
       <main className="main"><Outlet /></main>
       <nav className="tabs" aria-label="Main">{NAV.map((n) => (
-        <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => (isActive ? 'active' : '')} aria-label={t(n.key)} title={`${t(n.key)}: ${t(n.desc)}`}><Icon n={n.icon} /></NavLink>
+        <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => (isActive ? 'active' : '')} aria-label={t(n.key)} title={`${t(n.key)}: ${t(n.desc)}`}><Icon n={n.icon} /><span>{t(n.key)}</span></NavLink>
       ))}</nav>
     </div>
   )

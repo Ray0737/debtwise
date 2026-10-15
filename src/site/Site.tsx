@@ -14,19 +14,19 @@ export function PublicDock() {
   const L = useL()
   const { pathname } = useLocation()
   const userId = useApp((s) => s.userId)
-  const items: { to: string; icon: string; label: B }[] = [
-    { to: '/', icon: 'house', label: { th: 'หน้าแรก', en: 'Home' } },
-    { to: '/guide', icon: 'book', label: { th: 'คู่มือ', en: 'Guide' } },
-    { to: '/start', icon: 'rocket-takeoff', label: { th: 'เริ่มต้นใช้งาน', en: 'Get started' } },
-    { to: '/support', icon: 'chat-dots', label: { th: 'ช่วยเหลือ', en: 'Support' } },
-    { to: '/community', icon: 'people', label: { th: 'ชุมชน', en: 'Community' } },
-    { to: userId ? '/' : '/signin', icon: userId ? 'grid' : 'box-arrow-in-right', label: userId ? { th: 'เปิดแอป', en: 'Open app' } : { th: 'เข้าสู่ระบบ', en: 'Sign in' } },
+  const items: { to: string; icon: string; label: B; short: B }[] = [
+    { to: '/', icon: 'house', label: { th: 'หน้าแรก', en: 'Home' }, short: { th: 'หน้าแรก', en: 'Home' } },
+    { to: '/guide', icon: 'book', label: { th: 'คู่มือ', en: 'Guide' }, short: { th: 'คู่มือ', en: 'Guide' } },
+    { to: '/start', icon: 'rocket-takeoff', label: { th: 'เริ่มต้นใช้งาน', en: 'Get started' }, short: { th: 'เริ่มต้น', en: 'Start' } },
+    { to: '/support', icon: 'chat-dots', label: { th: 'ช่วยเหลือ', en: 'Support' }, short: { th: 'ช่วยเหลือ', en: 'Support' } },
+    { to: '/community', icon: 'people', label: { th: 'ชุมชน', en: 'Community' }, short: { th: 'ชุมชน', en: 'Community' } },
+    { to: userId ? '/' : '/signin', icon: userId ? 'grid' : 'box-arrow-in-right', label: userId ? { th: 'เปิดแอป', en: 'Open app' } : { th: 'เข้าสู่ระบบ', en: 'Sign in' }, short: userId ? { th: 'เปิดแอป', en: 'App' } : { th: 'เข้าสู่ระบบ', en: 'Sign in' } },
   ]
   return (
     <nav className="tabs always" aria-label="Site">
       {items.map((i, n) => (
         <Link key={i.to + n} to={i.to} className={pathname === i.to && n < 5 ? 'active' : ''} aria-label={L(i.label)} title={L(i.label)} aria-current={pathname === i.to && n < 5 ? 'page' : undefined}>
-          <Icon n={i.icon} />
+          <Icon n={i.icon} /><span>{L(i.short)}</span>
         </Link>
       ))}
     </nav>

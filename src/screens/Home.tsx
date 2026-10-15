@@ -50,6 +50,7 @@ export default function Home() {
   return (
     <Page
       icon="house"
+      tall
       title={t('home.greeting', { name: profile.displayName || t('app.name') })}
       desc={t('desc.home')}
       hero={
@@ -57,8 +58,8 @@ export default function Home() {
           <span className="small">{short ? t('plan.shortfall') : t('home.left')} · {t('home.thisMonth')}</span>
           <span className="big num">{formatBaht(short ? s.plan.shortfall : s.plan.leftover)}</span>
           {next && (
-            <span className="small">
-              <Icon n="calendar-event" /> {t('home.nextDue')}: {next.d.label}, {formatBaht(next.d.minPayment)}, {t('home.dueIn', { n: next.days })}
+            <span className="chip">
+              <Icon n="calendar-event" /> {t('home.nextDue')}: {next.d.label} · {formatBaht(next.d.minPayment)} · {next.days === 0 ? t('home.dueToday') : t('home.dueIn', { n: next.days })}
             </span>
           )}
           <button className="btn light" onClick={() => nav('/chat')}><Icon n="chat-dots" />{t('home.ask')}</button>

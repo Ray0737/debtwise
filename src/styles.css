@@ -437,3 +437,20 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .top-text { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .top-desc { font-size: 0.8rem; color: rgba(255, 255, 255, 0.72); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .top-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Bottom bar: icon with a small caption */
+:root { --tabs-h: 64px; }
+.tabs a { gap: 2px; padding: 6px 4px; border-radius: 16px; }
+.tabs a .bi { font-size: 1.2rem; }
+.tabs a span { font-size: 0.72rem; line-height: 1.2; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tabs a { max-width: 80px; }
+
+/* Home header: taller, text low and clear of the white sheet */
+.top.tall { min-height: 46dvh; display: flex; padding-bottom: 64px; }
+.top.tall > .col { display: flex; flex-direction: column; }
+.top.tall .hero { margin-top: auto; padding-top: var(--s5); gap: var(--s2); }
+@media (min-width: 1024px) { .top.tall { min-height: 38dvh; } }
+@media (max-height: 560px) { .top.tall { min-height: 0; } }
+.chip { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.14); font-size: 0.88rem; color: #fff; }
+.hero .chip { color: #fff; }
+.top.tall .hero .btn { margin-top: var(--s3); }
