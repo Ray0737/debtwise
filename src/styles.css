@@ -477,3 +477,11 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 /* Signed-in header: no language pill (Profile and the sidebar have it); all header circles are the same size */
 .main:not(.pub):not(.solo) .top .langpill { display: none; }
 .top .circle, .top .circle.lead { width: 36px; height: 36px; flex: none; }
+
+/* Row hover in the signed-in app: green row, darker green icon tile with a white icon (plain mode must not cancel it) */
+.main:not(.pub):not(.solo) a.row:hover, .main:not(.pub):not(.solo) button.row:hover,
+.main:not(.pub):not(.solo) a.row:focus-visible, .main:not(.pub):not(.solo) button.row:focus-visible { background: var(--tint-hover); border-bottom-color: transparent; border-radius: 10px; }
+.main a.row:hover .ico:not([style]), .main button.row:hover .ico:not([style]),
+.main a.row:focus-visible .ico:not([style]), .main button.row:focus-visible .ico:not([style]) { background: #3f8a2e; }
+.main a.row:hover .ico:not([style]) .bi, .main button.row:hover .ico:not([style]) .bi,
+.main a.row:focus-visible .ico:not([style]) .bi, .main button.row:focus-visible .ico:not([style]) .bi { color: #fff; }
