@@ -354,13 +354,35 @@ Still open:
 
 ---
 
-## 15. Compact pass and red accent (current, overrides earlier sizes)
+## 15. Tamroi alignment (current, overrides earlier sizes and layout)
 
-- **Red.** Truffle Trouble was too quiet, so the UI now uses a vibrant brick red. `--red #BF3520` carries the primary button, selected chips, user chat bubbles, the shortfall card and the Debt total card. `--red-bright #E8472B` is for dots and the tab indicator. Burning Flame stays for the active tab and figures on dark cards, and for the secondary `btn-accent`.
-- **Primary button.** Red fill, Palladian bold text, 42px high. This replaces the earlier Flame primary button.
-- **Smaller everything.** Body 14px, `.small` 12px, `.h1` 20px bold, `.h2` 15px bold, `.display` 30px bold (40px from 1200px). Top bar 48px, bottom nav 56px, inputs 40px, chips 30px, rows 44px, card padding 14px, radius 12px and 18px.
-- **Bubbles and placeholders shorter.** Chat bubbles use 8px by 12px padding. Inputs have a leading icon and a placeholder. Money inputs show a trailing unit (`฿`, `%`).
-- **Icon tiles.** A 32px rounded square (`.tile`) with a red icon on a soft red fill, used in rows and cards. Dark variant for dark cards, solid red variant for add-debt actions. Debt types have their own icons: card, coins, car, house, book, people.
-- **Custom pickers.** Dates never use the browser picker. Day of month (pay day, due day) opens a bottom sheet with a 1 to 31 grid, days after the 28th dimmed with a note. Birth year opens a scrolling year grid, newest first. Both use `Pickers.tsx`, a trigger that looks like an input with a calendar icon, red for the selected value, and `Clear` for optional fields.
-- **Brand mark.** A red rounded square with a check icon beside the app name in the top bar and on sign in.
-- **Contrast.** Red on Surface is 3.9:1, so red is used as text only on Palladian. Red on the dark Blue is 2.0:1, so never place red text or icons on dark cards. Use Flame there.
+Reference: `Tamroi-purple/` (read only). Debtwise takes its design principles, sizing, type scale and layout. Colours stay the Debtwise palette. The font stays LINE Seed Sans TH. Nothing is copied: no code, no Bootstrap, no external fonts.
+
+**Frame and layout**
+- A fixed 430px column, centred on every screen width. On screens wider than 768px the page surround is Abyssal with a soft shadow and a hairline either side of the frame. The earlier side rail and two column layouts are removed.
+- Three zones in a flex column: top bar (56px), a scrolling content area (16px padding), bottom nav (60px plus the device safe area). The content scrolls, the bars do not.
+- Top bar: avatar and name on the left (opens Profile), page title centred (Kanit-style heading weight, 16px), language toggle and settings icon on the right. Hairline underneath.
+- Bottom nav: Blue Fantastic, hairline on top, 10px labels, icon above. The active tab is Flame with a 24px by 3px red indicator hanging from the top edge.
+
+**Tokens (same scale as the reference)**
+- Type: 10, 12, 14, 16, 18, 22, 28, 36px. Body 14px. Titles 22px bold, section heads 16px bold, hero figures 28px bold.
+- Spacing: 4, 8, 16, 24, 32px.
+- Radius: 8, 12, 16, 20, 24px and full. Cards 16px, buttons and inputs 12px, bottom sheet 24px on top.
+- Shadows are back: cards use `0 4px 20px` in tinted Abyssal, the primary button has a red glow, the sheet has an upward shadow.
+- Motion: 150ms for colour, 250ms for overlay fade, 350ms for the sheet rise.
+
+**Components**
+- Buttons: 14px by 24px padding, 12px radius, bold, press scales to 0.97. Primary is red with glow. Secondary is Blue Fantastic. Outline, ghost and danger (tinted red with a red border) follow the reference. Small buttons are 8px by 16px.
+- Inputs: tinted fill, 1.5px border, 48px high, a red icon on the left, a unit on the right, border turns red on focus. Labels sit above in muted 12px.
+- Pills: outlined, muted text, selected pill is filled red with Palladian bold text.
+- Cards: shadowed, 16px padding. Variants: surface (default), dark (Blue Fantastic), red, outlined.
+- Stats row: three equal tiles with a bold value and a 10px muted label. Used on Home for income, essentials and debt payments.
+- Icon tile: a 38px circle with a soft red fill and a red icon (reference uses a primary-dim circle).
+- Step indicator: numbered 28px dots joined by short lines, the current step red, finished steps Blue Fantastic with a check.
+- Bottom sheet: 36px by 4px handle, 24px top radius, fades the overlay in and rises. Day and year pickers use it.
+
+**Colour roles (unchanged palette)**
+- Page Palladian, paper cards Surface, dark panels Blue Fantastic, text Abyssal, highlight Flame, action and attention red `#BF3520`, bright red `#E8472B` for dots and indicators.
+- Red text only on Palladian. Never red on dark cards, use Flame there.
+
+**Not taken from the reference:** Inter and Kanit fonts, Bootstrap, the dark ink page background, map and game components.

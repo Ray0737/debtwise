@@ -32,6 +32,8 @@ export default function Home() {
     .map((d) => ({ d, days: daysUntilDue(d.dueDay!) }))
     .sort((a, b) => a.days - b.days)[0]
   const short = s.plan.shortfall > 0
+  const paid = s.plan.allocations.reduce((x, a) => x + a.amount, 0)
+  const income = (profile.monthlyIncome ?? 0) + profile.otherIncome
   const status = short
     ? t('home.notice.short', { amount: formatBaht(s.plan.shortfall) })
     : t('home.notice.ok', { amount: formatBaht(s.plan.leftover) })
@@ -63,6 +65,11 @@ export default function Home() {
           <button className="btn btn-sm btn-secondary" onClick={() => nav('/debt/add')}><Icon name="plus" size={14} />{t('debt.add')}</button>
           {debts.some((d) => d.dueDay) && <button className="btn btn-sm btn-secondary" onClick={downloadIcs}><Icon name="bell" size={14} />{t('home.calendar')}</button>}
         </div>
+      </div>
+      <div className="stats-row">
+        <div className="stat-item"><span className="stat-value num">{formatBaht(income)}</span><span className="stat-label">{t('home.income')}</span></div>
+        <div className="stat-item"><span className="stat-value num">{formatBaht(profile.monthlyEssentials ?? 0)}</span><span className="stat-label">{t('home.essentials')}</span></div>
+        <div className="stat-item"><span className="stat-value num">{formatBaht(paid)}</span><span className="stat-label">{t('home.debts')}</span></div>
       </div>
       <Consultant notice={notice} />
     </>
