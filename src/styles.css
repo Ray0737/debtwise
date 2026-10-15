@@ -496,7 +496,11 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .modal.danger .btnrow { display: flex; justify-content: flex-end; gap: var(--s2); width: 100%; }
 .modal.danger .btnrow .btn { width: auto; min-height: 32px; padding: 6px 16px; }
 .modal.danger .input { min-height: 34px; }
-@media (max-width: 719px) { .modal.danger { max-width: none; border-radius: 20px 20px 0 0; } }
 .btnrow { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); width: 100%; }
 .btnrow .btn { width: 100%; }
 .warnicon { border-radius: 50%; background: #fdeaea; color: var(--danger); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+
+/* Delete pop-up sits in the middle of the screen on every width */
+.scrim.danger { align-items: center; padding: var(--s4); }
+.scrim.danger .modal.danger { width: 100%; max-width: 340px; border-radius: 16px; padding-bottom: var(--s4); animation: pop 0.16s ease; }
+@keyframes pop { from { transform: scale(0.96); opacity: 0; } to { transform: none; opacity: 1; } }

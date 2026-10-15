@@ -113,7 +113,7 @@ export function Modal({ title, onClose, tone, children }: { title: string; onClo
     <button className="circle xbtn" aria-label={t('common.close')} onClick={onClose}><Icon n="x-lg" /></button>
   )
   return (
-    <div className="scrim" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div className={`scrim ${tone ?? ''}`} onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       {tone === 'danger' ? (
         <div className="modal danger" role="alertdialog" aria-modal="true" aria-label={title}>
           <span className="warnicon" aria-hidden="true"><Icon n="exclamation-triangle-fill" /></span>
