@@ -12,8 +12,9 @@ import LoanDetail from './screens/LoanDetail'
 import AddDebt from './screens/AddDebt'
 import Review from './screens/Review'
 import Plan from './screens/Plan'
-
-const Todo = ({ name }: { name: string }) => <p className="muted">{name}</p>
+import Home from './screens/Home'
+import Invest from './screens/Invest'
+import Tax from './screens/Tax'
 
 function Guard({ children }: { children: ReactElement }) {
   const { ready, userId, profile } = useApp()
@@ -35,9 +36,10 @@ export default function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/onboarding/:step" element={<Onboarding />} />
         <Route element={<Guard><Shell /></Guard>}>
-          <Route index element={<Todo name="home" />} />
-          <Route path="invest" element={<Todo name="invest" />} />
-          <Route path="tax" element={<Todo name="tax" />} />
+          <Route index element={<Home />} />
+          <Route path="invest" element={<Invest />} />
+          <Route path="tax" element={<Tax />} />
+          <Route path="talk" element={<Navigate to="/" replace />} />
           <Route path="debt" element={<Debt />} />
           <Route path="debt/add" element={<AddDebt />} />
           <Route path="debt/review" element={<Review />} />
