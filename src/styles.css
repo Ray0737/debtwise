@@ -504,3 +504,11 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .scrim.danger { align-items: center; padding: var(--s4); }
 .scrim.danger .modal.danger { width: 100%; max-width: 340px; border-radius: 16px; padding-bottom: var(--s4); animation: pop 0.16s ease; }
 @keyframes pop { from { transform: scale(0.96); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Delete pop-up details: what is being deleted, and a Cancel that reacts on hover */
+.delitem { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); padding: 8px 12px; border: 1px solid var(--line); border-left: 3px solid var(--danger); border-radius: 8px; background: #fffafa; font-size: 0.9rem; }
+.modal.danger .btnrow .btn.soft { transition: background var(--ease), color var(--ease), border-color var(--ease); }
+.modal.danger .btnrow .btn.soft:hover, .modal.danger .btnrow .btn.soft:focus-visible { background: var(--tint-hover); border-color: var(--tint-hover); color: var(--on-green); }
+.modal.danger .btnrow .btn.danger:hover, .modal.danger .btnrow .btn.danger:focus-visible { background: var(--danger-hover); }
+.modal.danger .btnrow .btn.danger:disabled:hover { background: var(--danger); }
+.delitem .num { white-space: nowrap; flex: none; } .delitem .ell { min-width: 0; flex: 1; }

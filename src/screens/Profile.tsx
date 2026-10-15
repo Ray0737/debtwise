@@ -88,14 +88,14 @@ export default function Profile() {
       <button className="btn soft block" onClick={async () => { await signOut(); nav('/signin') }}><Icon n="box-arrow-right" />{t('profile.signOut')}</button>
 
       {del && (
-        <Modal title={t('profile.deleteAll')} tone="danger" onClose={() => { setDel(false); setWord('') }}>
+        <Modal title={t('profile.deleteTitle')} tone="danger" onClose={() => { setDel(false); setWord('') }}>
           <div className="stack">
             <p>{t('profile.deleteConfirm')}</p>
             <TextInput value={word} onChange={setWord} placeholder="delete" />
             <div className="btnrow">
               <button className="btn soft block" onClick={() => { setDel(false); setWord('') }}>{t('common.cancel')}</button>
               <button className="btn danger block" disabled={word.trim().toLowerCase() !== 'delete' || busy}
-                onClick={() => run(async () => { await store.deleteAll(); setDel(false); setWord('') })}>{t('common.delete')}</button>
+                onClick={() => run(async () => { await store.deleteAll(); setDel(false); setWord('') })}><Icon n="trash3" />{t('profile.deleteBtn')}</button>
             </div>
           </div>
         </Modal>
