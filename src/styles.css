@@ -459,3 +459,12 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .top.tall .hero { margin-top: auto; margin-bottom: auto; align-items: center; text-align: center; padding-top: 0; }
 .top.tall .hero .small { max-width: none; }
 .top.tall .chip { background: none; padding: 0; justify-content: center; border-radius: 0; }
+
+/* Inputs a little shorter everywhere (36px instead of 40px) */
+.input { min-height: 36px; padding-top: 6px; padding-bottom: 6px; }
+.btn.block, .btn.danger.block { min-height: 36px; }
+.composer-box { padding: 4px 4px 4px 16px; }
+.composer-box input { padding: 6px 0; }
+.cbtn { width: 30px; height: 30px; font-size: 0.95rem; }
+.chatlist .composer-box { padding-left: var(--s4); }
+.composer-box input { padding: 3px 0; line-height: 1.3; }
