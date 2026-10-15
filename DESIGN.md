@@ -386,3 +386,11 @@ Reference: `Tamroi-purple/` (read only). Debtwise takes its design principles, s
 - Red text only on Palladian. Never red on dark cards, use Flame there.
 
 **Not taken from the reference:** Inter and Kanit fonts, Bootstrap, the dark ink page background, map and game components.
+
+---
+
+## 16. Icons and sign in (current)
+
+- **Icons are Bootstrap Icons**, installed from npm (`bootstrap-icons`) and bundled by Vite, so there is no CDN request. `Icon.tsx` maps the app's own names (home, wallet, card, car, coins, and so on) to `bi-*` classes. This replaces the hand drawn 64 unit SVG paths in section 10.
+- **Language switcher** is a 44px circle at the top right of the page frame on sign in and onboarding (globe icon over `EN` or `TH`). Inside the app it is a round icon button in the top bar.
+- **Sign in uses compact controls**: the Google button, the email input and the send button are all 40px high with 10px radius and 12px text, so they read as one set. The `compact` class on the page frame applies this. Other screens keep the 48px controls from section 15.

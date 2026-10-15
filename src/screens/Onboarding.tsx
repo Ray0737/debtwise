@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
-import { LangToggle } from '../components/LangToggle'
+import { LangBubble } from '../components/LangBubble'
 import { ProfileForm } from '../components/ProfileForm'
 import { useT, type Key } from '../i18n'
 import { loadDemo } from '../lib/demo'
@@ -46,12 +46,10 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="app" style={{ alignItems: 'center' }}>
-      <div className="main" style={{ paddingBottom: 24 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          {step > 1 ? <button className="btn btn-text" onClick={() => nav(`/onboarding/${step - 1}`)}>{t('common.back')}</button> : <span />}
-          <LangToggle />
-        </div>
+    <div className="app">
+      <LangBubble />
+      <div className="main" style={{ paddingTop: 56 }}>
+        {step > 1 && <button className="btn btn-text" style={{ alignSelf: 'flex-start' }} onClick={() => nav(`/onboarding/${step - 1}`)}>{t('common.back')}</button>}
         <div className="step-indicator" aria-label={t('onb.step', { n: step, total: STEPS.length })}>
           {STEPS.map((_, i) => (
             <span key={i} style={{ display: 'contents' }}>

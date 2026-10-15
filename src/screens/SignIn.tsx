@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { Field, TextInput } from '../components/Field'
 import { Icon } from '../components/Icon'
-import { LangToggle } from '../components/LangToggle'
+import { LangBubble } from '../components/LangBubble'
 import { useT } from '../i18n'
 import { supabase } from '../lib/supabase'
 import { useApp } from '../store/useApp'
@@ -22,12 +22,14 @@ export default function SignIn() {
     if (e) setError(true); else setSent(true)
   }
   return (
-    <div className="app" style={{ alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div className="main" style={{ justifyContent: 'center', paddingBottom: 16 }}>
-        <div style={{ alignSelf: 'flex-end' }}><LangToggle /></div>
-        <span className="brand" style={{ fontSize: 22 }}><span className="brand-mark" style={{ width: 34, height: 34 }}><Icon name="check" size={20} /></span>{t('app.name')}</span>
+    <div className="app compact">
+      <LangBubble />
+      <div className="main" style={{ justifyContent: 'center' }}>
+        <span className="brand" style={{ fontSize: 'var(--text-xl)' }}>
+          <span className="brand-mark" style={{ width: 36, height: 36 }}><Icon name="check" size={20} /></span>{t('app.name')}
+        </span>
         <p className="muted">{t('signin.line')}</p>
-        <button className="btn btn-primary" onClick={google}><Icon name="globe" size={16} />{t('signin.google')}</button>
+        <button className="btn btn-primary" onClick={google}><Icon name="globe" size={15} />{t('signin.google')}</button>
         <Field label={t('signin.email')}>
           <TextInput icon="mail" type="email" autoComplete="email" placeholder={t('ph.email')} value={email} onChange={setEmail} />
         </Field>
