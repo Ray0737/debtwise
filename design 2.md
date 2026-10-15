@@ -160,19 +160,19 @@ The hero always has 24px of space under the top bar, so a long headline never to
 
 ### 6.1 Bottom bar (`.tabs`)
 
-Icon only, 60px high, white with a hairline on top.
+An icon with a small caption under it, 64px high, white with a hairline on top. Icons and captions are navy, and the active item is a navy pill.
 
-- Each item is an icon in a pill. The active item is a navy pill with a white icon.
-- Hover is dark blue (`--main-hover`) with a white icon. Never green.
+- Each item is an icon with a one word caption in a pill. The active item is a navy pill with a white icon and caption, and it stays navy under the pointer.
+- Hover on an inactive item is dark blue (`--main-hover`) with a white icon and caption. Never green.
 - Every item has an `aria-label` and a `title`.
 - **Signed in (phone and tablet):** Home, Chat, Invest, Tax, Debt, Profile.
 - **Public (`PublicDock`, all widths):** Home, Guide, Get started, Support, Community, and the last item is Sign in (door arrow) or Open app when signed in.
 
 ### 6.2 Header actions
 
-Top right of every header, in this order: the page's own action (for example the plus on Debt), then the language pill, then the sign out circle when signed in. The sign out circle is hidden on desktop because the sidebar has one.
+Top right of every header, in this order: the page's own action (for example the plus on Debt), then the sign out circle when signed in. The sign out circle is hidden on desktop because the sidebar has one. All header circles are 36px. Pages without a back arrow show a lead icon in the same size at the far left, and a short description sits under the title.
 
-The **language pill** (`.langpill`) is a globe icon, `TH` and `EN`, with the current language in a white pill. One click switches.
+The **language pill** (`.langpill`) is a globe icon, `TH` and `EN`, with the current language in a white pill. One click switches. It shows on sign in, onboarding and the public pages only. Signed in, language is in Profile and, on desktop, the globe icon in the sidebar.
 
 ### 6.3 Desktop sidebar (1024px and up)
 
@@ -199,7 +199,7 @@ Small. `7px 14px` padding, `.92rem` text, 10px radius, icon and text 6px apart.
 | `soft` | White, hairline border, navy text | Green, black text |
 | `light` | White, for use on navy | Green |
 | `danger` | Red fill, white text | Darker red |
-| `block` | Full width, 40px minimum height (equals an input) | |
+| `block` | Full width, 36px minimum height (equals an input) | |
 | `icon` | Square with a single icon | |
 
 ### 7.2 Header circle and tab icons
@@ -208,14 +208,14 @@ Small. `7px 14px` padding, `.92rem` text, 10px radius, icon and text 6px apart.
 
 ### 7.3 Inputs and fields
 
-40px minimum height, 10px radius, hairline border that turns navy on hover and focus. A `.field` stacks a small muted label over the input, with an error line in red under it.
+36px minimum height, 10px radius, hairline border that turns navy on hover and focus. A `.field` stacks a small muted label over the input, with an error line in red under it.
 
 - `Seg`: a switch of two to three options. The selected one is a navy pill.
 - `Choice`: a button that opens a popup picker. Pickers: day of month (a round-cell calendar grid, seven columns), birth year (a scrolling grid, four columns, opens on the selected year), debt type (a list).
 
 ### 7.4 Popups
 
-`Modal`: a bottom sheet on phones, a centred card (400px) on desktop. Dim background, Escape and a tap outside close it. The scroll bar inside is custom.
+`Modal`: a bottom sheet on phones, a centred card (400px) on desktop. The **danger** variant (deletes) is a small left aligned card in the middle of the screen on every width: a red warning icon tile on the left, the title and message beside it, and compact Cancel (green on hover) and red Delete buttons on the right. It has no close button. Dim background, Escape and a tap outside close it. The scroll bar inside is custom.
 
 ### 7.5 Scroll bar
 
@@ -229,8 +229,10 @@ Small. `7px 14px` padding, `.92rem` text, 10px radius, icon and text 6px apart.
 
 ### 7.7 Chat
 
+The Chat page is the one place that uses bubbles, on purpose: a navy header with the title only, grey consultant bubbles with a round navy robot avatar and a small time, navy user bubbles on the right, a three dot typing bubble while it thinks, and the composer fixed above the bottom bar.
+
 - **Composer:** one pill containing a chat icon, the text field, a mic button and a send button. Mic is a white circle that turns navy on hover and while recording. Send is a navy circle with an up arrow, faded until there is text. Clicking into the bar gives it a green outline.
-- **Messages:** see 8.
+- **Messages:** see the note at the start of this section.
 
 ### 7.8 Bank colours
 
@@ -246,7 +248,7 @@ The signed in app (not the public pages, sign in or onboarding) uses clean lines
 
 - **Cards** lose their fill, border, radius and padding. Neighbouring cards are separated by a hairline.
 - **Rows** lose their fill and border and become lines with a hairline under each. The whole line turns green on hover.
-- **Chat** has no bubbles. Each message is a block of text with a hairline between messages. The user's messages have a thin navy bar on the left. The consultant's replies sit plain under a small `AI` label.
+- **Chat messages** on the Chat page are bubbles (see 7.7). The plain rule does not apply to them.
 - **Kept as boxes on purpose:** inputs, switches, buttons, the refinance result, and the consultant's proposed change, because each is a control or a result to look at.
 
 Public document pages (Guide, Terms, Privacy) are also plain: sections are text under a heading, separated by a hairline, with a plain row of section links at the top (the section being read is underlined) and notes drawn with a thin navy bar on the left. The other public pages (landing, Get started, Support, Community, Get the app) keep their cards.
@@ -259,7 +261,7 @@ Public document pages (Guide, Terms, Privacy) are also plain: sections are text 
 
 | Route | Screen |
 |---|---|
-| `/` | Home: this month at a glance (what is left or short, next due date), the summary lines, the plan, add debt and calendar buttons, and a coming-up list of due dates |
+| `/` | Home: a tall navy header with the month at a glance centred in it, the summary lines, the plan, add debt and calendar buttons, a coming-up list of due dates, and an empty state when there are no debts |
 | `/chat` | Chat: the consultant on its own page, with the engine's first line, replies with source links and proposals to apply |
 | `/debt` | Total owed and monthly payments, by bank or by type |
 | `/debt/group/:by/:key` | Loans inside one bank or type |
@@ -384,3 +386,15 @@ Add the key to `en.ts` and `th.ts`, with the same placeholders.
 - The public pages repeat a few Thai and English sentences that also exist in the app dictionaries. They could share keys.
 - The hero screenshots in `public/site/` use the demo family with real bank names swapped in. Retake them when the app changes noticeably.
 - Tokens still named `--tint` and `--tint-hover` are now white and green. Rename them to `--surface` and `--accent` if the names start to confuse.
+
+
+---
+
+## 17. Added after the first write
+
+- **Real data:** Tax uses the Revenue Department rules for tax year 2568 with the source and date shown. Invest shows real token prices and supply from CoinGecko through `/api/market` (cached five minutes). Unlock dates and refinance offers stay sample and labelled.
+- **Loan page:** next due date, time to pay off at the minimum, and about how much interest that costs.
+- **Plan page:** when the month is short, "Draft a message" builds a restructure request to the lender from a template with the person's own numbers, ready to copy. No AI.
+- **Home:** one-off bills from the chat count for the month and can be cleared.
+- **Install:** PNG icons (192, 512, maskable and the iPhone touch icon), a description and sharing tags.
+- **AI:** Gemini first, Groq as a text-only backup, two retries on a busy answer, and the 1323 hotline rule in the consultant prompt.

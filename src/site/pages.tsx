@@ -158,6 +158,8 @@ export function Support() {
     ['file-earmark-arrow-up', { th: 'อัปโหลดใบแจ้งหนี้และตรวจกับบรรทัดต้นฉบับ', en: 'Upload a statement and check it against the source line.' }],
     ['list-check', { th: 'แผนรายเดือนแบบ avalanche และส่งออกวันครบกำหนดเป็นปฏิทิน', en: 'A monthly avalanche plan and due dates exported to your calendar.' }],
     ['arrow-repeat', { th: 'เช็กรีไฟแนนซ์หลังหักค่าธรรมเนียมและค่าปรับ', en: 'Refinance check after fees and penalty.' }],
+    ['envelope-paper', { th: 'ร่างข้อความขอปรับโครงสร้างหนี้ถึงผู้ให้กู้ ใส่ตัวเลขของคุณให้แล้ว', en: 'A drafted restructure request to your lender, with your numbers filled in.' }],
+    ['hourglass-split', { th: 'หน้าหนี้แต่ละก้อนบอกว่าจ่ายแค่ขั้นต่ำจะปิดได้เมื่อไรและเสียดอกเบี้ยเท่าไร', en: 'Each loan shows when it clears at the minimum payment and how much interest that costs.' }],
     ['chat-dots', { th: 'ที่ปรึกษาแบบแชต พิมพ์หรือพูดได้', en: 'A chat consultant you can type to or speak with.' }],
     ['receipt', { th: 'หน้าภาษีพร้อมรายการลดหย่อน ใช้กฎของกรมสรรพากรปี 2568', en: 'A tax page with allowances, using the Revenue Department rules for 2568.' }],
     ['graph-up-arrow', { th: 'หน้าลงทุนแสดงราคาและปริมาณเหรียญจริง และปฏิทินปลดล็อกตัวอย่าง', en: 'An invest page with real token prices and supply, and a sample unlock calendar.' }],

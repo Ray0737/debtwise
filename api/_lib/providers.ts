@@ -39,6 +39,42 @@ const gemini: Provider = {
   },
 }
 
+// Fallback when Gemini is down or rate limited. Text only: Groq cannot read the inline files.
+// The default model was confirmed live on 2026-09-13 in the Edu project.
+export const groq: Provider = {
+  async generate(i) {
+    const key = process.env.GROQ_API_KEY
+    if (!key) throw new Error('GROQ_API_KEY is not set')
+    if (i.inline) throw new Error('Groq cannot read files')
+    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
+      body: JSON.stringify({
+        model: process.env.GROQ_MODEL || 'openai/gpt-oss-120b',
+        temperature: 0.2,
+        response_format: { type: 'json_object' },
+        messages: [{ role: 'system', content: i.system }, ...i.messages.map((m) => ({ role: m.role, content: m.text }))],
+      }),
+      signal: AbortSignal.timeout(25000),
+    })
+    if (!r.ok) throw new Error(`Groq ${r.status}`)
+    const j = (await r.json()) as { choices?: { message?: { content?: string } }[] }
+    return j.choices?.[0]?.message?.content ?? ''
+  },
+}
+
+// Gemini first. If it still fails after its retries and a Groq key exists, answer text requests with Groq.
+export const withFallback = (primary: Provider, backup: Provider): Provider => ({
+  async generate(i) {
+    try {
+      return await primary.generate(i)
+    } catch (e) {
+      if (!process.env.GROQ_API_KEY || i.inline) throw e
+      return backup.generate(i)
+    }
+  },
+})
+
 // U-Bot interface is unknown. Adjust the request and response shape once its documentation is available.
 const ubot: Provider = {
   async generate(i) {
@@ -57,5 +93,5 @@ const ubot: Provider = {
 }
 
 export function pickProvider(name?: string): Provider {
-  return name === 'ubot' && process.env.UBOT_API_URL ? ubot : gemini
+  return name === 'ubot' && process.env.UBOT_API_URL ? ubot : withFallback(gemini, groq)
 }

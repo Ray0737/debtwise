@@ -63,3 +63,12 @@ Written by the Haiku build run, 2026-10-15, for a higher-capability model to rev
 4. Inject a malicious PDF text and confirm no balance changes without user confirmation.
 5. Review the `api/` functions for auth, logging and error leakage.
 6. Commit the fixes. Haiku used `Co-Authored-By: Claude Haiku 5.5`.
+
+
+## Update 2026-10-15 (later)
+
+- AI: Gemini first (`GEMINI_MODEL=gemini-3.1-flash-lite`), two retries on 429, 500 and 503, then Groq (`GROQ_API_KEY`, default model `openai/gpt-oss-120b`) for text requests only. Set `GROQ_API_KEY` in Vercel too if you want the backup live.
+- `npm run dev` serves `/api/ai`, `/api/stt`, `/api/tts` and `/api/market` through a Vite plugin, so chat works locally.
+- Tax uses the Revenue Department rules for tax year 2568. Invest market data is real (CoinGecko); the unlock calendar and refinance offers are sample.
+- One-off bills live in the browser (localStorage). A `one_offs` table is the upgrade path.
+- Not done: ElevenLabs voice test, photo and PDF upload test on the live site, real refinance offers, contact details and a lawyer review for terms and privacy.

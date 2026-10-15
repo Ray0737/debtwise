@@ -80,6 +80,12 @@ export default function Home() {
           {debts.some((d) => d.dueDay) && <button className="btn soft" onClick={downloadIcs}><Icon n="calendar-plus" />{t('home.calendar')}</button>}
         </div>
       </Card>
+      {debts.length === 0 && (
+        <Card title={t('home.emptyTitle')} icon="plus-circle">
+          <p className="muted">{t('home.notice.empty')}</p>
+          <button className="btn" style={{ alignSelf: 'flex-start' }} onClick={() => nav('/debt/add')}><Icon n="plus-lg" />{t('debt.add')}</button>
+        </Card>
+      )}
       {upcoming.length > 0 && (
         <div className="stack">
           <h2>{t('home.upcoming')}</h2>

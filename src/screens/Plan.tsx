@@ -3,8 +3,9 @@ import { OFFERS } from '../data/sample/offers'
 import { formatBaht, refinance, type Debt } from '../engine'
 import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
+import { buildLenderMessage } from '../lib/lenderMessage'
 import { oneOffTotal, useApp } from '../store/useApp'
-import { Card, Icon, Page, Row, SampleTag } from '../ui'
+import { Card, Icon, Modal, Page, Row, SampleTag } from '../ui'
 
 function Refi({ debt }: { debt: Debt }) {
   const t = useT()
@@ -41,9 +42,17 @@ export default function Plan() {
   const t = useT()
   const { profile, debts, store, oneOffs } = useApp()
   const [saved, setSaved] = useState(false)
+  const [draft, setDraft] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const { lang } = useApp()
   if (!profile) return null
   const s = summarize(profile, debts, oneOffTotal(oneOffs))
   const byId = new Map(debts.map((d) => [d.id, d]))
+  const atRisk = s.plan.shortfall > 0
+    ? byId.get(s.plan.allocations.find((a) => a.reason === 'unpaid' || a.reason === 'partial_minimum')?.debtId ?? '') ?? [...debts].sort((a, b) => b.minPayment - a.minPayment)[0]
+    : undefined
+  const message = atRisk ? buildLenderMessage({ lang, name: profile.displayName, debt: atRisk, available: s.cash.available, minimums: s.minimums, shortfall: s.plan.shortfall }) : ''
+  const copy = async () => { try { await navigator.clipboard.writeText(message); setCopied(true) } catch { /* clipboard may be blocked */ } }
   const hasRefi = debts.some((d) => d.ratePct != null && d.termMonthsLeft && OFFERS.some((o) => o.forTypes.includes(d.type)))
 
   const save = async () => {
@@ -80,6 +89,23 @@ export default function Plan() {
         <span className="small" role="status">{saved && <><Icon n="check-circle" /> {t('plan.saved')}</>}</span>
         <button className="btn" onClick={save}><Icon n="bookmark-check" />{t('plan.save')}</button>
       </div>
+      {atRisk && (
+        <Card title={t('plan.lenderTitle')} icon="envelope-paper">
+          <p className="muted">{t('plan.lenderLine')}</p>
+          <button className="btn" style={{ alignSelf: 'flex-start' }} onClick={() => { setDraft(true); setCopied(false) }}><Icon n="pencil-square" />{t('plan.lenderBtn')}</button>
+        </Card>
+      )}
+      {draft && atRisk && (
+        <Modal title={t('plan.lenderTitle')} onClose={() => setDraft(false)}>
+          <div className="stack">
+            <textarea className="input msgbox" readOnly rows={12} value={message} aria-label={t('plan.lenderTitle')} />
+            <div className="between">
+              <span className="small" role="status">{copied && <><Icon n="check-circle" /> {t('plan.copied')}</>}</span>
+              <button className="btn" onClick={copy}><Icon n="clipboard" />{t('plan.copy')}</button>
+            </div>
+          </div>
+        </Modal>
+      )}
       <h2>{t('refi.title')}</h2>
       <p className="small muted">{t('refi.line')}</p>
       {debts.map((d) => <Refi key={d.id} debt={d} />)}

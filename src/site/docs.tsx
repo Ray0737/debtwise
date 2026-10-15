@@ -163,6 +163,7 @@ export function Guide() {
         [{ th: 'คุณระบุเอง', en: 'User stated' }, { th: 'คุณกรอกเอง ไม่มีเอกสารยืนยัน', en: 'You typed it, with no document to back it up' }],
         [{ th: 'ตัวอย่าง', en: 'Sample' }, { th: 'มาจากครอบครัวตัวอย่าง', en: 'Comes from the demo family' }],
       ]} />
+      <P b={{ th: 'หน้ารายละเอียดยังบอกวันครบกำหนดถัดไป ระยะเวลาที่ต้องใช้ปิดหนี้ถ้าจ่ายแค่ขั้นต่ำ และดอกเบี้ยโดยประมาณตลอดช่วงนั้น ถ้ายอดขั้นต่ำน้อยกว่าดอกเบี้ยต่อเดือน แอปบอกว่าจ่ายขั้นต่ำอย่างเดียวไม่มีวันปิดหนี้', en: 'The detail page also shows the next due date, how long it takes to pay the loan off if you only pay the minimum, and about how much interest that costs. If the minimum is less than a month’s interest, it says paying only the minimum never clears the loan.' }} />
       <P b={{ th: 'แก้ไขได้ทุกช่อง และลบได้ การลบมีหน้าต่างยืนยันที่บอกว่าจะลบรายการไหน และย้อนกลับไม่ได้', en: 'Every field can be edited, and a loan can be deleted. Deleting shows a confirmation that names the loan, and it cannot be undone.' }} />
     </> },
 
@@ -183,6 +184,8 @@ export function Guide() {
         [{ th: 'เดือนนี้ยังจ่ายไม่ได้', en: 'Not covered this month' }, { th: 'ไม่มีเงินเหลือสำหรับก้อนนี้', en: 'No money is left for it' }],
       ]} />
       <P b={{ th: 'ถ้าเงินไม่พอ แผนบอกว่าขาดเท่าไรและก้อนไหนจ่ายไม่ครบ ควรคุยกับผู้ให้กู้ก่อนพลาดการชำระ กดบันทึกแผนนี้เพื่อเก็บภาพรวมของเดือน', en: 'If money is short, the plan shows by how much and which loans go unpaid. Talk to your lender before a payment is missed. Press save to keep the month’s snapshot.' }} />
+      <H b={{ th: 'ข้อความถึงผู้ให้กู้', en: 'A message to your lender' }} />
+      <P b={{ th: 'เมื่อเดือนนั้นขาด หน้าแผนมีปุ่ม ร่างข้อความ ระบบร่างคำขอปรับโครงสร้างหนี้ถึงผู้ให้กู้ของก้อนที่เสี่ยงที่สุด โดยใส่ยอดคงเหลือ ยอดขั้นต่ำ เงินที่มี และยอดที่ขาดของคุณให้ ร่างนี้เขียนจากแม่แบบ ไม่ได้ใช้ AI และไม่แต่งตัวเลขเอง คุณแก้ไขและส่งเองทางช่องทางของผู้ให้กู้ แอปไม่ส่งแทน', en: 'When the month is short, the Plan page has a "Draft a message" button. It writes a request to restructure, to the lender of the loan most at risk, with your balance, minimum, available money and shortfall filled in. The draft comes from a template, not from AI, and invents no numbers. You edit it and send it yourself through your lender’s channels. The app does not send it.' }} />
     </> },
 
     { id: 'refinance', title: { th: 'เช็กรีไฟแนนซ์', en: 'Refinance check' }, body: <>
@@ -296,7 +299,7 @@ export function Terms() {
       [{ th: 'บริการ', en: 'The service' }, { th: 'เว็บแอป Debtwise และหน้าสาธารณะ', en: 'The Debtwise web app and its public pages' }],
       [{ th: 'คุณ', en: 'You' }, { th: 'ผู้ใช้ที่เข้าสู่ระบบหรือเปิดหน้าสาธารณะ', en: 'Anyone who signs in or opens a public page' }],
       [{ th: 'ข้อมูลของคุณ', en: 'Your data' }, { th: 'สิ่งที่คุณกรอก อัปโหลด หรือยืนยันในบริการ', en: 'What you enter, upload or confirm in the service' }],
-      [{ th: 'ผู้ให้บริการภายนอก', en: 'Third-party services' }, { th: 'Supabase (บัญชีและฐานข้อมูล) ผู้ให้บริการ AI (Google Gemini) บริการเสียง (ElevenLabs) CoinGecko (ราคาโทเคน) และผู้โฮสต์ (Vercel)', en: 'Supabase (accounts and database), the AI provider (Google Gemini), the voice service (ElevenLabs), CoinGecko (token prices) and the host (Vercel)' }],
+      [{ th: 'ผู้ให้บริการภายนอก', en: 'Third-party services' }, { th: 'Supabase (บัญชีและฐานข้อมูล) ผู้ให้บริการ AI (Google Gemini และ Groq เป็นตัวสำรอง) บริการเสียง (ElevenLabs) CoinGecko (ราคาโทเคน) และผู้โฮสต์ (Vercel)', en: 'Supabase (accounts and database), the AI providers (Google Gemini, with Groq as a backup), the voice service (ElevenLabs), CoinGecko (token prices) and the host (Vercel)' }],
     ]} /> },
     { id: 'service', title: { th: 'บริการนี้คืออะไร', en: 'What the service is' }, body: <>
       <P b={{ th: 'Debtwise เป็นเครื่องมือให้ข้อมูลที่ช่วยให้คุณเห็นหนี้ ประมาณเงินที่เหลือในแต่ละเดือน ประมาณภาษี และเทียบตัวเลขรีไฟแนนซ์ ไม่ได้เป็นธนาคาร ผู้ให้กู้ นายหน้า หรือที่ปรึกษาที่ได้รับใบอนุญาต', en: 'Debtwise is an information tool that helps you see your debt, estimate what is left each month, estimate tax and compare refinance numbers. It is not a bank, a lender, a broker or a licensed adviser.' }} />
@@ -393,6 +396,7 @@ export function Privacy() {
         { th: 'ข้อความที่คุณพิมพ์หรือพูดถูกปิดชื่อ เลขบัญชี เบอร์โทร และเลขบัตรประชาชนก่อนส่งให้ AI ระบบปิดชื่อตามชื่อที่คุณใส่ในโปรไฟล์ และปิดตัวเลขตามรูปแบบที่พบบ่อย อาจไม่จับได้ทุกรูปแบบ', en: 'Text you type or speak has names, account numbers, phone numbers and national ID numbers removed before it goes to the AI. Names are matched to the name in your profile and numbers by common patterns, so not every format is caught.' },
         { th: 'AI ได้รับตัวเลขสรุป (รายได้ ค่าจำเป็น ผู้ให้กู้ ประเภทหนี้ ยอดคงเหลือ ดอกเบี้ย ยอดขั้นต่ำ ยอดที่วางแผนจ่าย บิลครั้งเดียว) และข้อความล่าสุดสิบข้อความ', en: 'The AI receives a summary of numbers (income, essentials, lenders, debt types, balances, rates, minimums, planned payments, one-off bills) and the last ten messages.' },
         { th: 'ไฟล์รูปและ PDF ที่อัปโหลดส่งให้ AI ตามที่เป็น ปิดข้อมูลก่อนส่งไม่ได้ และไม่ถูกเก็บ', en: 'Pictures and PDFs you upload go to the AI as they are, cannot be masked first, and are not stored.' },
+        { th: 'หาก Google Gemini ไม่ว่างหรือใช้ไม่ได้ ข้อความแชต (ไม่รวมไฟล์) อาจถูกส่งให้ Groq แทน ซึ่งได้รับข้อมูลชุดเดียวกัน คือข้อความที่ปิดข้อมูลแล้วและตัวเลขสรุป', en: 'If Google Gemini is busy or down, chat text (never files) may go to Groq instead, which receives the same data: masked text and the summary of numbers.' },
         { th: 'เมื่อใช้ไมค์หรือฟังเสียงตอบ เสียงหรือข้อความไปยังบริการเสียง (ElevenLabs) และฟังก์ชันของเราไม่เก็บเนื้อหา', en: 'When you use the mic or hear replies, audio or text goes to the voice service (ElevenLabs), and our functions do not store the content.' },
         { th: 'เราไม่ใช้ข้อมูลของคุณฝึกโมเดลของเราเอง การจัดการข้อมูลฝั่งผู้ให้บริการ AI และเสียงเป็นไปตามนโยบายและแผนบริการของผู้ให้บริการนั้น', en: 'We do not train any model of our own on your data. How the AI and voice providers handle data follows their own policies and plans.' },
       ]} />
@@ -403,6 +407,7 @@ export function Privacy() {
       <Table head={[{ th: 'ผู้ให้บริการ', en: 'Provider' }, { th: 'ทำอะไร', en: 'What it does' }, { th: 'เห็นข้อมูลอะไร', en: 'What it sees' }]} rows={[
         [{ th: 'Supabase', en: 'Supabase' }, { th: 'บัญชีและฐานข้อมูล', en: 'Accounts and database' }, { th: 'ข้อมูลทั้งหมดที่คุณบันทึกในบัญชี', en: 'Everything you save in your account' }],
         [{ th: 'Google (Gemini)', en: 'Google (Gemini)' }, { th: 'อ่านเอกสารและตอบแชต', en: 'Reads documents and answers chat' }, { th: 'ข้อความที่ปิดข้อมูลแล้ว ตัวเลขสรุป และไฟล์ที่คุณอัปโหลด', en: 'Masked text, a summary of numbers and files you upload' }],
+        [{ th: 'Groq (สำรอง)', en: 'Groq (backup)' }, { th: 'ตอบแชตแทนเมื่อ Gemini ใช้ไม่ได้', en: 'Answers chat when Gemini is down' }, { th: 'ข้อความที่ปิดข้อมูลแล้วและตัวเลขสรุป ไม่รับไฟล์', en: 'Masked text and a summary of numbers. Never files.' }],
         [{ th: 'ElevenLabs', en: 'ElevenLabs' }, { th: 'เสียงเป็นข้อความและข้อความเป็นเสียง', en: 'Speech to text and text to speech' }, { th: 'เสียงที่คุณพูดหรือข้อความคำตอบ เมื่อคุณใช้ฟีเจอร์เสียง', en: 'Audio you speak or reply text, when you use voice' }],
         [{ th: 'Google (เข้าสู่ระบบ)', en: 'Google (sign in)' }, { th: 'ยืนยันตัวตน', en: 'Identity' }, { th: 'อีเมล ชื่อ และรูปโปรไฟล์ที่คุณอนุญาต', en: 'The email, name and picture you allow' }],
         [{ th: 'CoinGecko', en: 'CoinGecko' }, { th: 'ราคาและปริมาณโทเคน', en: 'Token prices and supply' }, { th: 'ไม่เห็นข้อมูลของคุณ เซิร์ฟเวอร์ของเราดึงข้อมูลสาธารณะ', en: 'Nothing about you. Our server fetches public data.' }],

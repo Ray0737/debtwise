@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
-import { formatBaht } from '../engine'
+import { formatBaht, payoffMonths } from '../engine'
 import { useT } from '../i18n'
+import { daysUntilDue } from '../lib/derive'
 import type { Source } from '../store/types'
 import { useApp } from '../store/useApp'
 import { Badge, Card, Icon, Modal, Page } from '../ui'
@@ -24,6 +25,7 @@ export default function Loan() {
 
   if (!d) return <Navigate to="/debt" replace />
   const srcText = !source ? t('debt.sourceNone') : source.kind === 'sample' ? t('debt.sourceSample') : source.kind === 'upload' ? source.fileName ?? t('add.upload') : t('debt.sourceYou')
+  const months = d.minPayment > 0 ? payoffMonths(d.balance, d.ratePct ?? 0, d.minPayment) : null
   const rows: [string, string][] = [
     [t('debt.lender'), d.lender],
     [t('debt.type'), t(`type.${d.type}` as const)],
@@ -31,6 +33,9 @@ export default function Loan() {
     [t('debt.minPayment'), formatBaht(d.minPayment)],
     [t('debt.dueDay'), d.dueDay ? String(d.dueDay) : '-'],
     [t('debt.termLeft'), d.termMonthsLeft ? String(d.termMonthsLeft) : '-'],
+    ...(d.dueDay ? ([[t('loan.nextDue'), daysUntilDue(d.dueDay) === 0 ? t('home.dueToday') : t('home.dueIn', { n: daysUntilDue(d.dueDay) })]] as [string, string][]) : []),
+    [t('loan.payoff'), months === null ? t('loan.payoffNever') : t('loan.months', { n: months })],
+    ...(months === null ? [] : ([[t('loan.interestAtMin'), formatBaht(Math.max(0, Math.round(d.minPayment * months - d.balance)))]] as [string, string][])),
   ]
 
   return (
