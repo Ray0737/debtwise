@@ -6,6 +6,8 @@ import { useApp } from '../store/useApp'
 import type { Profile } from '../store/types'
 import { Choice, Field, Icon, NumInput, Page, Seg, TextInput, range } from '../ui'
 
+const STEP_ICON = ['person-circle', 'cash-coin', 'hourglass-split', 'house-heart', 'credit-card-2-front']
+
 const STEPS: { title: 'onb.aboutTitle' | 'onb.incomeTitle' | 'onb.retireTitle' | 'onb.essentialsTitle' | 'onb.debtsTitle'; fields: ProfileField[] }[] = [
   { title: 'onb.aboutTitle', fields: ['displayName', 'birthYear', 'householdSize'] },
   { title: 'onb.incomeTitle', fields: ['incomeType', 'monthlyIncome', 'otherIncome', 'payDay'] },
@@ -50,11 +52,11 @@ export default function Onboarding() {
 
   const thisYear = new Date().getFullYear()
   return (
-    <main className="main solo">
+    <main className="main solo half">
       <Page
-        title={t(s.title)}
+        title={t('app.name')}
         back={step > 1 ? `/onboarding/${step - 1}` : false}
-        hero={<span className="small">{t('onb.step', { n: step, total: STEPS.length })}</span>}
+        hero={<><span className="bigicon"><Icon n={STEP_ICON[step - 1]} /></span><span className="small">{t('onb.step', { n: step, total: STEPS.length })}</span><span className="big">{t(s.title)}</span></>}
       >
         <div className="bar" aria-hidden="true"><i style={{ width: `${(step / STEPS.length) * 100}%` }} /></div>
         {step === 1 && (

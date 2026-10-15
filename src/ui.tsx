@@ -9,8 +9,10 @@ export const Icon = ({ n }: { n: string }) => <i className={`bi bi-${n}`} aria-h
 export function LangButton() {
   const { lang, setLang } = useApp()
   return (
-    <button className="circle txt" aria-label="Language" onClick={() => setLang(lang === 'th' ? 'en' : 'th')}>
-      {lang === 'th' ? 'EN' : 'TH'}
+    <button className="langpill" aria-label={lang === 'th' ? 'English' : 'ภาษาไทย'} title={lang === 'th' ? 'English' : 'ภาษาไทย'} onClick={() => setLang(lang === 'th' ? 'en' : 'th')}>
+      <Icon n="globe2" />
+      <span className={lang === 'th' ? 'on' : ''}>TH</span>
+      <span className={lang === 'en' ? 'on' : ''}>EN</span>
     </button>
   )
 }
@@ -43,7 +45,7 @@ export function Page({ title, back, action, hero, children }: {
               </button>
             ) : <span />}
             <h1 className="top-title">{title}</h1>
-            <div className="top-act">{action ?? <LangButton />}<SignOutButton /></div>
+            <div className="top-act">{action}<LangButton /><SignOutButton /></div>
           </div>
           {hero && <div className="hero">{hero}</div>}
         </div>

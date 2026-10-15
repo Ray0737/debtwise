@@ -64,12 +64,18 @@ function Shell() {
     <div className="shell">
       <aside className="side">
         <div className="side-card side-me">
-          <Link className="side-user" to="/profile">
-            <span className="avatar">{account.photo ? <img src={account.photo} alt="" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.display = 'none' }} /> : null}<b>{name.trim().charAt(0).toUpperCase()}</b></span>
-            <span className="grow"><span className="ell name">{name}</span><span className="ell small">{account.email || t('profile.title')}</span></span>
-          </Link>
-          <button className="side-ico" aria-label="Language" title={lang === 'th' ? 'English' : 'ภาษาไทย'} onClick={() => setLang(lang === 'th' ? 'en' : 'th')}>{lang === 'th' ? 'EN' : 'TH'}</button>
-          <button className="side-ico" aria-label={t('profile.signOut')} title={t('profile.signOut')} onClick={async () => { await signOut(); nav('/signin') }}><Icon n="box-arrow-right" /></button>
+          <div className="side-row">
+            <Link className="side-user" to="/profile">
+              <span className="avatar">{account.photo ? <img src={account.photo} alt="" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.display = 'none' }} /> : null}<b>{name.trim().charAt(0).toUpperCase()}</b></span>
+              <span className="grow"><span className="ell name">{name}</span><span className="ell small">{account.email || t('profile.title')}</span></span>
+            </Link>
+            <button className="side-ico" aria-label={t('profile.signOut')} title={t('profile.signOut')} onClick={async () => { await signOut(); nav('/signin') }}><Icon n="box-arrow-right" /></button>
+          </div>
+          <div className="side-lang" role="group" aria-label="Language">
+            <Icon n="globe2" />
+            <button className={lang === 'th' ? 'on' : ''} aria-pressed={lang === 'th'} onClick={() => setLang('th')}>ไทย</button>
+            <button className={lang === 'en' ? 'on' : ''} aria-pressed={lang === 'en'} onClick={() => setLang('en')}>English</button>
+          </div>
         </div>
         <div className="side-scroll">
           <nav className="side-card side-nav" aria-label="Main">{links}</nav>
