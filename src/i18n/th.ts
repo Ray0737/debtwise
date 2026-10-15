@@ -68,7 +68,7 @@ export const th: Record<Key, string> = {
   'tax.reduceLine': 'คุณอาจใช้สิทธิ์เหล่านี้ได้ ตรวจสอบเงื่อนไขและเก็บเอกสารไว้',
   'tax.maySave': 'อาจประหยัดได้สูงสุด', 'tax.paperwork': 'เอกสารที่ต้องเก็บ', 'tax.missing': 'เพิ่มรายได้ในโปรไฟล์เพื่อดูประมาณการ',
   'tax.disclaimer': 'ประมาณการจากกฎตัวอย่าง ไม่ใช่คำแนะนำด้านภาษี',
-  'talk.title': 'คุยกับ Debtwise', 'talk.placeholder': 'เล่าให้ฟังว่าเกิดอะไรขึ้น', 'talk.send': 'ส่ง', 'talk.mic': 'พูด', 'talk.ai': 'เอไอ',
+  'talk.title': 'คุยกับ Debtwise', 'talk.placeholder': 'ถามเรื่องเงินของคุณได้เลย', 'talk.send': 'ส่ง', 'talk.mic': 'พูด', 'talk.ai': 'เอไอ',
   'talk.flagged': 'ตัวเลขบางส่วนในคำตอบนี้ตรวจสอบกับข้อมูลของคุณไม่ได้',
   'talk.proposal': 'การเปลี่ยนแปลงที่เสนอ', 'talk.apply': 'ใช้ค่านี้',
   'talk.intro': 'ฉันดูตัวเลขของคุณและช่วยคุยเรื่องเดือนที่ลำบากได้ ฉันไม่โอนเงินให้',
@@ -76,4 +76,7 @@ export const th: Record<Key, string> = {
   'profile.dataLine': 'เก็บไว้ในบัญชี Debtwise ของคุณ', 'profile.export': 'ส่งออกสำเนา',
   'profile.deleteAll': 'ลบข้อมูลทั้งหมดของฉัน', 'profile.deleteConfirm': 'การลบนี้จะลบหนี้ แผน และข้อความของคุณ พิมพ์ delete เพื่อยืนยัน',
   'profile.loadDemo': 'โหลดครอบครัวตัวอย่าง', 'profile.removeDemo': 'ลบข้อมูลสาธิต', 'profile.signOut': 'ออกจากระบบ', 'profile.saved': 'บันทึกแล้ว',
+  'nav.profile': 'โปรไฟล์', 'common.edit': 'แก้ไข', 'common.close': 'ปิด', 'common.or': 'หรือ',
+  'loan.deleteConfirm': 'ลบหนี้นี้หรือไม่ การลบไม่สามารถย้อนกลับได้', 'loan.details': 'รายละเอียด',
+  'nav.shortcuts': 'ทางลัด', 'debt.loans': 'จำนวน {n} รายการ', 'home.ask': 'ถาม Debtwise',
 }

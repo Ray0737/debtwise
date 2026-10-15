@@ -66,7 +66,7 @@ export const en = {
   'tax.reduceLine': 'You may be able to claim these. Check the rule and keep the paperwork.',
   'tax.maySave': 'May save up to', 'tax.paperwork': 'Keep', 'tax.missing': 'Add your income in Profile to see an estimate.',
   'tax.disclaimer': 'Estimate from sample rules, not tax advice.',
-  'talk.title': 'Talk to Debtwise', 'talk.placeholder': 'Tell me what changed', 'talk.send': 'Send', 'talk.mic': 'Speak', 'talk.ai': 'AI',
+  'talk.title': 'Talk to Debtwise', 'talk.placeholder': 'Ask about your money', 'talk.send': 'Send', 'talk.mic': 'Speak', 'talk.ai': 'AI',
   'talk.flagged': 'Some figures in this reply could not be checked against your numbers.',
   'talk.proposal': 'Proposed change', 'talk.apply': 'Apply',
   'talk.intro': 'I can look at your numbers and talk through a hard month. I never move money.',
@@ -74,6 +74,9 @@ export const en = {
   'profile.dataLine': 'Stored in your Debtwise account.', 'profile.export': 'Export a copy',
   'profile.deleteAll': 'Delete all my data', 'profile.deleteConfirm': 'This removes your debts, plans and messages. Type delete to confirm.',
   'profile.loadDemo': 'Load demo family', 'profile.removeDemo': 'Remove demo data', 'profile.signOut': 'Sign out', 'profile.saved': 'Saved',
+  'nav.profile': 'Profile', 'common.edit': 'Edit', 'common.close': 'Close', 'common.or': 'or',
+  'loan.deleteConfirm': 'Delete this loan? This cannot be undone.', 'loan.details': 'Details',
+  'nav.shortcuts': 'Shortcuts', 'debt.loans': 'Loans: {n}', 'home.ask': 'Ask Debtwise',
 } as const
 
 export type Key = keyof typeof en
