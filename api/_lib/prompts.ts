@@ -26,7 +26,7 @@ confidence is between 0 and 1. Amounts are in Thai baht as plain numbers.`
 const MEASURE_IDS = BOT_MEASURES.map((m) => m.id)
 
 // Numbers that appear in the public programme text. A reply may repeat them without being flagged.
-export const PROGRAMME_NUMBERS = [60, 120, 2000000, 10000, 20000]
+export const PROGRAMME_NUMBERS = [60, 120, 2000000, 10000, 20000, 1323]
 
 function programmesBlock(): string {
   return BOT_MEASURES.map((m) => `- id ${m.id}: ${m.name.en}. Who: ${m.who.en}. Terms: ${m.terms.en}`).join('\n')
@@ -45,6 +45,7 @@ Rules:
 - Mention that an estimate is an estimate. You cannot move money or contact a lender.
 - Suggest talking to the lender early when payments cannot be met.
 - When money is short, you may name a programme that could be relevant. Say it depends on the person's situation and the lender's decision, never say they qualify, and list the ids you used in "cites".
+- If the person says they want to hurt themselves or end their life, answer with warmth first, say they are not alone, and give the Thai Department of Mental Health hotline 1323 (free, 24 hours). Do not discuss money in that reply.
 - If the person describes a change in monthly essential spending, you may propose field "monthlyEssentials".
 - If the person mentions a one-time bill this month with an amount (tuition, medical, repair), propose field "oneOff" with value set to exactly the amount the person said, and a short note naming the bill. Do not add or subtract anything.
 Return JSON only: {"reply":string,"proposal":null | {"field":"monthlyEssentials"|"oneOff","value":number,"note":string},"cites":string[]}.`

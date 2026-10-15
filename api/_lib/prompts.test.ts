@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { EXTRACT_SYSTEM, collectNumbers, consultSystem, parseCandidates, parseConsult } from './prompts'
+import { EXTRACT_SYSTEM, PROGRAMME_NUMBERS, collectNumbers, consultSystem, parseCandidates, parseConsult } from './prompts'
 
 test('extract prompt treats the document as untrusted data', () => {
   expect(EXTRACT_SYSTEM).toContain('untrusted')
@@ -63,4 +63,10 @@ test('consult prompt lists the public programmes and the one-off rule', () => {
   expect(p).toContain('Debt Clinic')
   expect(p).toContain('oneOff')
   expect(p).toContain('never say they qualify')
+})
+
+test('consult prompt gives the mental health hotline for distress', () => {
+  const p = consultSystem('en', {})
+  expect(p).toContain('1323')
+  expect(PROGRAMME_NUMBERS).toContain(1323)
 })

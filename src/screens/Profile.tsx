@@ -12,7 +12,7 @@ const FIELDS: ProfileField[] = ['displayName', 'birthYear', 'householdSize', 'in
 export default function Profile() {
   const t = useT()
   const nav = useNavigate()
-  const { profile, store, refresh, signOut, lang, setLang } = useApp()
+  const { profile, store, refresh, signOut, lang, setLang, clearOneOffs } = useApp()
   const [draft, setDraft] = useState<Partial<ProfileT>>(profile ?? {})
   const [errors, setErrors] = useState<Partial<Record<ProfileField, 'required' | 'invalid'>>>({})
   const [saved, setSaved] = useState(false)
@@ -95,7 +95,7 @@ export default function Profile() {
             <div className="btnrow">
               <button className="btn soft block" onClick={() => { setDel(false); setWord('') }}>{t('common.cancel')}</button>
               <button className="btn danger block" disabled={word.trim().toLowerCase() !== 'delete' || busy}
-                onClick={() => run(async () => { await store.deleteAll(); setDel(false); setWord('') })}><Icon n="trash3" />{t('profile.deleteBtn')}</button>
+                onClick={() => run(async () => { await store.deleteAll(); clearOneOffs(); setDel(false); setWord('') })}><Icon n="trash3" />{t('profile.deleteBtn')}</button>
             </div>
           </div>
         </Modal>

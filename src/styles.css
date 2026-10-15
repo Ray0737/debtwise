@@ -512,3 +512,6 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .modal.danger .btnrow .btn.danger:disabled:hover { background: var(--danger); }
 
 .modal.danger .delname { color: var(--main); }
+
+.doc h3 { font-size: 1.05rem; color: var(--main); margin-top: var(--s3); }
+.doc .link { color: var(--main); }
