@@ -1,0 +1,53 @@
+import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { DebtForm } from '../components/DebtForm'
+import { Icon } from '../components/Icon'
+import { Sheet } from '../components/Sheet'
+import { useT } from '../i18n'
+import { useApp } from '../store/useApp'
+
+export default function AddDebt() {
+  const t = useT()
+  const nav = useNavigate()
+  const { store, refresh } = useApp()
+  const [form, setForm] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState(false)
+  const file = useRef<HTMLInputElement>(null)
+
+  const onFile = async (f: File | undefined) => {
+    if (!f) return
+    setBusy(true); setError(false)
+    try {
+      const { extractDocument } = await import('../lib/ai')
+      const candidates = await extractDocument(f)
+      nav('/debt/review', { state: { candidates, fileName: f.name } })
+    } catch { setError(true) } finally { setBusy(false) }
+  }
+
+  return (
+    <>
+      <button className="btn btn-text" style={{ alignSelf: 'flex-start' }} onClick={() => nav('/debt')}>{t('common.back')}</button>
+      <h1 className="h1">{t('add.title')}</h1>
+      <div className="joined">
+        <div className="row" role="button" tabIndex={0} onClick={() => file.current?.click()}>
+          <Icon name="upload" size={28} /><div className="grow"><div>{t('add.upload')}</div><div className="muted small">{t('add.uploadHint')}</div></div>
+        </div>
+        <div className="row" role="button" tabIndex={0} onClick={() => nav('/talk')}>
+          <Icon name="mic" size={28} /><div className="grow">{t('add.talk')}</div>
+        </div>
+        <div className="row" role="button" tabIndex={0} onClick={() => setForm(true)}>
+          <Icon name="edit" size={28} /><div className="grow">{t('add.form')}</div>
+        </div>
+      </div>
+      <input ref={file} type="file" accept="image/*,application/pdf" hidden onChange={(e) => onFile(e.target.files?.[0])} />
+      {busy && <p role="status">{t('common.loading')}</p>}
+      {error && <p className="err" role="alert">{t('common.error')}</p>}
+      {form && (
+        <Sheet onClose={() => setForm(false)}>
+          <DebtForm onCancel={() => setForm(false)} onSave={async (d) => { await store!.saveDebt(d); await refresh(); nav('/debt') }} />
+        </Sheet>
+      )}
+    </>
+  )
+}

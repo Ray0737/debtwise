@@ -6,6 +6,10 @@ import { useApp } from './store/useApp'
 import SignIn from './screens/SignIn'
 import Onboarding from './screens/Onboarding'
 import ProfileScreen from './screens/Profile'
+import Debt from './screens/Debt'
+import DebtGroup from './screens/DebtGroup'
+import LoanDetail from './screens/LoanDetail'
+import AddDebt from './screens/AddDebt'
 
 const Todo = ({ name }: { name: string }) => <p className="muted">{name}</p>
 
@@ -32,7 +36,10 @@ export default function App() {
           <Route index element={<Todo name="home" />} />
           <Route path="invest" element={<Todo name="invest" />} />
           <Route path="tax" element={<Todo name="tax" />} />
-          <Route path="debt" element={<Todo name="debt" />} />
+          <Route path="debt" element={<Debt />} />
+          <Route path="debt/add" element={<AddDebt />} />
+          <Route path="debt/group/:by/:key" element={<DebtGroup />} />
+          <Route path="debt/loan/:id" element={<LoanDetail />} />
           <Route path="profile" element={<ProfileScreen />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
