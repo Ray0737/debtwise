@@ -8,24 +8,6 @@ export interface Group {
   debts: Debt[]
 }
 
-export const TYPE_COLOR: Record<DebtType, string> = {
-  credit_card: 'var(--warn)',
-  personal: 'var(--accent)',
-  car: 'var(--card-dark)',
-  home: 'var(--text)',
-  student: 'var(--chart-5)',
-  informal: 'var(--chart-5)',
-}
-
-export const TYPE_ICON: Record<DebtType, string> = {
-  credit_card: 'card',
-  personal: 'coins',
-  car: 'car',
-  home: 'house',
-  student: 'book',
-  informal: 'people',
-}
-
 export function groupDebts(debts: Debt[], by: 'bank' | 'type'): Group[] {
   const map = new Map<string, Group>()
   for (const d of debts) {

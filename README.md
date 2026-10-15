@@ -4,11 +4,10 @@ Debt support app for normal Thai users. See all debts by bank and type, get a pl
 
 ## Status
 
-Build complete per the plan. Unit tests and build pass. Not yet run end to end in a browser against live Supabase and AI keys. See Manual steps in the plans.
+Logic, data and API are built and tested. All UI (screens, components, styles, DESIGN.md) was removed on purpose for a redesign. Not yet run end to end against live Supabase and AI keys.
 
 ## Docs
 
-- `DESIGN.md` : UI design system (palette, nav, screens, components)
 - `docs/superpowers/specs/2026-10-15-debtwise-design.md` : what we build and why
 - `docs/superpowers/plans/` : implementation plan
 - `docs/debt-app-idea-summary.md` : idea and market research
