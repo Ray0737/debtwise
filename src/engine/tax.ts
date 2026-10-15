@@ -1,5 +1,7 @@
-export const SAMPLE_TAX_YEAR = 2569
-export const TAX_RULES_LABEL = 'sample'
+// Rules from the Revenue Department instructions for form ภ.ง.ด.91, tax year 2568 (read 2026-10-15).
+// The 2569 instructions are not published yet, so 2568 is the latest official set.
+export const TAX_YEAR = 2568
+export const TAX_SOURCE = { label: 'Revenue Department', url: 'https://www.rd.go.th/67335.html', asOf: '2026-10-15' }
 
 export interface TaxEstimate {
   taxableIncome: number
@@ -8,7 +10,7 @@ export interface TaxEstimate {
   assumptions: string[]
 }
 
-// Sample progressive bands. Verify against the Revenue Department before showing as fact.
+// Progressive bands from table 1 of the tax year 2568 instructions.
 const BANDS: { upTo: number; rate: number }[] = [
   { upTo: 150000, rate: 0 },
   { upTo: 300000, rate: 0.05 },
@@ -39,7 +41,7 @@ export function estimateTax(i: { annualIncome: number; kind: 'salary' | 'freelan
     lower = b.upTo
   }
   const assumptions = [
-    `Sample rules for tax year ${SAMPLE_TAX_YEAR}, not verified.`,
+    `Revenue Department rules for tax year ${TAX_YEAR}.`,
     'Standard expense deduction of 50% of income, capped at 100,000.',
     'Personal allowance of 60,000.',
   ]

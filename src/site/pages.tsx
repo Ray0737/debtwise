@@ -52,8 +52,8 @@ export function Landing() {
       </Block>
       <Block title={{ th: 'ทุกอย่างในแอปเดียว', en: 'Everything in one app' }}>
         <Items items={[
-          { icon: 'receipt', title: { th: 'ภาษีและลดหย่อน', en: 'Tax and allowances' }, text: { th: 'ประมาณภาษีและรายการลดหย่อน ข้อมูลตัวอย่าง ไม่ใช่คำแนะนำภาษี', en: 'An estimate and allowances. Sample rules, not tax advice.' }, to: '/guide#extras' },
-          { icon: 'graph-up-arrow', title: { th: 'เหตุการณ์โทเคน', en: 'Token events' }, text: { th: 'ปลดล็อกและ vesting ที่กำลังมาถึง ข้อมูลตัวอย่าง', en: 'Upcoming unlocks and vesting. Sample data.' }, to: '/guide#extras' },
+          { icon: 'receipt', title: { th: 'ภาษีและลดหย่อน', en: 'Tax and allowances' }, text: { th: 'ประมาณภาษีและรายการลดหย่อนตามกฎของกรมสรรพากรปี 2568 ไม่ใช่คำแนะนำภาษี', en: 'An estimate and allowances from the Revenue Department rules for 2568. Not tax advice.' }, to: '/guide#extras' },
+          { icon: 'graph-up-arrow', title: { th: 'เหตุการณ์โทเคน', en: 'Token events' }, text: { th: 'ราคาและปริมาณเหรียญจริงของโทเคนที่มีตารางปลดล็อก ส่วนวันปลดล็อกเป็นข้อมูลตัวอย่าง', en: 'Real prices and supply for tokens with unlock schedules. Unlock dates are sample data.' }, to: '/guide#extras' },
           { icon: 'shield-lock', title: { th: 'ข้อมูลเป็นของคุณ', en: 'Your data stays yours' }, text: { th: 'ส่งออกหรือลบทั้งหมดได้เอง ข้อความที่ส่งให้ AI ปิดชื่อและเลขบัญชีก่อน', en: 'Export or delete it all. Names and account numbers are removed before text goes to the AI.' }, to: '/guide#data' },
         ]} />
       </Block>
@@ -143,8 +143,8 @@ export function Support() {
     ['list-check', { th: 'แผนรายเดือนแบบ avalanche และส่งออกวันครบกำหนดเป็นปฏิทิน', en: 'A monthly avalanche plan and due dates exported to your calendar.' }],
     ['arrow-repeat', { th: 'เช็กรีไฟแนนซ์หลังหักค่าธรรมเนียมและค่าปรับ', en: 'Refinance check after fees and penalty.' }],
     ['chat-dots', { th: 'ที่ปรึกษาแบบแชต พิมพ์หรือพูดได้', en: 'A chat consultant you can type to or speak with.' }],
-    ['receipt', { th: 'หน้าภาษีพร้อมรายการลดหย่อน ข้อมูลตัวอย่าง', en: 'A tax page with allowances. Sample data.' }],
-    ['graph-up-arrow', { th: 'หน้าลงทุนแสดงเหตุการณ์โทเคน ข้อมูลตัวอย่าง', en: 'An invest page with token events. Sample data.' }],
+    ['receipt', { th: 'หน้าภาษีพร้อมรายการลดหย่อน ใช้กฎของกรมสรรพากรปี 2568', en: 'A tax page with allowances, using the Revenue Department rules for 2568.' }],
+    ['graph-up-arrow', { th: 'หน้าลงทุนแสดงราคาและปริมาณเหรียญจริง และปฏิทินปลดล็อกตัวอย่าง', en: 'An invest page with real token prices and supply, and a sample unlock calendar.' }],
     ['translate', { th: 'ภาษาไทยและอังกฤษ สลับได้ทุกหน้า', en: 'Thai and English, switchable on every page.' }],
   ]
   return (
@@ -157,7 +157,7 @@ export function Support() {
       ]} />
       <Block id="prototype" title={{ th: 'Debtwise ยังเป็นต้นแบบ', en: 'Debtwise is a prototype' }} text={{ th: 'ใช้งานได้ แต่ยังอยู่ระหว่างทดสอบ ตัวเลขทุกจุดควรตรวจก่อนตัดสินใจ', en: 'It works, but it is still being tested. Check every number before you decide anything.' }}>
         <Items items={[
-          { icon: 'box', title: { th: 'บางหน้าเป็นตัวอย่าง', en: 'Some pages use sample data' }, text: { th: 'ภาษี ลงทุน และข้อเสนอรีไฟแนนซ์ใช้ข้อมูลตัวอย่างและมีป้ายกำกับ', en: 'Tax, invest and refinance offers use sample data and are labelled.' } },
+          { icon: 'box', title: { th: 'บางส่วนเป็นตัวอย่าง', en: 'Some parts use sample data' }, text: { th: 'วันปลดล็อกโทเคนและข้อเสนอรีไฟแนนซ์เป็นข้อมูลตัวอย่างและมีป้ายกำกับ ภาษีใช้กฎจริงของกรมสรรพากร', en: 'Token unlock dates and refinance offers are sample data and labelled. Tax uses the real Revenue Department rules.' } },
           { icon: 'exclamation-triangle', title: { th: 'ไม่ใช่คำแนะนำ', en: 'Not advice' }, text: { th: 'ให้ข้อมูลและตัวเลขประมาณการ ไม่ใช่คำแนะนำทางการเงิน ภาษี หรือกฎหมาย', en: 'Information and estimates, not financial, tax or legal advice.' } },
           { icon: 'patch-check', title: { th: 'ตรวจตัวเลขเสมอ', en: 'Always check numbers' }, text: { th: 'AI อ่านเอกสารผิดได้ จึงมีหน้าตรวจกับบรรทัดต้นฉบับก่อนบันทึก', en: 'The AI can misread a document, so a review screen shows the source line.' } },
           { icon: 'arrow-repeat', title: { th: 'อาจเปลี่ยนแปลง', en: 'Things can change' }, text: { th: 'หน้าจอและฟีเจอร์อาจเปลี่ยนระหว่างเวอร์ชัน', en: 'Screens and features may change between versions.' } },
@@ -272,12 +272,12 @@ export function Guide() {
       <P b={{ th: 'เช็กรีไฟแนนซ์เทียบข้อเสนอตัวอย่างกับหนี้ของคุณ โดยคิดค่าธรรมเนียม ค่าปรับ และประกันทั้งหมด แล้วแสดงส่วนต่างสุทธิ พร้อมเตือนถ้าระยะเวลายาวขึ้น', en: 'The refinance check compares a sample offer with your loan, counting fees, penalty and insurance, and shows the net difference. It warns you if the term gets longer.' }} />
     </> },
     { id: 'extras', title: { th: 'ลงทุนและภาษี', en: 'Invest and Tax' }, body: <>
-      <P b={{ th: 'สองแท็บนี้เป็นส่วนเสริม ใช้ข้อมูลตัวอย่างและมีป้ายกำกับ ตัวอย่าง ทุกส่วน', en: 'These two tabs are add-ons. They use sample data and every block is labelled sample.' }} />
+      <P b={{ th: 'สองแท็บนี้เป็นส่วนเสริม ภาษีใช้กฎของกรมสรรพากรปีภาษี 2568 ส่วนลงทุนใช้ราคาจริงจาก CoinGecko ส่วนที่เป็นข้อมูลตัวอย่างมีป้ายกำกับ ตัวอย่าง', en: 'These two tabs are add-ons. Tax uses the Revenue Department rules for tax year 2568. Invest uses real prices from CoinGecko. Anything that is sample data is labelled sample.' }} />
       <Ul items={[
         { th: 'ลงทุน: เหตุการณ์ปลดล็อกและ vesting ของโทเคนที่กำลังจะมาถึง พร้อมเงินที่เหลือหลังหนี้ ให้ข้อมูลเท่านั้น', en: 'Invest: upcoming token unlock and vesting events next to what is left after debt. Information only.' },
         { th: 'ภาษี: ประมาณภาษีจากรายได้ต่อปี พร้อมสมมติฐานและรายการลดหย่อนที่อาจใช้ได้ ไม่ใช่คำแนะนำภาษี', en: 'Tax: an estimate from your yearly income with assumptions and allowances you may claim. Not tax advice.' },
       ]} />
-      <Note icon="exclamation-triangle">{L({ th: 'กฎภาษีในแอปเป็นข้อมูลตัวอย่างและยังไม่ได้ตรวจกับกรมสรรพากร อย่าใช้ยื่นภาษี', en: 'The tax rules in the app are sample data and have not been checked against the Revenue Department. Do not use them to file taxes.' })}</Note>
+      <Note icon="exclamation-triangle">{L({ th: 'ตัวเลขภาษีเป็นการประมาณจากกฎที่กรมสรรพากรเผยแพร่ ไม่ใช่การคำนวณเพื่อยื่นแบบ ตรวจสอบสถานการณ์ของคุณและแบบ ภ.ง.ด. ก่อนยื่นเสมอ', en: 'The tax figures are an estimate from rules the Revenue Department publishes. They are not a filing calculation. Always check your own situation and the official form before you file.' })}</Note>
     </> },
     { id: 'data', title: { th: 'ข้อมูลของคุณ', en: 'Your data' }, body: <>
       <P b={{ th: 'ที่โปรไฟล์ คุณส่งออกสำเนาข้อมูลเป็นไฟล์ JSON โหลดหรือลบข้อมูลสาธิต และลบข้อมูลทั้งหมดของคุณได้ การลบทั้งหมดต้องพิมพ์ delete เพื่อยืนยัน', en: 'In Profile you can export a copy as a JSON file, load or remove demo data, and delete all of your data. Deleting everything needs you to type delete to confirm.' }} />
@@ -305,7 +305,7 @@ export function Terms() {
     </> },
     { id: 'advice', title: { th: 'ไม่ใช่คำแนะนำ', en: 'Not advice' }, body: <>
       <P b={{ th: 'ตัวเลข แผน และข้อความของที่ปรึกษาเป็นการประมาณและให้ข้อมูล ไม่ใช่คำแนะนำทางการเงิน ภาษี กฎหมาย หรือการลงทุน ตรวจสอบกับผู้ให้กู้หรือผู้เชี่ยวชาญก่อนตัดสินใจ', en: 'Numbers, plans and consultant replies are estimates and information, not financial, tax, legal or investment advice. Check with your lender or a professional before you decide.' }} />
-      <P b={{ th: 'หน้าลงทุน ภาษี และข้อเสนอรีไฟแนนซ์ใช้ข้อมูลตัวอย่างที่ยังไม่ได้ตรวจสอบ', en: 'The Invest and Tax pages and the refinance offers use sample data that has not been verified.' }} />
+      <P b={{ th: 'ตัวเลขภาษีมาจากกฎของกรมสรรพากรปีภาษี 2568 ราคาโทเคนมาจาก CoinGecko ส่วนวันปลดล็อกและข้อเสนอรีไฟแนนซ์เป็นข้อมูลตัวอย่างที่ยังไม่ได้ตรวจสอบ', en: 'Tax figures come from the Revenue Department rules for tax year 2568 and token prices from CoinGecko. Unlock dates and refinance offers are sample data that has not been verified.' }} />
     </> },
     { id: 'ai', title: { th: 'การใช้ AI', en: 'Use of AI' }, body: <>
       <P b={{ th: 'AI อาจอ่านเอกสารผิดหรืออธิบายไม่ครบ คุณต้องตรวจตัวเลขในหน้าตรวจก่อนบันทึก และเป็นผู้รับผิดชอบการตัดสินใจของคุณเอง', en: 'The AI can misread a document or explain something incompletely. You must check the numbers on the review screen before saving, and you are responsible for your own decisions.' }} />

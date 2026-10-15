@@ -12,7 +12,7 @@ function localApi(): Plugin {
     configureServer(server) {
       Object.assign(process.env, loadEnv(server.config.mode, process.cwd(), ''))
       server.middlewares.use(async (req, res, next) => {
-        const m = req.url?.match(/^\/api\/(ai|stt|tts)(\?|$)/)
+        const m = req.url?.match(/^\/api\/(ai|stt|tts|market)(\?|$)/)
         if (!m) return next()
         const chunks: Buffer[] = []
         for await (const c of req) chunks.push(c as Buffer)

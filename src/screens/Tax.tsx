@@ -1,9 +1,9 @@
 import { suggestDeductions, estimateTax, formatBaht } from '../engine'
-import { SAMPLE_TAX_YEAR } from '../engine/tax'
+import { TAX_SOURCE, TAX_YEAR } from '../engine/tax'
 import { useT } from '../i18n'
 import { annualIncome } from '../lib/derive'
 import { useApp } from '../store/useApp'
-import { Card, Icon, Page, Row, SampleTag } from '../ui'
+import { Card, Icon, Page, Row } from '../ui'
 
 export default function Tax() {
   const t = useT()
@@ -18,9 +18,9 @@ export default function Tax() {
       desc={t('desc.tax')}
       hero={est ? (
         <>
-          <span className="small">{t('tax.due')} · {t('tax.year')} {SAMPLE_TAX_YEAR}</span>
+          <span className="small">{t('tax.due')} · {t('tax.year')} {TAX_YEAR}</span>
           <span className="big num">{formatBaht(est.tax)}</span>
-          <span className="small"><SampleTag /></span>
+          <span className="small"><span className="badge out"><Icon n="patch-check" />{t('tax.official')}</span></span>
         </>
       ) : undefined}
     >
@@ -30,7 +30,7 @@ export default function Tax() {
         <>
           <Card title={t('tax.assumptions')} icon="list-ul" tone="line">
             <div className="kv"><span className="muted">{t('tax.annualIncome')}</span><span className="num strong">{formatBaht(income)}</span></div>
-            <ul className="stack small">{est.assumptions.map((a) => <li key={a}>{a}</li>)}</ul>
+            <ul className="stack small">{[t('tax.as.rules', { year: TAX_YEAR }), t('tax.as.expense'), t('tax.as.personal'), ...(profile?.incomeType === 'freelance' ? [t('tax.as.freelance')] : [])].map((a) => <li key={a}>{a}</li>)}</ul>
           </Card>
           <div className="stack">
             <h2>{t('tax.reduce')}</h2>
@@ -38,13 +38,13 @@ export default function Tax() {
             <div className="card">
               <div className="list">
                 {ideas.map(({ deduction: d, estimatedSaving }) => (
-                  <Row key={d.id} icon="piggy-bank" title={d.label[lang]} sub={`${t('tax.paperwork')}: ${d.paperwork[lang]}`}
+                  <Row key={d.id} icon="piggy-bank" title={<span className="wrapsub">{d.label[lang]}</span>} sub={`${t('tax.paperwork')}: ${d.paperwork[lang]}`}
                     value={<><span className="small muted" style={{ display: 'block' }}>{t('tax.maySave')}</span>{formatBaht(estimatedSaving)}</>} />
                 ))}
               </div>
             </div>
           </div>
-          <p className="small muted"><Icon n="info-circle" /> {t('tax.disclaimer')}</p>
+          <p className="small muted"><Icon n="info-circle" /> {t('tax.disclaimer')} {t('tax.source')}: <a className="link" href={TAX_SOURCE.url} target="_blank" rel="noreferrer">rd.go.th</a>, {TAX_SOURCE.asOf}</p>
         </>
       )}
     </Page>
