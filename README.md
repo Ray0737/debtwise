@@ -4,7 +4,7 @@ Debt support app for normal Thai users. See all debts by bank and type, get a pl
 
 ## Status
 
-Design and plan stage. Code not started.
+Build complete per the plan. Unit tests and build pass. Not yet run end to end in a browser against live Supabase and AI keys. See Manual steps in the plans.
 
 ## Docs
 
@@ -30,3 +30,12 @@ React, TypeScript, Vite, PWA, Supabase (Auth and Postgres), Vercel (hosting and 
 - The browser holds only the Supabase URL and anon key. Never put a `service_role` or AI key in client code.
 - Money figures come from the engine in `src/engine`, never from the AI.
 - Sample data is always labelled `sample`.
+
+## Running locally
+
+1. `npm install`
+2. `npm test` and `npm run build`
+3. `npm run dev` for the UI only. Sign in needs Supabase auth providers enabled.
+4. `npx vercel dev` runs the UI and the `api/` functions together. Requires `npx vercel login` and `npx vercel link`.
+
+AI keys (`GEMINI_API_KEY`, `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID`, optional `UBOT_API_KEY`, `UBOT_API_URL`) go in Vercel project settings, not in the browser.
