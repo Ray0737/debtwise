@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'line_seed_sans_th','Inter','Leelawadee UI',Tahoma,system-ui,sans-serif">
+<rect width="1600" height="900" fill="#fff"/>
+<text x="30.0" y="40.0" font-size="24" fill="#111" text-anchor="start" font-weight="400">Competition</text>
+<line x1="0" y1="64" x2="1600" y2="64" stroke="#222" stroke-width="2"/>
+<defs><marker id="a" markerWidth="16" markerHeight="16" refX="12" refY="8" orient="auto"><path d="M2 2L13 8L2 14Z" fill="#4472c4"/></marker></defs>
+<line x1="150" y1="482" x2="1490" y2="482" stroke="#4472c4" stroke-width="4" marker-end="url(#a)"/>
+<line x1="800" y1="860" x2="800" y2="110" stroke="#4472c4" stroke-width="4" marker-end="url(#a)"/>
+<text x="774.0" y="128.0" font-size="22" fill="#111" text-anchor="end" font-weight="400">Plan built around</text>
+<text x="774.0" y="156.0" font-size="22" fill="#111" text-anchor="end" font-weight="400">your own situation</text>
+<text x="1490.0" y="532.0" font-size="22" fill="#111" text-anchor="end" font-weight="400">Easy to reach and fast</text>
+<text x="120.0" y="210.0" font-size="19" fill="#8a8fa3" text-anchor="start" font-weight="400">People who look at your case:</text>
+<text x="120.0" y="236.0" font-size="19" fill="#8a8fa3" text-anchor="start" font-weight="400">personal, but slow and gated</text>
+<text x="860.0" y="200.0" font-size="19" fill="#8a8fa3" text-anchor="start" font-weight="400">Personal and instant,</text>
+<text x="860.0" y="226.0" font-size="19" fill="#8a8fa3" text-anchor="start" font-weight="400">if the numbers are right</text>
+<text x="170.0" y="850.0" font-size="19" fill="#8a8fa3" text-anchor="start" font-weight="400">Manual tools and reports:</text>
+<text x="170.0" y="876.0" font-size="19" fill="#8a8fa3" text-anchor="start" font-weight="400">you read and calculate it yourself</text>
+<text x="1490.0" y="850.0" font-size="19" fill="#8a8fa3" text-anchor="end" font-weight="400">Fast but narrow:</text>
+<text x="1490.0" y="876.0" font-size="19" fill="#8a8fa3" text-anchor="end" font-weight="400">one task, or your own bank only</text>
+<circle cx="1324.8" cy="383.0" r="46" fill="#c62828" fill-opacity="0.18" stroke="#c62828" stroke-width="3"/>
+<text x="1324.8" y="390.0" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400">AI</text>
+<text x="1324.8" y="301.0" font-size="20" fill="#222" text-anchor="middle" font-weight="400">ChatGPT / Gemini</text>
+<text x="1324.8" y="325.0" font-size="16" fill="#8a8fa3" text-anchor="middle" font-weight="400">free and instant, numbers not verified</text>
+<circle cx="1286.4" cy="620.6" r="44" fill="#c62828" fill-opacity="0.18" stroke="#c62828" stroke-width="3"/>
+<text x="1286.4" y="627.6" font-size="18" fill="#292d7a" text-anchor="middle" font-weight="400">Bank</text>
+<text x="1286.4" y="692.6" font-size="20" fill="#222" text-anchor="middle" font-weight="400">Thai bank apps</text>
+<text x="1286.4" y="716.6" font-size="16" fill="#8a8fa3" text-anchor="middle" font-weight="400">your own accounts and loans only</text>
+<circle cx="377.6" cy="277.4" r="36" fill="#e8832a" fill-opacity="0.18" stroke="#e8832a" stroke-width="3"/>
+<text x="377.6" y="284.4" font-size="18" fill="#292d7a" text-anchor="middle" font-weight="400">SAM</text>
+<text x="377.6" y="341.4" font-size="20" fill="#222" text-anchor="middle" font-weight="400">SAM Debt Clinic + BOT</text>
+<text x="377.6" y="365.4" font-size="16" fill="#8a8fa3" text-anchor="middle" font-weight="400">real relief, but gated and slow</text>
+<circle cx="966.4" cy="666.8" r="30" fill="#e8832a" fill-opacity="0.18" stroke="#e8832a" stroke-width="3"/>
+<text x="966.4" y="673.8" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400">RD</text>
+<text x="1010.4" y="664.8" font-size="20" fill="#222" text-anchor="start" font-weight="400">RD Smart Tax</text>
+<text x="1010.4" y="688.8" font-size="16" fill="#8a8fa3" text-anchor="start" font-weight="400">tax only, files the return</text>
+<circle cx="710.4" cy="633.8" r="28" fill="#e8832a" fill-opacity="0.18" stroke="#e8832a" stroke-width="3"/>
+<text x="710.4" y="640.8" font-size="18" fill="#292d7a" text-anchor="middle" font-weight="400">NCB</text>
+<text x="668.4" y="631.8" font-size="20" fill="#222" text-anchor="end" font-weight="400">NCB Bureau OK</text>
+<text x="668.4" y="655.8" font-size="16" fill="#8a8fa3" text-anchor="end" font-weight="400">shows your loans, no plan</text>
+<circle cx="627.2" cy="442.4" r="26" fill="#e8832a" fill-opacity="0.18" stroke="#e8832a" stroke-width="3"/>
+<text x="627.2" y="449.4" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400">R</text>
+<text x="587.2" y="440.4" font-size="20" fill="#222" text-anchor="end" font-weight="400">Refinn</text>
+<text x="587.2" y="464.4" font-size="16" fill="#8a8fa3" text-anchor="end" font-weight="400">real home loan offers, status unknown</text>
+<circle cx="467.2" cy="515.0" r="22" fill="#8a8fb5" fill-opacity="0.18" stroke="#8a8fb5" stroke-width="3"/>
+<text x="467.2" y="522.0" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400">C</text>
+<text x="431.2" y="513.0" font-size="20" fill="#222" text-anchor="end" font-weight="400">Cleo, Rocket Money, YNAB</text>
+<text x="431.2" y="537.0" font-size="16" fill="#8a8fa3" text-anchor="end" font-weight="400">not built for Thailand</text>
+<circle cx="364.8" cy="614.0" r="16" fill="#8a8fb5" fill-opacity="0.18" stroke="#8a8fb5" stroke-width="3"/>
+<text x="364.8" y="621.0" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400">U</text>
+<text x="364.8" y="658.0" font-size="20" fill="#222" text-anchor="middle" font-weight="400">Undebt.it</text>
+<text x="364.8" y="682.0" font-size="16" fill="#8a8fa3" text-anchor="middle" font-weight="400">you type every number</text>
+<circle cx="992.0" cy="277.4" r="38" fill="#e8832a"/>
+<path d="M976.0 279.4 l11 11 l21 -25" fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="992.0" y="351.4" font-size="30" fill="#e8832a" text-anchor="middle" font-weight="400">DebtWise</text>
+<text x="992.0" y="377.4" font-size="16" fill="#8a8fa3" text-anchor="middle" font-weight="400">checked numbers and a monthly plan,</text>
+<text x="992.0" y="397.4" font-size="16" fill="#8a8fa3" text-anchor="middle" font-weight="400">but 3 of 5 features still shallow</text>
+<text x="150.0" y="118.0" font-size="16" fill="#8a8fa3" text-anchor="start" font-weight="400">Ring colour: how much they can hurt us</text>
+<circle cx="160" cy="144" r="9" fill="#c62828" fill-opacity="0.18" stroke="#c62828" stroke-width="3"/>
+<text x="176.0" y="150.0" font-size="16" fill="#222" text-anchor="start" font-weight="400">High</text>
+<circle cx="260" cy="144" r="9" fill="#e8832a" fill-opacity="0.18" stroke="#e8832a" stroke-width="3"/>
+<text x="276.0" y="150.0" font-size="16" fill="#222" text-anchor="start" font-weight="400">Medium</text>
+<circle cx="360" cy="144" r="9" fill="#8a8fb5" fill-opacity="0.18" stroke="#8a8fb5" stroke-width="3"/>
+<text x="376.0" y="150.0" font-size="16" fill="#222" text-anchor="start" font-weight="400">Low</text>
+</svg>

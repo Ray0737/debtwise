@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'line_seed_sans_th','Inter','Leelawadee UI',Tahoma,system-ui,sans-serif">
+<rect width="1600" height="900" fill="#ffffff"/>
+<text x="70.0" y="84.0" font-size="52" fill="#292d7a" text-anchor="start" font-weight="400" >Where everyone sits</text>
+<text x="70.0" y="124.0" font-size="24" fill="#5a5e91" text-anchor="start" font-weight="400" >Overlap with what DebtWise does, against how many Thais already use and trust them</text>
+<rect x="591.0" y="170" width="539.0" height="297.6" rx="18" fill="#fdecec"/>
+<text x="1130.0" y="158.0" font-size="20" fill="#c62828" text-anchor="end" font-weight="400" >DANGER ZONE: covers our ground and already has the users</text>
+<rect x="591.0" y="641.2" width="539.0" height="148.8" rx="18" fill="#eef0fb"/>
+<text x="1116.0" y="776.0" font-size="19" fill="#292d7a" text-anchor="end" font-weight="400" >OUR GAP: broad, but nobody knows us yet</text>
+<line x1="150.0" y1="170" x2="150.0" y2="790" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="150.0" y="824.0" font-size="20" fill="#5a5e91" text-anchor="middle" font-weight="400" >0</text>
+<line x1="346.0" y1="170" x2="346.0" y2="790" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="346.0" y="824.0" font-size="20" fill="#5a5e91" text-anchor="middle" font-weight="400" >1</text>
+<line x1="542.0" y1="170" x2="542.0" y2="790" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="542.0" y="824.0" font-size="20" fill="#5a5e91" text-anchor="middle" font-weight="400" >2</text>
+<line x1="738.0" y1="170" x2="738.0" y2="790" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="738.0" y="824.0" font-size="20" fill="#5a5e91" text-anchor="middle" font-weight="400" >3</text>
+<line x1="934.0" y1="170" x2="934.0" y2="790" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="934.0" y="824.0" font-size="20" fill="#5a5e91" text-anchor="middle" font-weight="400" >4</text>
+<line x1="1130.0" y1="170" x2="1130.0" y2="790" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1130.0" y="824.0" font-size="20" fill="#5a5e91" text-anchor="middle" font-weight="400" >5</text>
+<line x1="150" y1="790.0" x2="1130" y2="790.0" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<line x1="150" y1="635.0" x2="1130" y2="635.0" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<line x1="150" y1="480.0" x2="1130" y2="480.0" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<line x1="150" y1="325.0" x2="1130" y2="325.0" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<line x1="150" y1="170.0" x2="1130" y2="170.0" stroke="#c9cce6" stroke-width="1" stroke-dasharray="4 6"/>
+<line x1="150" y1="790" x2="1130" y2="790" stroke="#292d7a" stroke-width="2.5"/>
+<line x1="150" y1="170" x2="150" y2="790" stroke="#292d7a" stroke-width="2.5"/>
+<text x="640.0" y="866.0" font-size="22" fill="#292d7a" text-anchor="middle" font-weight="400" >Overlap with DebtWise (features covered, of 5: debt plan, refinance, tax, life events, Thai)</text>
+<g transform="translate(78 480) rotate(-90)"><text x="0.0" y="0.0" font-size="22" fill="#292d7a" text-anchor="middle" font-weight="400" >Distribution and trust in Thailand</text></g>
+<text x="136.0" y="176.0" font-size="18" fill="#5a5e91" text-anchor="end" font-weight="400" >high</text>
+<text x="136.0" y="790.0" font-size="18" fill="#5a5e91" text-anchor="end" font-weight="400" >low</text>
+<defs><marker id="ah" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1 1L10 6L1 11" fill="none" stroke="#e8832a" stroke-width="2"/></marker></defs>
+<path d="M836.0 659.0 C 842.0 604.0, 822.0 542.0, 820.0 475.6" fill="none" stroke="#e8832a" stroke-width="3" stroke-dasharray="9 8" marker-end="url(#ah)"/>
+<text x="876.0" y="573.0" font-size="18" fill="#e8832a" text-anchor="start" font-weight="400" >borrow distribution:</text>
+<text x="876.0" y="595.0" font-size="18" fill="#e8832a" text-anchor="start" font-weight="400" >SAM, banks, LINE</text>
+<circle cx="973.2" cy="232.0" r="50" fill="#c62828" fill-opacity="0.22" stroke="#c62828" stroke-width="3"/>
+<text x="973.2" y="312.0" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400" >ChatGPT / Gemini</text>
+<text x="973.2" y="336.0" font-size="17" fill="#5a5e91" text-anchor="middle" font-weight="400" >free, Thai, already on your phone</text>
+<circle cx="679.2" cy="250.6" r="46" fill="#c62828" fill-opacity="0.22" stroke="#c62828" stroke-width="3"/>
+<text x="679.2" y="326.6" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400" >Thai bank apps</text>
+<text x="679.2" y="350.6" font-size="17" fill="#5a5e91" text-anchor="middle" font-weight="400" >K PLUS, SCB EASY, Krungthai NEXT, ttb</text>
+<circle cx="404.8" cy="318.8" r="38" fill="#e8832a" fill-opacity="0.22" stroke="#e8832a" stroke-width="3"/>
+<text x="404.8" y="386.8" font-size="20" fill="#292d7a" text-anchor="middle" font-weight="400" >SAM Debt Clinic + BOT programmes</text>
+<text x="404.8" y="410.8" font-size="17" fill="#5a5e91" text-anchor="middle" font-weight="400" >free, official, real relief</text>
+<circle cx="630.2" cy="393.2" r="32" fill="#e8832a" fill-opacity="0.22" stroke="#e8832a" stroke-width="3"/>
+<text x="676.2" y="391.2" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >RD Smart Tax</text>
+<text x="676.2" y="415.2" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >official, files the return</text>
+<circle cx="385.2" cy="486.2" r="30" fill="#e8832a" fill-opacity="0.22" stroke="#e8832a" stroke-width="3"/>
+<text x="429.2" y="484.2" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >NCB Bureau OK + ทางรัฐ</text>
+<text x="429.2" y="508.2" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >all your debts, free</text>
+<circle cx="542.0" cy="579.2" r="26" fill="#e8832a" fill-opacity="0.22" stroke="#e8832a" stroke-width="3"/>
+<text x="582.0" y="577.2" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >Refinn</text>
+<text x="582.0" y="601.2" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >real bank offers, status unknown</text>
+<circle cx="444.0" cy="659.8" r="24" fill="#8a8fb5" fill-opacity="0.22" stroke="#8a8fb5" stroke-width="3"/>
+<text x="482.0" y="657.8" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >Cleo, Rocket Money, YNAB</text>
+<text x="482.0" y="681.8" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >not in Thailand yet</text>
+<circle cx="326.4" cy="721.8" r="16" fill="#8a8fb5" fill-opacity="0.22" stroke="#8a8fb5" stroke-width="3"/>
+<text x="356.4" y="719.8" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >Undebt.it</text>
+<text x="356.4" y="743.8" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >English, manual</text>
+<circle cx="836.0" cy="697.0" r="34" fill="#e8832a"/>
+<path d="M822.0 698.0 l10 10 l19 -22" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="884.0" y="695.0" font-size="28" fill="#e8832a" text-anchor="start" font-weight="400" >DebtWise</text>
+<text x="884.0" y="721.0" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >5 features, 3 of them shallow</text>
+<rect x="1175" y="150" width="400" height="665" rx="22" fill="#f6f7fd" stroke="#c9cce6"/>
+<text x="1201.0" y="196.0" font-size="18" fill="#292d7a" text-anchor="start" font-weight="400" >Bubble size: how much they can hurt us</text>
+<circle cx="1215" cy="230" r="12" fill="#c62828" fill-opacity="0.25" stroke="#c62828" stroke-width="3"/>
+<text x="1241.0" y="236.0" font-size="19" fill="#292d7a" text-anchor="start" font-weight="400" >High</text>
+<circle cx="1215" cy="266" r="12" fill="#e8832a" fill-opacity="0.25" stroke="#e8832a" stroke-width="3"/>
+<text x="1241.0" y="272.0" font-size="19" fill="#292d7a" text-anchor="start" font-weight="400" >Medium</text>
+<circle cx="1215" cy="302" r="12" fill="#8a8fb5" fill-opacity="0.25" stroke="#8a8fb5" stroke-width="3"/>
+<text x="1241.0" y="308.0" font-size="19" fill="#292d7a" text-anchor="start" font-weight="400" >Low</text>
+<line x1="1201" y1="332" x2="1549" y2="332" stroke="#c9cce6"/>
+<text x="1201.0" y="368.0" font-size="21" fill="#292d7a" text-anchor="start" font-weight="400" >The three that matter most</text>
+<circle cx="1215" cy="402" r="15" fill="#292d7a"/>
+<text x="1215.0" y="408.0" font-size="17" fill="#ffffff" text-anchor="middle" font-weight="400" >1</text>
+<text x="1243.0" y="408.0" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >General AI chatbots</text>
+<text x="1243.0" y="434.0" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >A user can paste a statement into one</text>
+<text x="1243.0" y="456.0" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >for free.</text>
+<circle cx="1215" cy="508" r="15" fill="#292d7a"/>
+<text x="1215.0" y="514.0" font-size="17" fill="#ffffff" text-anchor="middle" font-weight="400" >2</text>
+<text x="1243.0" y="514.0" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >Thai banks</text>
+<text x="1243.0" y="540.0" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >They hold the data, and BOT opens it to</text>
+<text x="1243.0" y="562.0" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >them first.</text>
+<circle cx="1215" cy="614" r="15" fill="#292d7a"/>
+<text x="1215.0" y="620.0" font-size="17" fill="#ffffff" text-anchor="middle" font-weight="400" >3</text>
+<text x="1243.0" y="620.0" font-size="20" fill="#292d7a" text-anchor="start" font-weight="400" >SAM and BOT</text>
+<text x="1243.0" y="646.0" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >They give real relief we cannot: 3 to</text>
+<text x="1243.0" y="668.0" font-size="17" fill="#5a5e91" text-anchor="start" font-weight="400" >5% for up to 10 years.</text>
+<text x="1201.0" y="790.0" font-size="15" fill="#8a8fb5" text-anchor="start" font-weight="400" >Scores are our judgement. Evidence: competitors.md</text>
+</svg>

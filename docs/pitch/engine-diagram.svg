@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 920" width="1000" height="920" font-family="'line_seed_sans_th','Inter',Tahoma,sans-serif">
+<rect width="1000" height="920" fill="#fff"/>
+<defs><marker id="a" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1 1L10 6L1 11Z" fill="#4472c4"/></marker></defs>
+<rect x="350.0" y="28.0" width="300" height="84" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="500" y="62" font-size="21" fill="#292d7a" text-anchor="middle">Your debts</text>
+<text x="500" y="90" font-size="21" fill="#292d7a" text-anchor="middle">(statement, photo or typed)</text>
+<line x1="500" y1="112" x2="500" y2="178" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="350.0" y="178.0" width="300" height="84" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="500" y="212" font-size="21" fill="#292d7a" text-anchor="middle">Read, with a</text>
+<text x="500" y="240" font-size="21" fill="#292d7a" text-anchor="middle">source line for each figure</text>
+<line x1="500" y1="262" x2="500" y2="300" stroke="#4472c4" stroke-width="2.5"/>
+<line x1="170" y1="300" x2="830" y2="300" stroke="#4472c4" stroke-width="2.5"/>
+<line x1="170" y1="300" x2="170" y2="358" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="500" y1="300" x2="500" y2="358" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="830" y1="300" x2="830" y2="358" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="45.0" y="362.0" width="250" height="96" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="170" y="416" font-size="21" fill="#292d7a" text-anchor="middle">Your numbers</text>
+<rect x="375.0" y="362.0" width="250" height="96" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="500" y="402" font-size="21" fill="#292d7a" text-anchor="middle">Thai rules</text>
+<text x="500" y="430" font-size="21" fill="#292d7a" text-anchor="middle">(BOT, tax 2568)</text>
+<rect x="705.0" y="362.0" width="250" height="96" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="830" y="416" font-size="21" fill="#292d7a" text-anchor="middle">Your question</text>
+<line x1="170" y1="458" x2="170" y2="548" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="500" y1="458" x2="500" y2="548" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="830" y1="458" x2="830" y2="548" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="45.0" y="552.0" width="250" height="96" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="170" y="606" font-size="21" fill="#292d7a" text-anchor="middle">Calculated in code</text>
+<rect x="375.0" y="552.0" width="250" height="96" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="500" y="592" font-size="21" fill="#292d7a" text-anchor="middle">Matched with</text>
+<text x="500" y="620" font-size="21" fill="#292d7a" text-anchor="middle">a source link</text>
+<rect x="705.0" y="552.0" width="250" height="96" rx="22" fill="#fff" stroke="#4472c4" stroke-width="2.5"/>
+<text x="830" y="592" font-size="21" fill="#292d7a" text-anchor="middle">AI explains in</text>
+<text x="830" y="620" font-size="21" fill="#292d7a" text-anchor="middle">Thai or English</text>
+<line x1="170" y1="648" x2="170" y2="700" stroke="#4472c4" stroke-width="2.5"/>
+<line x1="500" y1="648" x2="500" y2="700" stroke="#4472c4" stroke-width="2.5"/>
+<line x1="830" y1="648" x2="830" y2="700" stroke="#4472c4" stroke-width="2.5"/>
+<line x1="170" y1="700" x2="830" y2="700" stroke="#4472c4" stroke-width="2.5"/>
+<line x1="500" y1="700" x2="500" y2="758" stroke="#4472c4" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="60" y="672" width="880" height="0" fill="none"/>
+<rect x="290.0" y="757.0" width="420" height="96" rx="22" fill="#292d7a" stroke="#292d7a" stroke-width="2.5"/>
+<text x="500" y="797" font-size="21" fill="#fff" text-anchor="middle">Checked answer</text>
+<text x="500" y="825" font-size="21" fill="#fff" text-anchor="middle">and monthly plan</text>
+<text x="500" y="893" font-size="16" fill="#8a8fa3" text-anchor="middle">Figure guard blocks any number the AI made up. Personal details are masked first.</text>
+</svg>
