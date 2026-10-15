@@ -1,8 +1,13 @@
+import { DEMO_DEBTS, DEMO_PROFILE } from '../data/sample/demoFamily'
 import type { DataStore } from '../store/types'
 
-// Stub until Task 16 implements the demo family loader.
-export async function loadDemo(_store: DataStore): Promise<void> {
-  throw new Error('loadDemo is implemented in Task 16')
+export async function loadDemo(store: DataStore): Promise<void> {
+  const existing = await store.getProfile()
+  if (!existing?.onboardedAt) {
+    await store.saveProfile({ ...DEMO_PROFILE, onboardedAt: new Date().toISOString() })
+  }
+  const source = await store.saveSource({ kind: 'sample' })
+  for (const d of DEMO_DEBTS) await store.saveDebt({ ...d, sourceId: source.id })
 }
 
 export async function removeDemo(store: DataStore): Promise<void> {
