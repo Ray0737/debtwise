@@ -473,3 +473,7 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .tabs a:not(.active) { color: var(--main); }
 .tabs a.active, .tabs a.active:hover, .tabs a.active:focus-visible { background: var(--main); color: #fff; }
 .chips a, .chips.plain a { color: var(--main); }
+
+/* Signed-in header: no language pill (Profile and the sidebar have it); all header circles are the same size */
+.main:not(.pub):not(.solo) .top .langpill { display: none; }
+.top .circle, .top .circle.lead { width: 36px; height: 36px; flex: none; }
