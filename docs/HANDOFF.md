@@ -23,7 +23,7 @@ Written by the Haiku build run, 2026-10-15, for a higher-capability model to rev
 - Sign-in has not been tested. Needs Supabase Auth providers (Email, Google) and redirect URLs enabled in the dashboard.
 - No AI call has been made. Needs `GEMINI_API_KEY` in Vercel env and `vercel dev` to exercise `/api/ai`.
 - ElevenLabs STT/TTS: model name `scribe_v1`, `eleven_multilingual_v2`, and language codes `tha`/`eng` are unverified.
-- Gemini model name comes from `GEMINI_MODEL` (default `gemini-2.5-flash`), unverified.
+- Gemini model comes from `GEMINI_MODEL` (default `gemini-3.1-flash-lite`, confirmed live 2026-10-15; `gemini-2.5-flash` is retired for this key).
 - U-Bot provider is a guessed JSON shape. Not connected to any real interface.
 - Tokenomist, Thai tax rules and deduction amounts are sample data only, labelled `sample`.
 - Refinance offers in `src/data/sample/offers.ts` are placeholder numbers with empty `sourceUrl`.
