@@ -395,3 +395,31 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 /* Public programme sources under a consultant reply */
 .cites { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); margin-top: var(--s2); color: var(--muted); }
 .cites .link { color: var(--main); }
+
+/* Header: same height and baseline in Thai and English, title on the left */
+.top, html[lang='th'] .top { line-height: 1.45; }
+.top-bar { min-height: 40px; align-items: center; }
+.top-title { text-align: left; line-height: 1.45; }
+.top.compact { padding-bottom: 40px; }
+
+/* Chat page: full conversation, composer fixed above the bottom bar */
+.chatlist { display: flex; flex-direction: column; gap: var(--s4); padding-bottom: 88px; }
+.mrow { display: flex; align-items: flex-end; gap: var(--s2); }
+.mrow.user { justify-content: flex-end; }
+.mrow .col1 { display: flex; flex-direction: column; gap: 2px; max-width: 82%; min-width: 0; }
+.mrow.user .col1 { align-items: flex-end; }
+.bot { width: 32px; height: 32px; border-radius: 50%; background: var(--main); color: #fff; display: inline-flex; align-items: center; justify-content: center; flex: none; font-size: 1rem; }
+.bub { padding: var(--s3); border-radius: 16px; font-size: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bub.ai { background: #f1f2f6; border-bottom-left-radius: 4px; color: var(--main); }
+.bub.user { background: var(--main); color: #fff; border-bottom-right-radius: 4px; }
+.bub .proposal { margin-top: var(--s2); white-space: normal; background: var(--bg); }
+.mtime { font-size: 0.75rem; color: var(--muted); padding: 0 var(--s1); }
+.typing { display: inline-flex; gap: 4px; align-items: center; padding: var(--s3) var(--s4); }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: 0.2s; }
+.typing i:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+.chatend { scroll-margin-bottom: 120px; }
+.chatlist .composer { position: fixed; left: 0; right: 0; bottom: calc(var(--tabs-h) + env(safe-area-inset-bottom)); z-index: 15; padding: var(--s2) 0 var(--s3); background: var(--bg); border-top: 1px solid var(--line); }
+@media (min-width: 1024px) { .chatlist .composer { left: 288px; bottom: 0; } }
+.chatlist .composer-box { padding-left: var(--s4); }

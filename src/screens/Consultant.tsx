@@ -68,16 +68,37 @@ export function Consultant({ notice }: { notice?: string }) {
     void send(t('talk.applied', { amount: formatBaht(pr.value), note: pr.note }), false, oneOffTotal(oneOffs) + pr.value)
   }
 
+  const hhmm = (iso: string) => {
+    const d = new Date(iso)
+    return Number.isNaN(d.getTime()) ? '' : d.toLocaleTimeString(lang === 'th' ? 'th-TH' : 'en-GB', { hour: '2-digit', minute: '2-digit' })
+  }
+  const Avatar = () => <span className="bot" aria-hidden="true"><Icon n="robot" /></span>
+
   return (
-    <section className="stack" aria-label={t('talk.title')}>
-      <div className="chat">
-        {items.length === 0 && !notice && <p className="muted">{t('talk.intro')}</p>}
-        {notice && <div className="msg ai"><span className="small">{t('talk.ai')}</span>{notice}</div>}
-        {items.map((m, i) => (
-          <div key={m.id} className={`msg ${m.role === 'user' ? 'user' : 'ai'}`}>
-            {m.role === 'assistant' && <span className="small">{t('talk.ai')}</span>}
-            {m.content}
-            {m.flagged && m.flagged.length > 0 && <div className="small" role="status" style={{ marginTop: 4 }}><Icon n="exclamation-triangle" /> {t('talk.flagged')}</div>}
+    <section className="chatlist" aria-label={t('talk.title')}>
+      {items.length === 0 && !notice && <p className="muted">{t('talk.intro')}</p>}
+      {notice && (
+        <div className="mrow ai">
+          <Avatar />
+          <div className="col1"><div className="bub ai">{notice}</div></div>
+        </div>
+      )}
+      {items.map((m, i) => (
+        <div key={m.id} className={`mrow ${m.role === 'user' ? 'user' : 'ai'}`}>
+          {m.role === 'assistant' && <Avatar />}
+          <div className="col1">
+            <div className={`bub ${m.role === 'user' ? 'user' : 'ai'}`}>
+              {m.content}
+              {m.flagged && m.flagged.length > 0 && <div className="small" role="status" style={{ marginTop: 4 }}><Icon n="exclamation-triangle" /> {t('talk.flagged')}</div>}
+              {m.proposal && (
+                <div className="card line proposal">
+                  <span className="card-title"><Icon n="pencil-square" />{t('talk.proposal')}</span>
+                  <span>{m.proposal.field === 'oneOff' ? t('home.oneOff') : t('field.essentials')}: <span className="num strong">{formatBaht(m.proposal.value)}</span></span>
+                  <span className="small muted">{m.proposal.note}</span>
+                  <button className="btn" onClick={() => apply(m.proposal!, i)}>{t('talk.apply')}</button>
+                </div>
+              )}
+            </div>
             {m.cites && m.cites.length > 0 && (
               <div className="cites small">
                 <Icon n="bank" /> {t('talk.source')}:{' '}
@@ -86,25 +107,22 @@ export function Consultant({ notice }: { notice?: string }) {
                 ))}
               </div>
             )}
-            {m.proposal && (
-              <div className="card line" style={{ marginTop: 8 }}>
-                <span className="card-title"><Icon n="pencil-square" />{t('talk.proposal')}</span>
-                <span>{m.proposal.field === 'oneOff' ? t('home.oneOff') : t('field.essentials')}: <span className="num strong">{formatBaht(m.proposal.value)}</span></span>
-                <span className="small muted">{m.proposal.note}</span>
-                <button className="btn" onClick={() => apply(m.proposal!, i)}>{t('talk.apply')}</button>
-              </div>
-            )}
+            {hhmm(m.createdAt) && <span className="mtime">{hhmm(m.createdAt)}</span>}
           </div>
-        ))}
-        <div ref={end} />
-      </div>
+        </div>
+      ))}
+      {busy && (
+        <div className="mrow ai"><Avatar /><div className="col1"><div className="bub ai typing" aria-label={t('common.loading')}><i /><i /><i /></div></div></div>
+      )}
       {error && <p className="err" role="alert">{t('common.error')}</p>}
+      <div ref={end} className="chatend" />
       <div className="composer">
-        <div className="composer-box">
-          <Icon n="chat-dots" />
-          <input id="chat-input" value={text} placeholder={t('talk.placeholder')} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send(text)} />
-          <button className={`cbtn ${recording ? 'rec' : ''}`} aria-label={t('talk.mic')} aria-pressed={!!recording} onClick={mic}><Icon n={recording ? 'stop-fill' : 'mic-fill'} /></button>
-          <button className="cbtn send" aria-label={t('talk.send')} disabled={busy || !text.trim()} onClick={() => send(text)}><Icon n="arrow-up" /></button>
+        <div className="col">
+          <div className="composer-box">
+            <input id="chat-input" value={text} placeholder={t('talk.placeholder')} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send(text)} />
+            <button className={`cbtn ${recording ? 'rec' : ''}`} aria-label={t('talk.mic')} aria-pressed={!!recording} onClick={mic}><Icon n={recording ? 'stop-fill' : 'mic-fill'} /></button>
+            <button className="cbtn send" aria-label={t('talk.send')} disabled={busy || !text.trim()} onClick={() => send(text)}><Icon n="send-fill" /></button>
+          </div>
         </div>
       </div>
     </section>

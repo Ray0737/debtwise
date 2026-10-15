@@ -29,14 +29,14 @@ function SignOutButton() {
   )
 }
 
-export function Page({ title, back, action, hero, children }: {
-  title: string; back?: boolean | string; action?: ReactNode; hero?: ReactNode; children: ReactNode
+export function Page({ title, back, action, hero, compact, children }: {
+  title: string; back?: boolean | string; action?: ReactNode; hero?: ReactNode; compact?: boolean; children: ReactNode
 }) {
   const t = useT()
   const nav = useNavigate()
   return (
     <>
-      <header className="top">
+      <header className={`top ${compact ? 'compact' : ''}`}>
         <div className="col">
           <div className="top-bar">
             {back ? (

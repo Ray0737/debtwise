@@ -28,7 +28,7 @@ export default function Chat() {
   const lead = justAdded ? t('home.notice.added', { n: justAdded }) : monthly ? t('home.notice.month') : ''
   const notice = debts.length === 0 ? t('home.notice.empty') : [lead, status].filter(Boolean).join(' ')
   return (
-    <Page title={t('nav.chat')} hero={<><span className="big">{t('talk.title')}</span><span className="small">{t('talk.intro')}</span></>}>
+    <Page title={t('talk.title')} compact>
       <Consultant notice={notice} />
     </Page>
   )
