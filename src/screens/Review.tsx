@@ -28,7 +28,7 @@ export default function Review() {
         })
       }
       await refresh()
-      nav('/', { state: { justAdded: chosen.length } })
+      nav('/chat', { state: { justAdded: chosen.length } })
     } finally { setBusy(false) }
   }
 

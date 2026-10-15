@@ -4,6 +4,7 @@ import { useT } from './i18n'
 import type { Key } from './i18n'
 import Add from './screens/Add'
 import Debt from './screens/Debt'
+import Chat from './screens/Chat'
 import Group from './screens/Group'
 import Home from './screens/Home'
 import Invest from './screens/Invest'
@@ -23,6 +24,7 @@ import { Icon } from './ui'
 
 const NAV: { to: string; icon: string; key: Key }[] = [
   { to: '/', icon: 'house', key: 'nav.home' },
+  { to: '/chat', icon: 'chat-dots', key: 'nav.chat' },
   { to: '/invest', icon: 'graph-up-arrow', key: 'nav.invest' },
   { to: '/tax', icon: 'receipt', key: 'nav.tax' },
   { to: '/debt', icon: 'credit-card-2-front', key: 'nav.debt' },
@@ -128,6 +130,7 @@ export default function App() {
         <Route path="onboarding/:step" element={<Onboarding />} />
         <Route element={<Gate />}>
           <Route index element={<Home />} />
+          <Route path="chat" element={<Chat />} />
           <Route path="invest" element={<Invest />} />
           <Route path="tax" element={<Tax />} />
           <Route path="debt" element={<Debt />} />
@@ -137,7 +140,7 @@ export default function App() {
           <Route path="debt/loan/:id" element={<Loan />} />
           <Route path="plan" element={<Plan />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="talk" element={<Navigate to="/" replace />} />
+          <Route path="talk" element={<Navigate to="/chat" replace />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

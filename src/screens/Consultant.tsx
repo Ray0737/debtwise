@@ -70,7 +70,6 @@ export function Consultant({ notice }: { notice?: string }) {
 
   return (
     <section className="stack" aria-label={t('talk.title')}>
-      <div className="card-title"><Icon n="chat-dots" />{t('talk.title')}</div>
       <div className="chat">
         {items.length === 0 && !notice && <p className="muted">{t('talk.intro')}</p>}
         {notice && <div className="msg ai"><span className="small">{t('talk.ai')}</span>{notice}</div>}

@@ -165,7 +165,7 @@ Icon only, 60px high, white with a hairline on top.
 - Each item is an icon in a pill. The active item is a navy pill with a white icon.
 - Hover is dark blue (`--main-hover`) with a white icon. Never green.
 - Every item has an `aria-label` and a `title`.
-- **Signed in (phone and tablet):** Home, Invest, Tax, Debt, Profile.
+- **Signed in (phone and tablet):** Home, Chat, Invest, Tax, Debt, Profile.
 - **Public (`PublicDock`, all widths):** Home, Guide, Get started, Support, Community, and the last item is Sign in (door arrow) or Open app when signed in.
 
 ### 6.2 Header actions
@@ -259,7 +259,8 @@ Public document pages (Guide, Terms, Privacy) are also plain: sections are text 
 
 | Route | Screen |
 |---|---|
-| `/` | Home: this month at a glance (what is left or short, next due date), the summary lines, the plan, add debt and calendar buttons, then the consultant chat |
+| `/` | Home: this month at a glance (what is left or short, next due date), the summary lines, the plan, add debt and calendar buttons, and a coming-up list of due dates |
+| `/chat` | Chat: the consultant on its own page, with the engine's first line, replies with source links and proposals to apply |
 | `/debt` | Total owed and monthly payments, by bank or by type |
 | `/debt/group/:by/:key` | Loans inside one bank or type |
 | `/debt/loan/:id` | Loan detail, source and badge, edit and delete |

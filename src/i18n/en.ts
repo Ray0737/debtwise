@@ -76,7 +76,7 @@ export const en = {
   'profile.loadDemo': 'Load demo family', 'profile.removeDemo': 'Remove demo data', 'profile.signOut': 'Sign out', 'profile.saved': 'Saved',
   'nav.profile': 'Profile', 'common.edit': 'Edit', 'common.close': 'Close', 'common.or': 'or',
   'loan.deleteConfirm': 'Delete this loan? This cannot be undone.', 'loan.details': 'Details',
-  'home.oneOff': 'One-off bills this month', 'home.clearOneOff': 'Clear one-off bills', 'talk.applied': 'I added a one-off bill of {amount} ({note}) for this month. What are my options?', 'talk.source': 'Source', 'nav.shortcuts': 'Shortcuts', 'debt.loans': 'Loans: {n}', 'home.ask': 'Ask Debtwise',
+  'home.oneOff': 'One-off bills this month', 'home.clearOneOff': 'Clear one-off bills', 'talk.applied': 'I added a one-off bill of {amount} ({note}) for this month. What are my options?', 'talk.source': 'Source', 'nav.chat': 'Chat', 'home.upcoming': 'Coming up', 'nav.shortcuts': 'Shortcuts', 'debt.loans': 'Loans: {n}', 'home.ask': 'Ask Debtwise',
 } as const
 
 export type Key = keyof typeof en

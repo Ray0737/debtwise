@@ -28,7 +28,7 @@ export default function Add() {
       <div className="card">
         <div className="list">
           <Row icon={busy ? 'hourglass-split' : 'file-earmark-arrow-up'} title={busy ? t('common.loading') : t('add.upload')} sub={t('add.uploadHint')} onClick={() => !busy && file.current?.click()} />
-          <Row icon="mic" title={t('add.talk')} onClick={() => nav('/')} />
+          <Row icon="mic" title={t('add.talk')} onClick={() => nav('/chat')} />
           <Row icon="pencil-square" title={t('add.form')} onClick={() => setForm(true)} />
         </div>
         <p className="small muted"><Icon n="shield-lock" /> {t('add.uploadNote')}</p>

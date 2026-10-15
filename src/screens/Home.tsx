@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { formatBaht } from '../engine'
 import { useT } from '../i18n'
 import { daysUntilDue, summarize } from '../lib/derive'
 import { buildIcs } from '../lib/ics'
 import { oneOffTotal, useApp } from '../store/useApp'
-import { Card, Icon, Page } from '../ui'
-import { Consultant } from './Consultant'
+import { Card, Icon, Page, Row } from '../ui'
 
 export default function Home() {
   const t = useT()
   const nav = useNavigate()
   const { profile, debts, store, oneOffs, clearOneOffs } = useApp()
   const oneOff = oneOffTotal(oneOffs)
-  const [monthly, setMonthly] = useState(false)
-  const justAdded = (useLocation().state as { justAdded?: number } | null)?.justAdded ?? 0
   const s = profile ? summarize(profile, debts, oneOff) : null
   const month = new Date().toISOString().slice(0, 7)
 
@@ -23,20 +20,16 @@ export default function Home() {
     void store.hasPlan(month).then(async (has) => {
       if (has) return
       await store.savePlan(month, { available: s.cash.available, minimums: s.minimums, taxSetAside: s.taxSetAside }, s.plan)
-      setMonthly(true)
+      try { localStorage.setItem('dw-monthly-notice', month) } catch { /* storage may be blocked */ }
     })
   }, [store, debts.length, profile?.monthlyIncome, profile?.monthlyEssentials]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!profile || !s) return null
-  const next = debts
+  const upcoming = debts
     .filter((d) => d.dueDay)
     .map((d) => ({ d, days: daysUntilDue(d.dueDay!) }))
-    .sort((a, b) => a.days - b.days)[0]
-  const status = s.plan.shortfall > 0
-    ? t('home.notice.short', { amount: formatBaht(s.plan.shortfall) })
-    : t('home.notice.ok', { amount: formatBaht(s.plan.leftover) })
-  const lead = justAdded ? t('home.notice.added', { n: justAdded }) : monthly ? t('home.notice.month') : ''
-  const notice = debts.length === 0 ? t('home.notice.empty') : [lead, status].filter(Boolean).join(' ')
+    .sort((x, y) => x.days - y.days)
+  const next = upcoming[0]
 
   const downloadIcs = () => {
     const a = document.createElement('a')
@@ -66,9 +59,7 @@ export default function Home() {
               <Icon n="calendar-event" /> {t('home.nextDue')}: {next.d.label}, {formatBaht(next.d.minPayment)}, {t('home.dueIn', { n: next.days })}
             </span>
           )}
-          <button className="btn light" onClick={() => { const i = document.getElementById('chat-input'); i?.scrollIntoView({ behavior: 'smooth', block: 'center' }); i?.focus({ preventScroll: true }) }}>
-            <Icon n="chat-dots" />{t('home.ask')}
-          </button>
+          <button className="btn light" onClick={() => nav('/chat')}><Icon n="chat-dots" />{t('home.ask')}</button>
         </>
       }
     >
@@ -86,7 +77,18 @@ export default function Home() {
           {debts.some((d) => d.dueDay) && <button className="btn soft" onClick={downloadIcs}><Icon n="calendar-plus" />{t('home.calendar')}</button>}
         </div>
       </Card>
-      <Consultant notice={notice} />
+      {upcoming.length > 0 && (
+        <div className="stack">
+          <h2>{t('home.upcoming')}</h2>
+          <div className="card">
+            <div className="list">
+              {upcoming.slice(0, 5).map(({ d, days }) => (
+                <Row key={d.id} icon="calendar-event" title={`${d.label} · ${d.lender}`} sub={t('home.dueIn', { n: days })} value={formatBaht(d.minPayment)} to={`/debt/loan/${d.id}`} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </Page>
   )
 }
