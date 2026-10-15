@@ -38,3 +38,10 @@ React, TypeScript, Vite, PWA, Supabase (Auth and Postgres), Vercel (hosting and 
 4. `npx vercel dev` runs the UI and the `api/` functions together. Requires `npx vercel login` and `npx vercel link`.
 
 AI keys (`GEMINI_API_KEY`, `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID`, optional `UBOT_API_KEY`, `UBOT_API_URL`) go in Vercel project settings, not in the browser.
+
+## Deploy on Vercel
+
+1. Import `Ray0737/debt_wise` in Vercel. The preset is Vite, `vercel.json` sets the build, the SPA rewrite, security headers, caching and function timeouts.
+2. Project settings, Environment Variables. Browser: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`. Server only: `GEMINI_API_KEY`, `GEMINI_MODEL`, `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, optional `UBOT_API_KEY`, `UBOT_API_URL`.
+3. Supabase, Authentication, URL Configuration: set the Site URL and add the Vercel domain to Redirect URLs, and enable the Google provider.
+4. Every push to `master` deploys to production.
