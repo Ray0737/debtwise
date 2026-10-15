@@ -485,3 +485,16 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 .main a.row:focus-visible .ico:not([style]), .main button.row:focus-visible .ico:not([style]) { background: #3f8a2e; }
 .main a.row:hover .ico:not([style]) .bi, .main button.row:hover .ico:not([style]) .bi,
 .main a.row:focus-visible .ico:not([style]) .bi, .main button.row:focus-visible .ico:not([style]) .bi { color: #fff; }
+
+/* Danger pop-up: icon, title, text and two equal buttons, all centred; close in the corner */
+.modal.danger { position: relative; align-items: center; text-align: center; gap: var(--s3); padding: var(--s5) var(--s4) var(--s4); }
+.modal.danger .xbtn { position: absolute; top: var(--s3); right: var(--s3); width: 32px; height: 32px; background: var(--bg); color: var(--main); border: 1px solid var(--line); }
+.modal.danger .xbtn:hover, .modal.danger .xbtn:focus-visible { background: var(--tint-hover); color: var(--on-green); }
+.warnicon { width: 56px; height: 56px; border-radius: 50%; background: #fdeaea; color: var(--danger); display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; flex: none; }
+.modal.danger h2 { font-size: 1.15rem; }
+.modal.danger .modal-body { width: 100%; overflow: visible; }
+.modal.danger .modal-body p { color: var(--muted); }
+.modal.danger .stack { gap: var(--s4); }
+.btnrow { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); width: 100%; }
+.btnrow .btn { width: 100%; }
+.modal.danger { padding-bottom: calc(var(--s4) + env(safe-area-inset-bottom)); }

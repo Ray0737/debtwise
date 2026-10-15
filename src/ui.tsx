@@ -100,7 +100,7 @@ export const SampleTag = () => {
   return <span className="badge out"><Icon n="box" />{t('common.sample')}</span>
 }
 
-export function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+export function Modal({ title, onClose, tone, children }: { title: string; onClose: () => void; tone?: 'danger'; children: ReactNode }) {
   const t = useT()
   useEffect(() => {
     const key = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
@@ -109,15 +109,24 @@ export function Modal({ title, onClose, children }: { title: string; onClose: ()
     window.addEventListener('keydown', key)
     return () => { document.body.style.overflow = prev; window.removeEventListener('keydown', key) }
   }, [onClose])
+  const closeBtn = (
+    <button className="circle xbtn" aria-label={t('common.close')} onClick={onClose}><Icon n="x-lg" /></button>
+  )
   return (
     <div className="scrim" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="modal" role="dialog" aria-modal="true" aria-label={title}>
-        <div className="modal-head">
+      {tone === 'danger' ? (
+        <div className="modal danger" role="alertdialog" aria-modal="true" aria-label={title}>
+          {closeBtn}
+          <span className="warnicon" aria-hidden="true"><Icon n="exclamation-triangle-fill" /></span>
           <h2>{title}</h2>
-          <button className="circle" style={{ background: 'var(--tint)', color: 'var(--main)' }} aria-label={t('common.close')} onClick={onClose}><Icon n="x-lg" /></button>
+          <div className="modal-body">{children}</div>
         </div>
-        <div className="modal-body">{children}</div>
-      </div>
+      ) : (
+        <div className="modal" role="dialog" aria-modal="true" aria-label={title}>
+          <div className="modal-head"><h2>{title}</h2>{closeBtn}</div>
+          <div className="modal-body">{children}</div>
+        </div>
+      )}
     </div>
   )
 }

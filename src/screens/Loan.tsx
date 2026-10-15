@@ -59,12 +59,12 @@ export default function Loan() {
         </>
       )}
       {confirm && (
-        <Modal title={t('common.delete')} onClose={() => setConfirm(false)}>
+        <Modal title={t('common.delete')} tone="danger" onClose={() => setConfirm(false)}>
           <div className="stack">
             <p>{t('loan.deleteConfirm')}</p>
-            <div className="between">
-              <button className="btn soft" onClick={() => setConfirm(false)}>{t('common.cancel')}</button>
-              <button className="btn danger" onClick={async () => { await store!.deleteDebt(d.id); await refresh(); nav('/debt', { replace: true }) }}>{t('common.delete')}</button>
+            <div className="btnrow">
+              <button className="btn soft block" onClick={() => setConfirm(false)}>{t('common.cancel')}</button>
+              <button className="btn danger block" onClick={async () => { await store!.deleteDebt(d.id); await refresh(); nav('/debt', { replace: true }) }}>{t('common.delete')}</button>
             </div>
           </div>
         </Modal>
