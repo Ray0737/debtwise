@@ -5,9 +5,11 @@ import { PublicPage, useL, type B } from './Site'
 
 type Sec = { id: string; title: B; body: ReactNode }
 
-function Doc({ title, sub, sections }: { title: B; sub: B; sections: Sec[] }) {
+// bare: only the text, no page frame, so onboarding can show the real document in a modal.
+function Doc({ title, sub, sections, bare }: { title: B; sub: B; sections: Sec[]; bare?: boolean }) {
   const L = useL()
   useEffect(() => {
+    if (bare) return
     const links = [...document.querySelectorAll<HTMLAnchorElement>('.chips a')]
     if (!links.length || !('IntersectionObserver' in window)) return
     const by = new Map(links.map((a) => [a.getAttribute('href')!.split('#')[1], a]))
@@ -18,13 +20,15 @@ function Doc({ title, sub, sections }: { title: B; sub: B; sections: Sec[] }) {
     }), { rootMargin: '-80px 0px -65% 0px' })
     by.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el) })
     return () => io.disconnect()
-  }, [])
+  }, [bare])
+  const text = sections.map((s) => <section key={s.id} id={bare ? undefined : s.id} className="doc prose"><h2>{L(s.title)}</h2>{s.body}</section>)
+  if (bare) return <>{text}</>
   return (
     <PublicPage title={title} sub={sub}>
       <nav className="chips plain" aria-label="Contents">
         {sections.map((s) => <Link key={s.id} to={`#${s.id}`}>{L(s.title)}</Link>)}
       </nav>
-      {sections.map((s) => <section key={s.id} id={s.id} className="doc prose"><h2>{L(s.title)}</h2>{s.body}</section>)}
+      {text}
     </PublicPage>
   )
 }
@@ -289,7 +293,7 @@ export function Guide() {
 }
 
 /* =========================================================== Terms */
-export function Terms() {
+export function Terms({ bare }: { bare?: boolean } = {}) {
   const sections: Sec[] = [
     { id: 'draft', title: { th: 'ร่างฉบับนี้', en: 'About this draft' }, body: <>
       <P b={{ th: 'ข้อกำหนดนี้เป็นร่างสำหรับต้นแบบ Debtwise 0.1.0 อัปเดตล่าสุด 15 ตุลาคม 2026 และอาจเปลี่ยนก่อนการเผยแพร่จริง ยังไม่ได้ผ่านการตรวจโดยนักกฎหมาย', en: 'These terms are a draft for the Debtwise 0.1.0 prototype. Last updated 15 October 2026. They may change before any public release and have not been reviewed by a lawyer.' }} />
@@ -348,11 +352,11 @@ export function Terms() {
       <P b={{ th: 'ช่องทางติดต่อผู้พัฒนาจะระบุก่อนเผยแพร่จริง ระหว่างนี้ใช้หน้าชุมชนและช่วยเหลือในเว็บไซต์', en: 'Contact details for the developer will be added before a real release. Until then, use the Community and Support pages.' }} />
     </> },
   ]
-  return <Doc title={{ th: 'ข้อกำหนด', en: 'Terms' }} sub={{ th: 'ร่างข้อกำหนดการใช้งานสำหรับต้นแบบ', en: 'Draft terms of use for the prototype.' }} sections={sections} />
+  return <Doc title={{ th: 'ข้อกำหนด', en: 'Terms' }} sub={{ th: 'ร่างข้อกำหนดการใช้งานสำหรับต้นแบบ', en: 'Draft terms of use for the prototype.' }} sections={sections} bare={bare} />
 }
 
 /* =========================================================== Privacy */
-export function Privacy() {
+export function Privacy({ bare }: { bare?: boolean } = {}) {
   const L = useL()
   const sections: Sec[] = [
     { id: 'draft', title: { th: 'ร่างฉบับนี้', en: 'About this draft' }, body: <>
@@ -452,5 +456,5 @@ export function Privacy() {
       <P b={{ th: 'ช่องทางติดต่อผู้พัฒนาจะระบุก่อนเผยแพร่จริง ระหว่างนี้ใช้หน้าชุมชนและช่วยเหลือ', en: 'Contact details for the developer will be added before a real release. Until then, use the Community and Support pages.' }} />
     </> },
   ]
-  return <Doc title={{ th: 'ความเป็นส่วนตัว', en: 'Privacy' }} sub={{ th: 'ร่างนโยบายความเป็นส่วนตัวสำหรับต้นแบบ', en: 'Draft privacy policy for the prototype.' }} sections={sections} />
+  return <Doc title={{ th: 'ความเป็นส่วนตัว', en: 'Privacy' }} sub={{ th: 'ร่างนโยบายความเป็นส่วนตัวสำหรับต้นแบบ', en: 'Draft privacy policy for the prototype.' }} sections={sections} bare={bare} />
 }

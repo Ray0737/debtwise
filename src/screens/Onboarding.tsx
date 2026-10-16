@@ -4,7 +4,8 @@ import { useT } from '../i18n'
 import { validateProfile, type ProfileField } from '../lib/validate'
 import { useApp } from '../store/useApp'
 import type { Profile } from '../store/types'
-import { Choice, Field, Icon, NumInput, Page, Seg, TextInput, range } from '../ui'
+import { Terms, Privacy } from '../site/docs'
+import { Choice, Field, Icon, Modal, NumInput, Page, Seg, TextInput, range, showFirstError } from '../ui'
 
 const STEP_ICON = ['person-circle', 'cash-coin', 'hourglass-split', 'house-heart', 'credit-card-2-front']
 
@@ -24,6 +25,10 @@ export default function Onboarding() {
   const [draft, setDraft] = useState<Partial<Profile>>(() => ({ otherIncome: 0, ...(profile ?? {}) }))
   const [errors, setErrors] = useState<Partial<Record<ProfileField, 'required' | 'invalid'>>>({})
   const [busy, setBusy] = useState(false)
+  // ponytail: not stored. A returning user who already saved a name has accepted before, so the box starts ticked.
+  const [agreed, setAgreed] = useState(() => Boolean(profile?.displayName))
+  const [needAgree, setNeedAgree] = useState(false)
+  const [reading, setReading] = useState<'terms' | 'privacy' | null>(null)
   if (!ready) return <div className="center">{t('common.loading')}</div>
   if (!userId) return <Navigate to="/signin" replace />
 
@@ -34,7 +39,8 @@ export default function Onboarding() {
   const next = async () => {
     const e = validateProfile(draft, s.fields)
     setErrors(e)
-    if (Object.keys(e).length) return
+    if (step === 1 && !agreed) setNeedAgree(true)
+    if (Object.keys(e).length || (step === 1 && !agreed)) return showFirstError()
     setBusy(true)
     try {
       const patch: Record<string, unknown> = { lang }
@@ -67,6 +73,13 @@ export default function Onboarding() {
                 options={range(thisYear - 16, thisYear - 90).map((y) => ({ v: y, label: String(y) }))} />
             </Field>
             <Field label={t('field.household')} error={err('householdSize')}><NumInput value={draft.householdSize} onChange={(v) => set('householdSize', v)} /></Field>
+            <div className={`field ${needAgree ? 'bad' : ''}`}>
+            <label className="check">
+              <input type="checkbox" checked={agreed} onChange={(e) => { setAgreed(e.target.checked); setNeedAgree(false) }} />
+              <span>{t('onb.agreeA')} <button type="button" className="link" onClick={() => setReading('terms')}>{t('onb.termsLink')}</button> {t('onb.agreeAnd')} <button type="button" className="link" onClick={() => setReading('privacy')}>{t('onb.privacyLink')}</button></span>
+            </label>
+            {needAgree && <span className="err" role="alert">{t('onb.agreeNeed')}</span>}
+            </div>
           </div>
         )}
         {step === 2 && (
@@ -106,6 +119,11 @@ export default function Onboarding() {
           </div>
         )}
       </Page>
+      {reading && (
+        <Modal title={t(reading === 'terms' ? 'onb.termsLink' : 'onb.privacyLink')} onClose={() => setReading(null)}>
+          {reading === 'terms' ? <Terms bare /> : <Privacy bare />}
+        </Modal>
+      )}
     </main>
   )
 }

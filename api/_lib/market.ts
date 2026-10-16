@@ -9,9 +9,16 @@ export interface Coin {
   circulating: number | null
   total: number | null
   marketCapThb: number | null
+  spark: number[]
 }
 
 const num = (v: unknown): number | null => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : null)
+
+// 7 day price line: CoinGecko sends hourly points (about 168). Keep every 6th, enough for a small chart.
+const sparkline = (v: unknown): number[] => {
+  const p = (v as { price?: unknown } | null)?.price
+  return Array.isArray(p) ? p.filter((x): x is number => typeof x === 'number' && Number.isFinite(x)).filter((_, i) => i % 6 === 0) : []
+}
 
 // CoinGecko /coins/markets rows in, plain coin rows out. Rows without a price are dropped.
 export function mapCoins(raw: unknown): Coin[] {
@@ -31,6 +38,7 @@ export function mapCoins(raw: unknown): Coin[] {
       circulating: num(o.circulating_supply),
       total: num(o.total_supply) ?? num(o.max_supply),
       marketCapThb: num(o.market_cap),
+      spark: sparkline(o.sparkline_in_7d),
     })
   }
   return out

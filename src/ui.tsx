@@ -130,9 +130,26 @@ export function Modal({ title, onClose, tone, children }: { title: string; onClo
   )
 }
 
+// After a failed submit, bring the first field with an error into view so the person sees which cell to fix.
+export const showFirstError = () => requestAnimationFrame(() => document.querySelector('.field.bad')?.scrollIntoView({ block: 'center', behavior: 'smooth' }))
+
+// Tiny line chart for a price series. Green when the line ends higher than it started, red when lower.
+export function Sparkline({ points, label }: { points: number[]; label?: string }) {
+  if (points.length < 2) return null
+  const lo = Math.min(...points), hi = Math.max(...points), span = hi - lo || 1
+  const d = points.map((p, i) => `${(i / (points.length - 1)) * 100},${30 - ((p - lo) / span) * 28}`).join(' ')
+  const up = points[points.length - 1] >= points[0]
+  return (
+    <svg className={`spark ${up ? 'up' : 'down'}`} viewBox="0 0 100 32" preserveAspectRatio="none" role="img" aria-label={label}>
+      <polygon points={`0,32 ${d} 100,32`} className="area" />
+      <polyline points={d} fill="none" vectorEffect="non-scaling-stroke" />
+    </svg>
+  )
+}
+
 export function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
   return (
-    <div className="field">
+    <div className={`field ${error ? 'bad' : ''}`}>
       <label>{label}</label>
       {children}
       {error && <span className="err" role="alert">{error}</span>}

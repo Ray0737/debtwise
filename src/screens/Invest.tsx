@@ -5,7 +5,8 @@ import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
 import { fetchMarket, type MarketData } from '../lib/market'
 import { oneOffTotal, useApp } from '../store/useApp'
-import { Icon, Page, Row, SampleTag } from '../ui'
+import { Icon, Page, Row, SampleTag, Sparkline } from '../ui'
+import { SpareCash } from './SpareCash'
 import { lockedPct } from '../../api/_lib/market'
 
 const KIND_ICON = { unlock: 'unlock', vesting: 'hourglass-split', emission: 'droplet' } as const
@@ -39,6 +40,18 @@ export default function Invest() {
         {failed && <p className="err" role="status">{t('invest.marketErr')}</p>}
         {!market && !failed && <p className="muted">{t('common.loading')}</p>}
         {market && (
+          <div className="strip" aria-label={t('invest.market')}>
+            {market.coins.filter((c) => c.spark.length > 1).map((c) => (
+              <div key={c.id} className="tick">
+                <span className="small strong">{c.symbol}</span>
+                <span className={`small ${(c.change24h ?? 0) >= 0 ? 'upc' : 'downc'}`}>{c.change24h === null ? '' : `${c.change24h >= 0 ? '▲' : '▼'} ${Math.abs(c.change24h).toFixed(2)}%`}</span>
+                <Sparkline points={c.spark} label={`${c.name} ${t('invest.sevenDays')}`} />
+                <span className="num small">{formatBaht(c.priceThb)}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {market && (
           <div className="card">
             <div className="list">
               {market.coins.map((c) => {
@@ -57,6 +70,8 @@ export default function Invest() {
         )}
         {market && <p className="small muted">{t('invest.updated', { time })} · <a className="link" href="https://www.coingecko.com/" target="_blank" rel="noreferrer">CoinGecko</a></p>}
       </div>
+
+      <SpareCash />
 
       <div className="stack">
         <div className="between"><h2>{t('invest.unlockSample')}</h2><SampleTag /></div>

@@ -519,3 +519,57 @@ a.row:hover .ico, button.row:hover .ico { background: rgba(255, 255, 255, 0.75);
 /* Draft message box */
 .msgbox { display: block; min-height: 220px; resize: vertical; line-height: 1.5; white-space: pre-wrap; align-items: stretch; }
 textarea { font: inherit; color: inherit; }
+
+/* Chat toolbar (new chat, history) and smaller placeholder */
+.chatlist .composer-box { padding-left: 5px; }
+.chatlist .composer-box .cbtn.tool { background: none; color: var(--muted); }
+.chatlist .composer-box .cbtn.tool:hover:not(:disabled), .chatlist .composer-box .cbtn.tool:focus-visible { color: #fff; background: var(--main); }
+.chatlist .composer-box .cbtn.tool:disabled { opacity: 0.35; cursor: default; background: none; color: var(--muted); }
+.histhead { display: flex; align-items: center; gap: var(--s3); }
+.histhead h2 { margin: 0; font-size: 1.1rem; }
+.histhead .circle { background: var(--tint); color: var(--main); }
+.histhead .badge { margin-left: auto; }
+.histsearch { display: flex; align-items: center; gap: var(--s2); border: 1px solid var(--line); border-radius: 999px; padding: 0 var(--s3); color: var(--muted); }
+.histsearch:focus-within { border-color: var(--green); }
+.histsearch input { flex: 1; min-width: 0; border: 0; background: transparent; outline: none; font-size: 0.95rem; color: var(--main); padding: 9px 0; }
+.histsearch input::placeholder { font-size: 0.85rem; color: var(--muted); }
+.histgroup { display: flex; flex-direction: column; gap: var(--s2); }
+.histlabel { text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.75rem; }
+.histmeta { display: flex; align-items: center; gap: var(--s3); margin-top: 2px; }
+.histempty { display: flex; flex-direction: column; align-items: center; gap: var(--s2); padding: var(--s6, 48px) 0; text-align: center; }
+.histempty .bigdot { width: 56px; height: 56px; border-radius: 50%; background: var(--green-soft); display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--on-green); }
+.composer-box input::placeholder { font-size: 0.85rem; }
+
+/* A field with an error: its own cell turns red, so the person sees which one to fix */
+.field.bad > label { color: var(--danger); }
+.field.bad .input { border-color: var(--danger); }
+.link { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-decoration: underline; }
+
+/* Thai bank picker: each bank is a chip in its own brand colour, no logos */
+.banks { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.bank { display: inline-flex; align-items: center; gap: 4px; min-height: 34px; padding: 4px 14px; border: 2px solid transparent; border-radius: 999px; font: inherit; font-size: 0.9rem; cursor: pointer; transition: transform var(--ease), box-shadow var(--ease); }
+.bank:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); }
+.bank.on { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--main); }
+.bank.other { background: var(--tint); color: var(--main); border-color: var(--line); }
+.field.bad .bank.other { border-color: var(--danger); }
+
+/* Market strip with 7 day lines, and the spare cash card */
+.strip { display: flex; gap: var(--s2); overflow-x: auto; padding-bottom: var(--s1); scroll-snap-type: x proximity; }
+.tick { flex: none; width: 128px; display: flex; flex-direction: column; gap: 2px; padding: var(--s3); border: 1px solid var(--line); border-radius: 14px; scroll-snap-align: start; }
+.upc { color: #1f8a3b; }
+.downc { color: var(--danger); }
+.spark { width: 100%; height: 36px; margin: 4px 0; overflow: visible; }
+.spark polyline { stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.spark.up polyline { stroke: #1f8a3b; }
+.spark.down polyline { stroke: var(--danger); }
+.spark .area { stroke: none; opacity: 0.1; }
+.spark.up .area { fill: #1f8a3b; }
+.spark.down .area { fill: var(--danger); }
+.accrued { display: flex; align-items: center; gap: var(--s3); margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--line); }
+.accrued .ico { width: 32px; height: 32px; border-radius: 10px; background: var(--green-soft); display: inline-flex; align-items: center; justify-content: center; }
+.cmp { display: flex; flex-direction: column; gap: var(--s2); }
+.cmprow { display: grid; grid-template-columns: 96px 1fr auto; align-items: center; gap: var(--s2); }
+.cmpbar { height: 10px; border-radius: 999px; background: var(--tint); overflow: hidden; }
+.cmpbar i { display: block; height: 100%; border-radius: 999px; }
+.cmpbar .earn { background: #1f8a3b; }
+.cmpbar .cost { background: var(--danger); }

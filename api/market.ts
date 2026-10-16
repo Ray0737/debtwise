@@ -5,7 +5,7 @@ import { COIN_IDS, mapCoins } from './_lib/market.js'
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') return res.status(405).end()
   try {
-    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=thb&ids=${COIN_IDS.join(',')}&price_change_percentage=24h`
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=thb&ids=${COIN_IDS.join(',')}&price_change_percentage=24h&sparkline=true`
     const r = await fetch(url, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(8000) })
     if (!r.ok) return res.status(502).json({ error: 'upstream' })
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=900')

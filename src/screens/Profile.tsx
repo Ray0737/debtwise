@@ -5,7 +5,7 @@ import { loadDemo, removeDemo } from '../lib/demo'
 import { validateProfile, type ProfileField } from '../lib/validate'
 import type { Profile as ProfileT } from '../store/types'
 import { useApp } from '../store/useApp'
-import { Card, Choice, Field, Icon, Modal, NumInput, Page, Row, Seg, TextInput, range } from '../ui'
+import { Card, Choice, Field, Icon, Modal, NumInput, Page, Row, Seg, TextInput, range, showFirstError } from '../ui'
 
 const FIELDS: ProfileField[] = ['displayName', 'birthYear', 'householdSize', 'incomeType', 'monthlyIncome', 'otherIncome', 'payDay', 'retireAge', 'postRetireIncome', 'monthlyEssentials']
 
@@ -27,7 +27,7 @@ export default function Profile() {
   const save = async () => {
     const e = validateProfile(draft, FIELDS)
     setErrors(e)
-    if (Object.keys(e).length) return
+    if (Object.keys(e).length) return showFirstError()
     const patch: Record<string, unknown> = {}
     for (const f of FIELDS) patch[f] = draft[f] ?? (f === 'otherIncome' ? 0 : null)
     await store.saveProfile(patch as Partial<ProfileT>)
