@@ -2,14 +2,16 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { findUnknownFigures } from '../src/engine/guard.js'
 import { mask } from '../src/engine/mask.js'
 import { requireUser } from './_lib/auth.js'
-import { EXTRACT_SYSTEM, PROGRAMME_NUMBERS, collectNumbers, consultSystem, parseCandidates, parseConsult } from './_lib/prompts.js'
+import { EXTRACT_SYSTEM, PROGRAMME_NUMBERS, collectNumbers, consultSystem, parseCandidates, parseConsult, sanitizeFacts } from './_lib/prompts.js'
 import { pickProvider } from './_lib/providers.js'
 
 const MAX_INLINE = 4_000_000
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'method' })
-  if (!(await requireUser(req))) return res.status(401).json({ error: 'auth' })
+  const user = await requireUser(req)
+  if (!user) return res.status(401).json({ error: 'auth' })
+  if (overLimit(user)) return res.status(429).json({ error: 'rate' })
   const b = (req.body ?? {}) as Record<string, any>
   const lang = b.lang === 'en' ? 'en' : 'th'
   const provider = pickProvider(b.provider)
@@ -33,17 +35,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         text: mask(String(m?.text ?? '').slice(0, 2000), names),
       }))
       if (!messages.length) return res.status(400).json({ error: 'input' })
-      const out = await provider.generate({ system: consultSystem(lang, b.facts ?? {}), messages })
+      const facts = sanitizeFacts(b.facts)
+      const out = await provider.generate({ system: consultSystem(lang, facts), messages })
       const parsed = parseConsult(safeJson(out))
-      // Figures the person typed themselves (a bill amount) and public programme figures are allowed in a reply.
-      const typed = messages.filter((m) => m.role === 'user').flatMap((m) => (m.text.match(/\d[\d,]*(?:\.\d+)?/g) ?? []).map((x) => parseFloat(x.replace(/,/g, ''))))
-      const flagged = findUnknownFigures(parsed.reply, [...collectNumbers(b.facts), ...PROGRAMME_NUMBERS, ...typed])
+      // Figures the person typed themselves (a bill amount) and public programme figures (including the 1323 hotline) are allowed in a reply.
+      const typed = messages.filter((m) => m.role === 'user').flatMap((m) => [...m.text.matchAll(/\d[\d,]*(?:\.\d+)?/g)].map((x) => parseFloat(x[0].replace(/,/g, ''))))
+      const flagged = findUnknownFigures(parsed.reply, [...collectNumbers(facts), ...PROGRAMME_NUMBERS, ...typed])
       return res.status(200).json({ ...parsed, flagged, maskedPayload: messages })
     }
     return res.status(400).json({ error: 'action' })
   } catch {
     return res.status(502).json({ error: 'upstream' })
   }
+}
+
+// ponytail: per instance memory, so the limit resets on cold starts and is per instance. Move to a Supabase table or Upstash if abuse shows up.
+const hits = new Map<string, number[]>()
+export function overLimit(user: string, now = Date.now(), max = 20): boolean {
+  const recent = (hits.get(user) ?? []).filter((t) => now - t < 60_000)
+  recent.push(now)
+  hits.set(user, recent)
+  return recent.length > max
 }
 
 function safeJson(s: string): unknown {
