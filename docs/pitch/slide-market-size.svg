@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" font-family="Segoe UI, Arial, sans-serif" fill="#2b2d7e">
+<rect width="1600" height="900" fill="#fff"/>
+<circle cx="150" cy="95" r="26" fill="#8bc96a"/><circle cx="150" cy="84" r="5" fill="#000"/><rect x="144" y="91" width="12" height="24" rx="3" fill="#000"/>
+<text x="196" y="105" font-size="34" font-weight="700">Market size deep dive, borrowers</text>
+<g fill="none" stroke="#2b2d7e" stroke-width="2.5"><circle cx="720" cy="500" r="330"/><circle cx="720" cy="580" r="250"/><circle cx="720" cy="665" r="165"/><circle cx="720" cy="750" r="80"/></g>
+<g text-anchor="middle"><g font-size="30" font-weight="700"><text x="720" y="225">21M</text><text x="720" y="390">5.1M</text><text x="720" y="552">3.1M</text><text x="720" y="735">105K</text></g>
+<g font-size="17"><text x="720" y="255">People with debt in the</text><text x="720" y="277">credit system</text>
+<text x="720" y="418">People with non-performing loans:</text><text x="720" y="440">9.5M accounts, ฿1.3 trillion</text>
+<text x="720" y="580">Small debtors with bad debt up to</text><text x="720" y="602">฿100,000: 4.3M accounts, ฿105B</text>
+<text x="720" y="763">Year-1 target users</text><text x="720" y="785">(0.5% of 21M)</text></g></g>
+<g font-size="22" font-weight="700"><text x="110" y="205">Layer 04</text><text x="110" y="235">Total available</text>
+<text x="110" y="370">Layer 03</text><text x="110" y="400">Serviceable available</text>
+<text x="110" y="535">Layer 02</text><text x="110" y="565">Serviceable obtainable</text>
+<text x="110" y="715">Layer 01</text><text x="110" y="745">Immediate market</text></g>
+<g text-anchor="middle"><text x="1280" y="215" font-size="32" font-weight="700">105K MAU</text><text x="1280" y="262" font-size="26" font-weight="700">Usage, year 1</text>
+<g font-size="20"><text x="1280" y="305">Goal is 0.5% of the 21M Thais with debt.</text><text x="1280" y="333">1% of active users pay, about 755</text><text x="1280" y="361">paying members on average. Users grow</text><text x="1280" y="389">15% in year 2 and 10% in year 3.</text></g>
+<text x="1280" y="540" font-size="32" font-weight="700">฿1.7M / year 1</text><text x="1280" y="587" font-size="26" font-weight="700">Revenue</text>
+<g font-size="20"><text x="1280" y="630">฿0.58M from ฿69/month membership</text><text x="1280" y="658">plus ฿1.13M bank success fee (1% of</text><text x="1280" y="686">money the bank actually receives).</text><text x="1280" y="714">Grows to ฿4.0M by year 3.</text></g></g>
+<text x="110" y="860" font-size="16" opacity=".7">Layers 03 and 02 carried over from the earlier slide (25M base), source to confirm. Model, not bank-certified revenue.</text>
+</svg>

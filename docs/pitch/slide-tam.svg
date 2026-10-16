@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" font-family="Segoe UI, Arial, sans-serif" fill="#2b2d7e">
+<rect width="1600" height="900" fill="#fff"/>
+<circle cx="150" cy="95" r="26" fill="#8bc96a"/><circle cx="150" cy="84" r="5" fill="#000"/><rect x="144" y="91" width="12" height="24" rx="3" fill="#000"/>
+<text x="196" y="105" font-size="34" font-weight="700">Expanding Total Available Market</text>
+<g fill="none" stroke="#2b2d7e" stroke-width="2.5"><circle cx="330" cy="420" r="105"/><circle cx="800" cy="420" r="140"/><circle cx="1280" cy="420" r="185"/></g>
+<g font-size="58" font-weight="700" text-anchor="middle"><text x="330" y="440">$0.5B</text><text x="800" y="440">$34B</text><text x="1280" y="440">$491B</text></g>
+<g font-size="22" text-anchor="middle">
+<text x="330" y="680">Yearly revenue if every Thai</text><text x="330" y="710">with debt paid ฿69 a month</text><text x="330" y="740">(21M people × ฿69 × 12 = ฿17.4B)</text>
+<text x="800" y="680">Interest Thai households pay each</text><text x="800" y="710">year on their debt. Better decisions</text><text x="800" y="740">on 1% of it are worth about $0.3B</text>
+<text x="1280" y="680">Total Thai household debt,</text><text x="1280" y="710">฿16.4 trillion (86.7% of GDP)</text></g>
+<text x="150" y="850" font-size="16" opacity=".7">21M: Bank of Thailand, 2024. $ at about ฿33 per $. $34B interest and ฿16.4T household debt: carried over from the earlier slide, source to confirm.</text>
+</svg>
