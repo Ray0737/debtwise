@@ -85,3 +85,11 @@ test('consult prompt gives the mental health hotline for distress', () => {
   expect(p).toContain('1323')
   expect(PROGRAMME_NUMBERS).toContain(1323)
 })
+
+test('consult prompt keeps the model on topic, on the facts, and quiet about money in distress', () => {
+  const p = consultSystem('en', {})
+  expect(p).toContain('recipes, code, politics')
+  expect(p).toContain('not in <facts> or <programmes>')
+  expect(p).toContain('do not discuss money, options or programmes')
+  expect(p).toContain('only for programmes you name')
+})

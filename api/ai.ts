@@ -46,6 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const facts = sanitizeFacts(b.facts)
       const out = await provider.generate({ system: consultSystem(lang, facts), messages })
       const parsed = parseConsult(safeJson(out))
+      if (parsed.reply.includes('1323')) { parsed.cites = []; parsed.proposal = null }
       // Figures the person typed themselves (a bill amount) and public programme figures (including the 1323 hotline) are allowed in a reply.
       const typed = messages.filter((m) => m.role === 'user').flatMap((m) => [...m.text.matchAll(/\d[\d,]*(?:\.\d+)?/g)].map((x) => parseFloat(x[0].replace(/,/g, ''))))
       const flagged = findUnknownFigures(parsed.reply, [...collectNumbers(facts), ...PROGRAMME_NUMBERS, ...typed])
