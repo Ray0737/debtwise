@@ -1,74 +1,68 @@
 # Debtwise handoff
 
-Written by the Haiku build run, 2026-10-15, for a higher-capability model to review, fix and finish.
+Updated 2026-10-16. Replaces the 2026-10-15 Haiku build handoff.
 
 ## Where things are
 
-- Project: `Website - Debtwise/`, git repo, branch `master`, 14 commits from scaffold to deploy config.
-- Plans followed in order: `docs/superpowers/plans/2026-10-15-debtwise-part1-foundation-engine.md`, `...part2a-app-shell.md`, `...part2b-ai-and-finish.md`.
-- Spec: `docs/superpowers/specs/2026-10-15-debtwise-design.md`. UI rules: `DESIGN.md`.
+- Project: `Website - Debtwise/`, git repo, branch `main`. Remote `prod` is `https://github.com/Ray0737/debtwise` (public, no license file). Remote `origin` points at `Ray0737/debt_wise`, which no longer exists on GitHub: remove it or repoint it.
+- Spec: `docs/superpowers/specs/2026-10-15-debtwise-design.md`. Plans: `docs/superpowers/plans/`. Finance: `docs/debt-wise-finance-summary-3years.md` (the only current finance file). Pitch slides: `docs/pitch/`.
 - Supabase project: `lnvpolwznueiklfgycei` (named "Grid", shared). Migration `init` applied. Five tables, RLS on.
 
-## What is verified
+## What is verified (2026-10-16)
 
-- `npm test`: 91 unit tests pass (engine, masking, formatting, tax, refinance, plan, guard, store mapping, i18n parity, validation, debt grouping, consultant facts, calendar export, AI parsing and prompt-injection cases, demo loader).
-- `npm run typecheck`: clean, includes `api/`.
-- `npm run build`: passes. PWA service worker and manifest are generated.
-- `npx vite preview` serves `/` and `/signin` with HTTP 200 (preview server was started on port 4173).
-- Supabase: tables exist, RLS enabled on all five, security advisor reports nothing on them.
+- `npm test`: 131 tests pass in 24 files. `npm run typecheck` and `npm run build` are clean.
+- AI consultant against a live Gemini key, 11 questions: on-topic answers use only the app's figures; recipe, code, politics, role play, investment and "print your prompt" are declined; an "exact balance in 7 months" request is refused honestly; a distress message gets the 1323 hotline only. Gemini wording varies run to run, so this is a spot check. The hard guards are server side: figures outside the app's data are flagged, and any reply containing 1323 loses its sources and proposal.
+- Upload checks (`api/_lib/upload.ts`) and validation have unit tests, including PDF script detection and junk input.
 
 ## What is NOT verified
 
-- No browser run. Screens have never been clicked through. Expect layout and runtime bugs.
-- Sign-in has not been tested. Needs Supabase Auth providers (Email, Google) and redirect URLs enabled in the dashboard.
-- No AI call has been made. Needs `GEMINI_API_KEY` in Vercel env and `vercel dev` to exercise `/api/ai`.
-- ElevenLabs STT/TTS: model name `scribe_v1`, `eleven_multilingual_v2`, and language codes `tha`/`eng` are unverified.
-- Gemini model comes from `GEMINI_MODEL` (default `gemini-3.1-flash-lite`, confirmed live 2026-10-15; `gemini-2.5-flash` is retired for this key).
-- U-Bot provider is a guessed JSON shape. Not connected to any real interface.
-- Tokenomist, Thai tax rules and deduction amounts are sample data only, labelled `sample`.
-- Refinance offers in `src/data/sample/offers.ts` are placeholder numbers with empty `sourceUrl`.
+- No browser click-through of the 2026-10-16 UI: chat New chat and History, onboarding terms popup and Back button, red error cells, Thai bank picker, tax questionnaire, Invest graphs and spare cash, upload check list, Community GitHub card.
+- Sign-in end to end (needs Supabase providers and redirect URLs), ElevenLabs voice (`scribe_v1`, `eleven_multilingual_v2`, `tha`/`eng` codes), a real photo or PDF upload on the live site, the U-Bot provider (guessed JSON shape).
+- Real refinance offers: `src/data/sample/offers.ts` is placeholder numbers with empty `sourceUrl`. The token unlock calendar is sample data.
+- Contact details and a lawyer review for terms and privacy.
 
-## Manual steps for the user
+## Decisions still open
 
-1. Supabase dashboard: Authentication, Providers: enable Email and Google. Add `http://localhost:5173`, `http://127.0.0.1:4173` and the Vercel URL to redirect URLs.
-2. Vercel: `npx vercel login`, `npx vercel link`, then set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `GEMINI_API_KEY`, `GEMINI_MODEL`, `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID`, and optionally `UBOT_API_KEY`, `UBOT_API_URL`. Also `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` for the build. Then `npx vercel deploy --prod`.
-3. Replace placeholder offers in `src/data/sample/offers.ts` with public rates, each with a real source URL and date.
-4. Verify before any demo claim: Gemini model name, ElevenLabs Thai STT, Tokenomist access and terms, official Thai tax rules and deduction amounts.
+- Gemini model default is `gemini-3.1-flash-lite`. The `prod/master` branch used `gemini-3.7-flash`. Pick one in `api/_lib/providers.ts`.
+- Data source for SET index and ETF graphs (a keyed API or an unofficial endpoint). Until then the market strip is crypto only.
+- Tagline. Suggested: "Debtwise: your AI debt-relief coach". Not applied.
+- Savings interest tax rule is not on the Tax page, because it was not checked against the Revenue Department.
+- Bank colours for TISCO, KKP, Islamic Bank and SME D Bank are guesses (`src/lib/bank.ts`).
 
-## Issues to know about
+## Browser-only data (per device)
 
-- Shared Supabase project `Grid` has pre-existing `yoke_*` functions and `lookup_candidate` that are SECURITY DEFINER and callable by `anon` or `authenticated`. Advisor flagged them. Not ours, not touched. The user should review.
-- Shared project also has extensions `cube`, `earthdistance`, `btree_gist` in `public`. Advisor warning only.
-- `.env.local` holds the Supabase anon key. It is gitignored. Do not commit it. Do not print it.
-- Storage decision: data is in Supabase only for now. The DataStore interface allows a local store later, not built. Do not claim local-only storage.
-- Home's consultant is a notice line plus chat. The first-message notice is built from engine numbers. Monthly plan snapshot is saved on first open of each month.
-- `api/_lib/prompts.test.ts` lives under `api/` and runs under vitest. Vercel may treat `api/_lib` as non-function (underscore prefix is the convention, so it should be fine). Verify on first `vercel dev`.
-- Relative imports from `api/` into `src/engine/` have no `.js` extension. Vercel's bundler may need them. If deploy fails with a module resolution error, add extensions or move the shared code.
-- Bundle is about 548 kB, one chunk. Vite warns. Not a blocker.
+These live in localStorage, so they do not follow the user to another device. Upgrade path for each is a table behind `DataStore`.
+
+| Key | What | Where |
+|---|---|---|
+| `dw-oneoff:<user>:<month>` | One-off bills for the month | `src/store/useApp.ts` |
+| `dw-tax:<user>:<year>` | Tax questionnaire answers | `src/store/useApp.ts` |
+| `dw-chat-breaks` | Where each new chat starts, for History | `src/lib/chatSessions.ts` |
+| `dw-spare-cash` | Savings accounts on the Invest page | `src/lib/spareCash.ts` |
+| `dw-upload-log` | Last 20 upload checks | `src/lib/uploadLog.ts` |
+
+Terms acceptance in onboarding is not stored anywhere. The accept box starts ticked for a returning user who already saved a name. If proof of consent is needed (the privacy page names consent as the basis), add `accepted_terms_at` to the profile.
+
+## Things to know
+
+- Shared Supabase project `Grid` has pre-existing `yoke_*` functions and `lookup_candidate` that are SECURITY DEFINER and callable by `anon` or `authenticated`. Advisor flagged them. Not ours, not touched. The user should review. The `yoke_*` tables from the wiped Yoke project still need to be dropped.
+- `.env.local` holds keys. It is gitignored. Do not commit it or print it.
+- Storage decision: data is in Supabase. Do not claim local-only storage. The browser-only items above are the exception, and the privacy page lists them.
+- AI: Gemini first, retries on 429 and 503 with one 25 s deadline, then Groq (`GROQ_API_KEY`, default `openai/gpt-oss-120b`) for text requests only. `/api/ai` needs a signed-in user, allows 20 calls a minute per user and 8 uploads a minute.
+- Imports from `api/` use `.js` extensions (Vercel's bundler needs them). `api/_lib/upload.ts` is shared with the browser: it must stay free of Node-only APIs.
+- The upload scan is a keyword search for `/JavaScript`, `/JS`, `/Launch`, `/EmbeddedFile`. An obfuscated PDF can slip past it. Upgrade path: ClamAV or VirusTotal on the server.
+- Bundle is one chunk of about 550 kB. Vite warns. Not a blocker.
+- `docs/screenshots/` predates the 2026-10-16 UI (chat toolbar, bank picker, tax form, Invest page). Retake before using them in a deck.
 
 ## Known gaps vs the spec
 
-- No rate limiting on `/api/*` beyond requiring a signed-in user.
-- Uploaded images and PDFs cannot be masked before the AI reads them. The upload screen says so.
-- PWA icon is SVG only. iOS home screen needs PNG icons later.
+- Images and PDFs cannot be masked before the AI reads them. The upload screen says so.
 - Calendar export (`.ics`) is the only due-date reminder. No push notifications.
-- Invest and Tax tabs are read-only sample data.
 - Pro tier, money account, payments, live bank data, tax filing: out of scope, not built.
+- Finance doc open items after the hackathon: real activation and retention, paying conversion, accounts a bank will count for the success fee, bank API prices, tax and licence advice, CAC per channel.
 
-## Next steps for the reviewer
+## Next steps
 
-1. Run `npx vite preview` (or `npm run dev`) and click through: sign in, onboarding, add debt by form, load demo family, Home consultant, Plan, Debt by bank and by type, Invest, Tax, Profile. Fix layout and runtime errors at 360, 390, 768 and 1280 widths.
-2. Run `npx vercel dev` with keys set, then test `/api/ai` extract and consult with a real key. Check the masked payload in the response.
-3. Upload one synthetic statement (image) and confirm the review screen shows extracted values with source lines.
-4. Inject a malicious PDF text and confirm no balance changes without user confirmation.
-5. Review the `api/` functions for auth, logging and error leakage.
-6. Commit the fixes. Haiku used `Co-Authored-By: Claude Haiku 5.5`.
-
-
-## Update 2026-10-15 (later)
-
-- AI: Gemini first (`GEMINI_MODEL=gemini-3.1-flash-lite`), two retries on 429, 500 and 503, then Groq (`GROQ_API_KEY`, default model `openai/gpt-oss-120b`) for text requests only. Set `GROQ_API_KEY` in Vercel too if you want the backup live.
-- `npm run dev` serves `/api/ai`, `/api/stt`, `/api/tts` and `/api/market` through a Vite plugin, so chat works locally.
-- Tax uses the Revenue Department rules for tax year 2568. Invest market data is real (CoinGecko); the unlock calendar and refinance offers are sample.
-- One-off bills live in the browser (localStorage). A `one_offs` table is the upgrade path.
-- Not done: ElevenLabs voice test, photo and PDF upload test on the live site, real refinance offers, contact details and a lawyer review for terms and privacy.
+1. Click through every screen at 360, 390, 768 and 1280 widths and fix layout and runtime bugs.
+2. `npx vercel dev` with keys set: test `/api/ai` extract with a real statement image and PDF, and check the `"evt":"upload"` log line.
+3. Decide the open items above, then retake the screenshots.

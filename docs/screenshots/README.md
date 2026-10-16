@@ -1,5 +1,7 @@
 # Debtwise screenshots (phone)
 
+> These screenshots were taken before the 2026-10-16 UI changes (chat New chat and History, bank picker, tax questionnaire, Invest graphs and spare cash, upload checks). Retake them before using them in a deck.
+
 Phone size, 390 by 844 CSS pixels at 2x (780 by 1688 files). Taken with Playwright in Edge, with a demo family and real Thai bank names. Everything shown is demo data. Thai is in `phone/th`, English in `phone/en`, the same 35 screens in each, plus 10 whole pages.
 
 | File | Screen |

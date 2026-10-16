@@ -84,6 +84,7 @@ export function Guide() {
         [{ th: '4 ค่าใช้จ่ายจำเป็น', en: '4 Essentials' }, { th: 'ค่าเช่า อาหาร ค่าเทอม ต่อเดือน (ไม่บังคับ)', en: 'Rent, food, school fees per month (optional)' }, { th: 'แผนจะกันเงินส่วนนี้ไว้ก่อนจ่ายหนี้', en: 'The plan protects this before paying debt' }],
         [{ th: '5 หนี้', en: '5 Debts' }, { th: 'เพิ่มตอนนี้หรือไว้ทีหลัง', en: 'Add them now or later' }, { th: 'เริ่มสร้างแผน', en: 'Starts the plan' }],
       ]} />
+      <P b={{ th: 'ขั้นแรกมีช่องยอมรับ กดที่ข้อกำหนดการใช้งานหรือนโยบายความเป็นส่วนตัวเพื่ออ่านฉบับจริงในหน้าต่างเล็ก ต้องติ๊กก่อนไปต่อ ทุกขั้นมีปุ่มย้อนกลับข้างปุ่มถัดไป ชื่อรับเฉพาะตัวอักษร ห้ามมีตัวเลข จำนวนเต็มอย่างปีเกิดและวันที่เงินเข้าไม่รับทศนิยม', en: 'Step 1 has an accept box. Tap the terms or the privacy policy to read the real text in a small window, and tick the box to go on. Every step has a Back button beside Next. A name takes letters only, no digits. Whole-number fields such as birth year and pay day do not take decimals.' }} />
       <P b={{ th: 'ปีเกิด รายได้ต่อเดือน และอายุเลิกทำงานเป็นข้อมูลที่ต้องกรอก ระบบตรวจว่าปีเกิดสมเหตุสมผลและอายุเลิกทำงานมากกว่าอายุปัจจุบัน', en: 'Birth year, monthly income and retirement age are required. The app checks that the birth year makes sense and that the retirement age is above your current age.' }} />
     </> },
 
@@ -95,6 +96,7 @@ export function Guide() {
         { th: 'ไฟล์ถูกส่งให้ AI เพื่ออ่านค่าเท่านั้น ไม่ถูกเก็บ เก็บเฉพาะค่าที่คุณยืนยันและบรรทัดต้นฉบับ', en: 'The file goes to the AI only to read its values. It is not stored. Only the values you confirm and the source line are kept.' },
         { th: 'รูปและ PDF ปิดข้อมูลส่วนตัวก่อนส่งไม่ได้ หากต้องการ ให้บังเลขบัญชีหรือเลขบัตรก่อนถ่าย', en: 'Photos and PDFs cannot be masked before sending. If you prefer, cover account or ID numbers before you take the picture.' },
       ]} />
+      <P b={{ th: 'ทุกไฟล์ถูกตรวจก่อนส่ง รับเฉพาะ PDF, JPG, PNG และ WebP ไม่เกิน 10 MB ระบบดูชนิดไฟล์จากเนื้อไฟล์จริง ไม่ใช่นามสกุล และบล็อก PDF ที่มีสคริปต์หรือไฟล์แนบฝัง เซิร์ฟเวอร์ตรวจซ้ำอีกครั้ง อัปโหลดได้ไม่เกิน 8 ครั้งต่อนาที หน้านี้แสดงผลการตรวจ 5 ครั้งล่าสุด (ผ่านหรือถูกบล็อก ขนาด และรหัสแฮชของไฟล์) เป็นการตรวจเบื้องต้น ไม่ใช่โปรแกรมกำจัดไวรัส', en: 'Every file is checked before it is sent. Only PDF, JPG, PNG and WebP up to 10 MB are accepted. The type is read from the file content, not the extension, and a PDF with scripts or embedded files is blocked. The server checks again. You can upload at most 8 files a minute. This page lists the last 5 checks (accepted or blocked, size and the file hash). It is a basic check, not an antivirus.' }} />
       <H b={{ th: 'พูดคุย', en: 'Talk it through' }} />
       <P b={{ th: 'เล่าให้ที่ปรึกษาฟังที่แท็บแชต ที่ปรึกษาเสนอเปลี่ยนค่าใช้จ่ายจำเป็นหรือบิลครั้งเดียวได้ แต่ยังไม่สร้างหนี้ให้ ใช้ฟอร์มหรืออัปโหลดสำหรับเพิ่มหนี้', en: 'Tell the consultant in the Chat tab. It can propose a change to your essentials or a one-off bill, but it does not create a debt for you. Use the form or an upload to add a debt.' }} />
       <H b={{ th: 'กรอกเอง', en: 'Enter by hand' }} />
@@ -107,6 +109,7 @@ export function Guide() {
         [{ th: 'วันครบกำหนด', en: 'Due day' }, { th: 'วันที่ 29 ถึง 31 จะนับเป็นวันที่ 28 ในไฟล์ปฏิทินเพื่อให้ทุกเดือนมีวันนั้น', en: 'The 29th to 31st are moved to the 28th in the calendar file so every month has the date.' }],
         [{ th: 'เดือนที่เหลือ', en: 'Months left' }, { th: 'ต้องมีสำหรับเช็กรีไฟแนนซ์', en: 'Needed for the refinance check.' }],
       ]} />
+      <P b={{ th: 'ช่องผู้ให้กู้เป็นปุ่มธนาคารไทย 17 แห่งและกองทุน กยศ. แต่ละปุ่มใช้สีของธนาคารนั้นและไอคอนทั่วไป ไม่ใช้โลโก้ เลือกอื่นๆ เพื่อพิมพ์ชื่อเอง ชื่อผู้ให้กู้และชื่อเรียกหนี้ต้องมีตัวอักษรอย่างน้อยหนึ่งตัว ตัวเลขล้วนอย่าง 74 ใช้ไม่ได้ ช่องที่ผิดจะเป็นสีแดงและหน้าจอเลื่อนไปที่ช่องนั้น', en: 'The lender field is a set of buttons for 17 Thai banks and the Student Loan Fund. Each uses that bank’s colour and a generic icon, not a logo. Choose Other to type a name. A lender name and a loan name must hold at least one letter, so digits only, like 74, is refused. A field with a problem turns red and the page scrolls to it.' }} />
       <P b={{ th: 'ประเภทหนี้ที่รองรับ: บัตรเครดิต สินเชื่อส่วนบุคคลและนาโน รถหรือมอเตอร์ไซค์ บ้าน กยศ. และหนี้นอกระบบ', en: 'Supported types: credit card, personal and nano loan, car or motorbike, home, student loan and informal debt.' }} />
     </> },
 
@@ -149,8 +152,11 @@ export function Guide() {
         { th: 'เมื่อเอ่ยถึงโครงการช่วยเหลือ จะมีลิงก์แหล่งที่มาไปยังหน้าทางการของธนาคารแห่งประเทศไทยใต้ข้อความ', en: 'When it mentions a relief programme, a source link to the official Bank of Thailand page appears under the message.' },
         { th: 'ที่ปรึกษาไม่บอกว่าคุณมีสิทธิ์ในโครงการ เพราะขึ้นกับเงื่อนไขและการพิจารณาของเจ้าหนี้', en: 'It never says you qualify for a programme, because that depends on the terms and the creditor’s decision.' },
         { th: 'ถ้าคำตอบมีตัวเลขที่ไม่อยู่ในข้อมูลของคุณ แอปติดป้ายเตือนใต้ข้อความ', en: 'If a reply contains a figure that is not in your data, the app adds a warning under it.' },
+        { th: 'ที่ปรึกษาคุยเฉพาะเรื่องเงิน หนี้ และงบของคุณ เรื่องอื่นเช่นสูตรอาหาร โค้ด การเมือง หรือการเล่นบทบาท จะปฏิเสธสั้นๆ และชวนกลับมาเรื่องหนี้ และไม่ตอบข้อเท็จจริงเรื่องธนาคาร กฎหมาย ภาษี หรืออัตราดอกเบี้ยที่ไม่อยู่ในข้อมูลของคุณ', en: 'The consultant only talks about your money, debts and budget. Other topics such as recipes, code, politics or role play get a short decline and an offer to go back to your debts. It does not state facts about banks, laws, taxes or rates that are not in your data.' },
         { th: 'ที่ปรึกษาไม่ย้ายเงินและไม่ติดต่อผู้ให้กู้แทนคุณ', en: 'It does not move money and does not contact your lender for you.' },
       ]} />
+      <H b={{ th: 'แชตใหม่และประวัติ', en: 'New chat and history' }} />
+      <P b={{ th: 'ปุ่มบวกในแถบพิมพ์เริ่มแชตใหม่ ที่ปรึกษาเห็นเฉพาะแชตปัจจุบัน ปุ่มนาฬิกาเปิดหน้าประวัติเต็มหน้า มีช่องค้นหา จัดกลุ่มวันนี้ เมื่อวาน และก่อนหน้านี้ แต่ละรายการแสดงข้อความแรก คำตอบล่าสุด วันที่ และจำนวนข้อความ แตะเพื่ออ่านแชตเก่า (อ่านอย่างเดียว) การแบ่งแชตเก็บในเบราว์เซอร์นี้ จึงเห็นประวัติแยกตามอุปกรณ์', en: 'The plus in the message bar starts a new chat. The consultant sees only the current chat. The clock opens a full-page history with a search box, grouped as Today, Yesterday and Earlier. Each item shows the first message, the last reply, the date and the message count. Tap one to read an old chat (read only). The split into chats is kept in this browser, so history is per device.' }} />
       <H b={{ th: 'เสียง', en: 'Voice' }} />
       <P b={{ th: 'ไมค์แปลงเสียงเป็นข้อความ และถ้าคุณพูด คำตอบอาจถูกอ่านออกเสียง เสียงและข้อความไปยังบริการเสียง ถ้าไม่สะดวกให้พิมพ์แทนได้เสมอ', en: 'The mic turns speech into text, and if you spoke, the reply may be read aloud. Audio and text go to the voice service. You can always type instead.' }} />
       <P b={{ th: 'ที่ปรึกษาเห็นข้อความล่าสุดสิบข้อความ และข้อมูลสรุปของคุณ (รายได้ ค่าจำเป็น หนี้ ผู้ให้กู้ ยอดคงเหลือ ดอกเบี้ย ยอดที่วางแผนจ่าย)', en: 'The consultant sees the last ten messages and a summary of your numbers (income, essentials, debts, lenders, balances, rates, planned payments).' }} />
@@ -214,6 +220,8 @@ export function Guide() {
         { th: 'คำนวณตามขั้นอัตราก้าวหน้า: ถึง 150,000 ยกเว้น แล้ว 5% 10% 15% 20% 25% 30% และ 35% เมื่อเกิน 5 ล้านบาท', en: 'Apply the progressive bands: exempt up to 150,000, then 5%, 10%, 15%, 20%, 25%, 30%, and 35% above 5 million baht.' },
         { th: 'หารด้วยสิบสองเป็นภาษีที่กันไว้ต่อเดือน ซึ่งนำไปรวมในหน้าหลัก แผน และแชต', en: 'Divide by twelve for the monthly tax set aside, which feeds Home, the plan and the chat.' },
       ]} />
+      <H b={{ th: 'บอกเราเกี่ยวกับคุณ', en: 'Tell us about you' }} />
+      <P b={{ th: 'แบบสอบถามในหน้านี้ถามว่าคุณมีคู่สมรสที่ไม่มีเงินได้หรือไม่ เลี้ยงดูบุตรกี่คน (และกี่คนเป็นบุตรคนที่สองขึ้นไปที่เกิดตั้งแต่ปี 2561) และเลี้ยงดูบิดามารดากี่คน กับยอดที่จ่ายไปในปีนี้สำหรับประกันสังคม ประกันชีวิต ประกันสุขภาพ ดอกเบี้ยบ้าน และค่าคลอดบุตร แต่ละยอดถูกจำกัดที่เพดานของรายการนั้น และประกันชีวิตกับสุขภาพรวมกันไม่เกิน 100,000 คำตอบทำให้ยอดภาษีโดยประมาณ ภาษีที่กันไว้ต่อเดือน แผน และคำตอบของที่ปรึกษาเปลี่ยนตาม คำตอบเก็บในเบราว์เซอร์นี้เท่านั้น', en: 'The form on this page asks whether you have a spouse with no income, how many children you support (and how many are a second or later child born from 2018), how many parents you support, and what you paid this year for social security, life insurance, health insurance, home loan interest and childbirth. Each amount is capped at that item’s limit, and life and health insurance together stay within 100,000. Your answers change the estimated tax, the monthly tax set-aside, the plan and the consultant’s figures. They are kept in this browser only.' }} />
       <H b={{ th: 'ค่าลดหย่อนที่แสดง', en: 'Allowances shown' }} />
       <P b={{ th: 'หน้านี้ลิสต์ค่าลดหย่อนที่อาจใช้ได้และประมาณว่าแต่ละรายการอาจประหยัดภาษีได้สูงสุดเท่าไร (ค่าลดหย่อนสูงสุด คูณอัตราภาษีขั้นสูงสุดของคุณ) พร้อมเอกสารที่ต้องเก็บ', en: 'It lists allowances you may be able to claim and the most each could save (the maximum allowance times your top tax rate), with the paperwork to keep.' }} />
       <Table head={[{ th: 'รายการ', en: 'Item' }, { th: 'สูงสุด (บาท)', en: 'Most (baht)' }]} rows={[
@@ -236,6 +244,7 @@ export function Guide() {
         { th: 'ปฏิทินปลดล็อก: วันที่และปริมาณเป็นข้อมูลตัวอย่างของโทเคนสมมติ และมีป้ายกำกับ ตัวอย่าง เพราะยังไม่มีแหล่งข้อมูลจริงที่ใช้ได้', en: 'Unlock calendar: the dates and amounts are sample data for made-up tokens and are labelled sample, because there is no real source in use yet.' },
         { th: 'แถบด้านบนบอกเงินที่เหลือหลังหนี้ ค่าจำเป็น และภาษีในเดือนนี้ เพื่อให้เห็นภาพ ก่อนคิดเรื่องลงทุน', en: 'The line at the top tells you what is left after debt, essentials and tax this month, so you can see the picture before thinking about investing.' },
       ]} />
+      <P b={{ th: 'แถบตลาดแสดงกราฟเส้น 7 วันของแต่ละเหรียญ เส้นเขียวเมื่อสิ้นสัปดาห์สูงกว่าตอนต้น เส้นแดงเมื่อต่ำกว่า เงินเก็บ: ใส่บัญชีออมทรัพย์ที่เก็บไว้ที่อื่น (ชื่อ ยอด ดอกเบี้ยต่อปี) เพื่อดูดอกเบี้ยที่ได้ต่อเดือน และกราฟแท่งเทียบดอกเบี้ยที่ได้กับดอกเบี้ยที่หนี้ที่แพงที่สุดคิดจากเงินจำนวนเดียวกัน เป็นข้อมูลเท่านั้น ข้อมูลเงินเก็บอยู่ในเบราว์เซอร์นี้เท่านั้น', en: 'The market strip shows a 7-day line for each coin: green when the week ended higher than it started, red when lower. Spare cash: add savings you keep elsewhere (name, balance, yearly interest) to see the interest earned each month, and a bar chart that compares it with the interest your costliest debt charges on the same amount. Information only. Spare cash is kept in this browser only.' }} />
       <Note icon="exclamation-triangle">{L({ th: 'ให้ข้อมูลเท่านั้น ไม่ใช่คำแนะนำให้ซื้อหรือขาย การปลดล็อกไม่ได้บอกว่าราคาจะขึ้นหรือลง คริปโตมีความเสี่ยงสูง และเงินที่ต้องใช้จ่ายหนี้หรือค่าเทอมไม่ควรนำไปลงทุน', en: 'Information only, not advice to buy or sell. An unlock does not tell you whether a price will rise or fall. Crypto is high risk, and money you need for debt or tuition should not be invested.' })}</Note>
     </> },
 
@@ -371,6 +380,7 @@ export function Privacy({ bare }: { bare?: boolean } = {}) {
         [{ th: 'หนี้', en: 'Debts' }, { th: 'ผู้ให้กู้ ประเภท ชื่อเรียก ยอดคงเหลือ ดอกเบี้ย ยอดขั้นต่ำ วันครบกำหนด เดือนที่เหลือ สถานะ', en: 'Lender, type, label, balance, interest, minimum, due day, months left, status' }],
         [{ th: 'แหล่งที่มา', en: 'Sources' }, { th: 'ชื่อไฟล์ หน้า บรรทัดข้อความที่ใช้ยืนยันตัวเลข และความมั่นใจ ไม่เก็บตัวไฟล์', en: 'File name, page, the source line used to confirm a number, and confidence. The file itself is not stored.' }],
         [{ th: 'ข้อความ', en: 'Messages' }, { th: 'บทสนทนากับที่ปรึกษาตามที่คุณพิมพ์ และสำเนาที่ปิดข้อมูลแล้วที่ส่งให้ AI', en: 'Your conversation with the consultant as you typed it, and the masked copy that was sent to the AI' }],
+        [{ th: 'บันทึกความปลอดภัย', en: 'Security log' }, { th: 'ทุกครั้งที่อัปโหลดไฟล์ เซิร์ฟเวอร์เขียนบันทึกหนึ่งบรรทัด: รหัสผู้ใช้แบบสั้น ชนิดและขนาดไฟล์ ผลการตรวจ และรหัสแฮชของไฟล์ ไม่เก็บตัวไฟล์ ไม่เก็บชื่อไฟล์', en: 'For every file upload the server writes one log line: a short user id, file type and size, the result of the check, and the file’s hash. The file itself and its name are not kept in this log.' }],
         [{ th: 'แผน', en: 'Plans' }, { th: 'ภาพรวมแผนรายเดือนที่บันทึก', en: 'Saved monthly plan snapshots' }],
         [{ th: 'ในเบราว์เซอร์', en: 'In your browser' }, { th: 'เซสชันเข้าสู่ระบบ ภาษาที่เลือก บิลครั้งเดียวของเดือนนี้ และตัวบอกว่าแสดงข้อความต้อนรับเดือนใหม่แล้ว', en: 'Your sign in session, your chosen language, this month’s one-off bills, and a flag that the new-month message was shown' }],
       ]} />
@@ -445,6 +455,10 @@ export function Privacy({ bare }: { bare?: boolean } = {}) {
         [{ th: 'dw-lang', en: 'dw-lang' }, { th: 'จำภาษาที่เลือก', en: 'Remembers your language' }],
         [{ th: 'dw-oneoff', en: 'dw-oneoff' }, { th: 'บิลครั้งเดียวของเดือนนี้ต่อบัญชี', en: 'This month’s one-off bills, per account' }],
         [{ th: 'dw-monthly-notice', en: 'dw-monthly-notice' }, { th: 'แสดงข้อความต้อนรับเดือนใหม่ครั้งเดียว', en: 'Shows the new-month message once' }],
+        [{ th: 'dw-chat-breaks', en: 'dw-chat-breaks' }, { th: 'จุดแบ่งแชตใหม่ สำหรับหน้าประวัติ', en: 'Where each new chat starts, for the history page' }],
+        [{ th: 'dw-tax', en: 'dw-tax' }, { th: 'คำตอบแบบสอบถามภาษีต่อบัญชีและปีภาษี', en: 'Your tax form answers, per account and tax year' }],
+        [{ th: 'dw-spare-cash', en: 'dw-spare-cash' }, { th: 'บัญชีเงินเก็บที่คุณกรอกในหน้าลงทุน', en: 'The savings accounts you add on the Invest page' }],
+        [{ th: 'dw-upload-log', en: 'dw-upload-log' }, { th: 'ผลการตรวจไฟล์ 20 ครั้งล่าสุด (ชื่อที่ล้างแล้ว ขนาด ผล)', en: 'The last 20 upload checks (cleaned name, size, result)' }],
       ]} />
       <P b={{ th: 'ล้างข้อมูลเว็บไซต์ในเบราว์เซอร์เพื่อลบรายการเหล่านี้ และแอปอาจเก็บไฟล์ของแอปไว้ในแคชเพื่อให้เปิดเร็ว', en: 'Clear the site data in your browser to remove these. The app may also keep its own files in the cache so it opens faster.' }} />
     </> },
