@@ -25,3 +25,36 @@ export function suggestDeductions(marginalRate: number) {
   const rate = Number.isFinite(marginalRate) ? Math.max(0, marginalRate) : 0
   return DEDUCTIONS.map((deduction) => ({ deduction, estimatedSaving: deduction.maxAmount * rate }))
 }
+
+// What the person says about their life and what they paid this year. Every number is clamped, so junk input cannot inflate the claim.
+export interface TaxAnswers {
+  spouse: boolean
+  children: number
+  laterChildren: number
+  parents: number
+  socialSecurity: number
+  lifeInsurance: number
+  healthInsurance: number
+  homeLoanInterest: number
+  childbirth: number
+}
+export const NO_ANSWERS: TaxAnswers = { spouse: false, children: 0, laterChildren: 0, parents: 0, socialSecurity: 0, lifeInsurance: 0, healthInsurance: 0, homeLoanInterest: 0, childbirth: 0 }
+
+const max = (id: string) => DEDUCTIONS.find((d) => d.id === id)!.maxAmount
+const amt = (v: unknown, cap: number) => (typeof v === 'number' && Number.isFinite(v) ? Math.min(Math.max(0, v), cap) : 0)
+const count = (v: unknown, cap: number) => (typeof v === 'number' && Number.isFinite(v) ? Math.min(Math.max(0, Math.floor(v)), cap) : 0)
+
+// Total extra allowance on top of the personal allowance. Conditions such as a parent's age and income are on the form, not checked here.
+export function allowanceTotal(a: Partial<TaxAnswers>): number {
+  const children = count(a.children, 10)
+  const later = Math.min(count(a.laterChildren, 10), children)
+  const life = amt(a.lifeInsurance, max('life_insurance'))
+  const health = Math.min(amt(a.healthInsurance, max('health_insurance')), max('life_insurance') - life)
+  return (
+    (a.spouse ? max('spouse') : 0) +
+    children * max('child') + later * max('child2') +
+    count(a.parents, 4) * max('parents') +
+    amt(a.socialSecurity, max('social_security')) + life + health +
+    amt(a.homeLoanInterest, max('home_loan_interest')) + amt(a.childbirth, max('childbirth'))
+  )
+}

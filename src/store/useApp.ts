@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import type { Debt, Lang } from '../engine'
+import { NO_ANSWERS, type Debt, type Lang, type TaxAnswers } from '../engine'
+import { TAX_YEAR } from '../engine/tax'
 import { supabase } from '../lib/supabase'
 import { SupabaseStore } from './supabaseStore'
 import type { DataStore, Profile } from './types'
@@ -11,9 +12,16 @@ const monthKey = (userId: string) => `dw-oneoff:${userId}:${new Date().toISOStri
 const readOneOffs = (userId: string): OneOff[] => {
   try { return JSON.parse(localStorage.getItem(monthKey(userId)) ?? '[]') as OneOff[] } catch { return [] }
 }
+// ponytail: tax answers live in localStorage per user and tax year, so they stay on this device. Same upgrade path as one-off bills.
+const taxKey = (userId: string) => `dw-tax:${userId}:${TAX_YEAR}`
+const readTax = (userId: string): TaxAnswers => {
+  try { return { ...NO_ANSWERS, ...JSON.parse(localStorage.getItem(taxKey(userId)) ?? '{}') } } catch { return NO_ANSWERS }
+}
 export const oneOffTotal = (list: OneOff[]) => list.reduce((s, o) => s + o.amount, 0)
 
 interface AppState {
+  taxAnswers: TaxAnswers
+  setTaxAnswers: (a: TaxAnswers) => void
   oneOffs: OneOff[]
   addOneOff: (o: OneOff) => void
   clearOneOffs: () => void
@@ -34,13 +42,13 @@ const readLang = (): Lang => {
 }
 
 export const useApp = create<AppState>((set, get) => ({
-  oneOffs: [], ready: false, userId: null, profile: null, debts: [], store: null, lang: readLang(),
+  taxAnswers: NO_ANSWERS, oneOffs: [], ready: false, userId: null, profile: null, debts: [], store: null, lang: readLang(),
 
   async init() {
     const apply = async (userId: string | null) => {
-      if (!userId) { set({ userId: null, store: null, profile: null, debts: [], ready: true }); return }
+      if (!userId) { set({ userId: null, store: null, profile: null, debts: [], taxAnswers: NO_ANSWERS, ready: true }); return }
       const store = new SupabaseStore(supabase, userId)
-      set({ userId, store, oneOffs: readOneOffs(userId) })
+      set({ userId, store, oneOffs: readOneOffs(userId), taxAnswers: readTax(userId) })
       await get().refresh()
       set({ ready: true })
     }
@@ -54,6 +62,12 @@ export const useApp = create<AppState>((set, get) => ({
     if (!store) return
     const [profile, debts] = await Promise.all([store.getProfile(), store.listDebts()])
     set({ profile, debts, lang: profile?.lang ?? get().lang })
+  },
+
+  setTaxAnswers(a) {
+    const { userId } = get()
+    if (userId) { try { localStorage.setItem(taxKey(userId), JSON.stringify(a)) } catch { /* storage may be blocked */ } }
+    set({ taxAnswers: a })
   },
 
   addOneOff(o) {
@@ -80,6 +94,6 @@ export const useApp = create<AppState>((set, get) => ({
 
   async signOut() {
     await supabase.auth.signOut()
-    set({ userId: null, store: null, profile: null, debts: [] })
+    set({ userId: null, store: null, profile: null, debts: [], taxAnswers: NO_ANSWERS })
   },
 }))

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useT } from '../i18n'
-import { validateProfile, type ProfileField } from '../lib/validate'
+import { cleanName, validateProfile, type ProfileField } from '../lib/validate'
 import { useApp } from '../store/useApp'
 import type { Profile } from '../store/types'
 import { Terms, Privacy } from '../site/docs'
@@ -34,7 +34,7 @@ export default function Onboarding() {
 
   const s = STEPS[step - 1]
   const set = <K extends keyof Profile>(k: K, v: Profile[K] | null) => setDraft((d) => ({ ...d, [k]: v }))
-  const err = (f: ProfileField) => (errors[f] ? t(errors[f] === 'required' ? 'field.required' : 'field.invalid') : undefined)
+  const err = (f: ProfileField) => (errors[f] ? t(errors[f] === 'required' ? 'field.required' : f === 'displayName' ? 'field.nameLetters' : 'field.invalid') : undefined)
 
   const next = async () => {
     const e = validateProfile(draft, s.fields)
@@ -57,6 +57,7 @@ export default function Onboarding() {
   }
 
   const thisYear = new Date().getFullYear()
+  const back = step > 1 ? <button className="btn soft" disabled={busy} onClick={() => nav(`/onboarding/${step - 1}`)}><Icon n="arrow-left" />{t('common.back')}</button> : null
   return (
     <main className="main solo half">
       <Page
@@ -67,7 +68,7 @@ export default function Onboarding() {
         <div className="bar" aria-hidden="true"><i style={{ width: `${(step / STEPS.length) * 100}%` }} /></div>
         {step === 1 && (
           <div className="stack">
-            <Field label={t('field.displayName')} error={err('displayName')}><TextInput value={draft.displayName ?? ''} onChange={(v) => set('displayName', v)} placeholder={t('ph.name')} /></Field>
+            <Field label={t('field.displayName')} error={err('displayName')}><TextInput value={draft.displayName ?? ''} onChange={(v) => set('displayName', cleanName(v))} placeholder={t('ph.name')} /></Field>
             <Field label={t('field.birthYear')} error={err('birthYear')}>
               <Choice title={t('picker.year')} placeholder={t('ph.pickYear')} cols={4} value={draft.birthYear} onChange={(v) => set('birthYear', v)}
                 options={range(thisYear - 16, thisYear - 90).map((y) => ({ v: y, label: String(y) }))} />
@@ -89,7 +90,7 @@ export default function Onboarding() {
                 options={[{ v: 'salary', label: t('field.income.salary') }, { v: 'freelance', label: t('field.income.freelance') }, { v: 'both', label: t('field.income.both') }]} />
             </Field>
             <Field label={t('field.monthlyIncome')} error={err('monthlyIncome')}><NumInput value={draft.monthlyIncome} onChange={(v) => set('monthlyIncome', v)} /></Field>
-            <Field label={t('field.otherIncome')} error={err('otherIncome')}><NumInput value={draft.otherIncome} onChange={(v) => set('otherIncome', v ?? 0)} /></Field>
+            <Field label={t('field.otherIncome')} error={err('otherIncome')}><NumInput value={draft.otherIncome} onChange={(v) => set('otherIncome', v)} /></Field>
             <Field label={t('field.payDay')} error={err('payDay')}>
               <Choice title={t('picker.day')} placeholder={t('ph.pickDay')} cols={7} value={draft.payDay} onChange={(v) => set('payDay', v)}
                 options={range(1, 31).map((d) => ({ v: d, label: String(d) }))} />
@@ -109,12 +110,12 @@ export default function Onboarding() {
 
         {step < STEPS.length ? (
           <div className="between">
-            {step === 4 ? <button className="btn soft" disabled={busy} onClick={() => nav('/onboarding/5')}>{t('common.later')}</button> : <span />}
+            <span className="btnrow">{back}{step === 4 && <button className="btn soft" disabled={busy} onClick={() => nav('/onboarding/5')}>{t('common.later')}</button>}</span>
             <button className="btn" disabled={busy} onClick={next}>{t('common.next')}<Icon n="arrow-right" /></button>
           </div>
         ) : (
           <div className="between">
-            <button className="btn soft" disabled={busy} onClick={() => finish('/')}>{t('common.later')}</button>
+            <span className="btnrow">{back}<button className="btn soft" disabled={busy} onClick={() => finish('/')}>{t('common.later')}</button></span>
             <button className="btn" disabled={busy} onClick={() => finish('/debt/add')}><Icon n="plus-lg" />{t('onb.addNow')}</button>
           </div>
         )}

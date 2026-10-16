@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { formatBaht, formatDate } from '../engine'
+import { allowanceTotal, formatBaht, formatDate } from '../engine'
 import { TOKEN_EVENTS } from '../data/sample/tokenomist'
 import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
@@ -13,12 +13,12 @@ const KIND_ICON = { unlock: 'unlock', vesting: 'hourglass-split', emission: 'dro
 
 export default function Invest() {
   const t = useT()
-  const { profile, debts, lang, oneOffs } = useApp()
+  const { profile, debts, lang, oneOffs, taxAnswers } = useApp()
   const [market, setMarket] = useState<MarketData | null>(null)
   const [failed, setFailed] = useState(false)
   useEffect(() => { fetchMarket().then(setMarket).catch(() => setFailed(true)) }, [])
 
-  const left = profile ? Math.max(0, summarize(profile, debts, oneOffTotal(oneOffs)).plan.leftover) : 0
+  const left = profile ? Math.max(0, summarize(profile, debts, oneOffTotal(oneOffs), allowanceTotal(taxAnswers)).plan.leftover) : 0
   const events = [...TOKEN_EVENTS].sort((a, b) => a.date.localeCompare(b.date))
   const row = (e: (typeof events)[number]) => (
     <Row key={e.id} icon={KIND_ICON[e.kind]} title={`${e.token} · ${t(`invest.kind.${e.kind}` as const)}`}

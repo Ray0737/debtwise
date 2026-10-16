@@ -573,3 +573,10 @@ textarea { font: inherit; color: inherit; }
 .cmpbar i { display: block; height: 100%; border-radius: 999px; }
 .cmpbar .earn { background: #1f8a3b; }
 .cmpbar .cost { background: var(--danger); }
+
+.btnrow { display: inline-flex; gap: var(--s2); }
+
+/* Upload check log */
+.uplog { display: flex; flex-direction: column; gap: 4px; margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--line); }
+.uprow { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+.uprow .ell { max-width: 40%; }

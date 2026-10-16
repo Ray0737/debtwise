@@ -5,15 +5,15 @@ export function annualIncome(p: Profile): number {
   return ((p.monthlyIncome ?? 0) + (p.otherIncome ?? 0)) * 12
 }
 
-export function monthlyTaxSetAside(p: Profile): number {
-  const t = estimateTax({ annualIncome: annualIncome(p), kind: p.incomeType === 'freelance' ? 'freelance' : 'salary', allowances: 0 })
+export function monthlyTaxSetAside(p: Profile, allowances = 0): number {
+  const t = estimateTax({ annualIncome: annualIncome(p), kind: p.incomeType === 'freelance' ? 'freelance' : 'salary', allowances })
   return Math.round(t.tax / 12)
 }
 
-export function summarize(p: Profile, debts: Debt[], oneOff = 0): {
+export function summarize(p: Profile, debts: Debt[], oneOff = 0, allowances = 0): {
   taxSetAside: number; minimums: number; cash: Cashflow; plan: PlanResult; essentialsMissing: boolean
 } {
-  const taxSetAside = monthlyTaxSetAside(p)
+  const taxSetAside = monthlyTaxSetAside(p, allowances)
   const minimums = debts.reduce((s, d) => s + d.minPayment, 0)
   const cash = cashflow({
     monthlyIncome: p.monthlyIncome ?? 0, otherIncome: p.otherIncome ?? 0,

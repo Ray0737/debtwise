@@ -198,6 +198,14 @@ export function Community() {
         <h2>{L({ th: 'ชุมชนผู้ใช้', en: 'User community' })}</h2>
         <p className="muted">{L({ th: 'พื้นที่ส่งความเห็น ถามคำถาม และคุยกับผู้ใช้คนอื่น', en: 'A place for feedback, questions and talking with other users.' })}</p>
       </Card>
+      <Card title={L({ th: 'โอเพนซอร์ส', en: 'Open source' })} icon="github">
+        <h2>{L({ th: 'ร่วมสร้างบน GitHub', en: 'Collaborate on GitHub' })}</h2>
+        <p className="muted">{L({ th: 'โค้ดของ Debtwise เปิดให้ดูสาธารณะ ดูโค้ด แจ้งปัญหา เสนอไอเดีย หรือส่ง pull request ได้เลย', en: 'The Debtwise code is public. Read it, report a problem, suggest an idea or send a pull request.' })}</p>
+        <div className="btnrow">
+          <a className="btn" href="https://github.com/Ray0737/debtwise" target="_blank" rel="noreferrer"><Icon n="github" />{L({ th: 'ดูบน GitHub', en: 'View on GitHub' })}</a>
+          <a className="btn soft" href="https://github.com/Ray0737/debtwise/issues/new" target="_blank" rel="noreferrer"><Icon n="chat-square-text" />{L({ th: 'แจ้งปัญหาหรือเสนอไอเดีย', en: 'Report or suggest' })}</a>
+        </div>
+      </Card>
       <Card title={L({ th: 'ธีม 1 AI', en: 'Track 1, AI' })} icon="trophy">
         <h2>{L({ th: 'สร้างสำหรับ U-Hackathon', en: 'Built for U-Hackathon' })}</h2>
         <p className="muted">{L({ th: 'Debtwise เป็นต้นแบบที่ทำขึ้นเพื่อช่วยคนทั่วไปเข้าใจหนี้ของตัวเอง', en: 'Debtwise is a prototype made to help ordinary people understand their own debt.' })}</p>

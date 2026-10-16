@@ -4,6 +4,7 @@ import { mask } from '../src/engine/mask.js'
 import { requireUser } from './_lib/auth.js'
 import { EXTRACT_SYSTEM, PROGRAMME_NUMBERS, collectNumbers, consultSystem, parseCandidates, parseConsult, sanitizeFacts } from './_lib/prompts.js'
 import { pickProvider } from './_lib/providers.js'
+import { SERVER_TYPES, inspectFile } from './_lib/upload.js'
 
 const MAX_INLINE = 4_000_000
 
@@ -21,6 +22,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const text = typeof b.text === 'string' ? mask(b.text.slice(0, 20000)) : ''
       if (!text && !(inline?.data && inline.mimeType)) return res.status(400).json({ error: 'input' })
       if (inline?.data && inline.data.length > MAX_INLINE) return res.status(413).json({ error: 'size' })
+      if (inline?.data && inline.mimeType) {
+        if (overLimit(`${user}:upload`, Date.now(), 8)) return res.status(429).json({ error: 'rate' })
+        const v = await inspectFile(new Uint8Array(Buffer.from(inline.data, 'base64')), inline.mimeType, SERVER_TYPES)
+        // One structured line per upload for the host's log search: who (short id), type, size, verdict, and the file's sha256.
+        console.log(JSON.stringify({ evt: 'upload', user: user.slice(0, 8), mime: inline.mimeType, size: v.size, ok: v.ok, ...(v.ok ? { sha256: v.sha256 } : { reason: v.reason }) }))
+        if (!v.ok) return res.status(415).json({ error: 'file', reason: v.reason })
+      }
       const out = await provider.generate({
         system: EXTRACT_SYSTEM,
         messages: [{ role: 'user', text: text || 'Extract the debts from the attached document.' }],

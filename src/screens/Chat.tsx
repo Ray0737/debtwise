@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { formatBaht } from '../engine'
+import { allowanceTotal, formatBaht } from '../engine'
 import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
 import { oneOffTotal, useApp } from '../store/useApp'
@@ -10,10 +10,10 @@ import { Consultant } from './Consultant'
 // The first line of the conversation comes from the engine numbers, never from the AI.
 export default function Chat() {
   const t = useT()
-  const { profile, debts, oneOffs } = useApp()
+  const { profile, debts, oneOffs, taxAnswers } = useApp()
   const justAdded = (useLocation().state as { justAdded?: number } | null)?.justAdded ?? 0
   if (!profile) return null
-  const s = summarize(profile, debts, oneOffTotal(oneOffs))
+  const s = summarize(profile, debts, oneOffTotal(oneOffs), allowanceTotal(taxAnswers))
   const [monthly] = useState(() => {
     const month = new Date().toISOString().slice(0, 7)
     try {

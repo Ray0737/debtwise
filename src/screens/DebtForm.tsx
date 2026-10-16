@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Debt, DebtType } from '../engine'
 import { useT } from '../i18n'
 import { THAI_BANKS } from '../lib/bank'
+import { LABEL } from '../lib/validate'
 import type { DebtInput } from '../store/types'
 import { useApp } from '../store/useApp'
 import { Choice, Field, NumInput, Icon, TextInput, range, showFirstError } from '../ui'
@@ -22,7 +23,11 @@ export function DebtForm({ initial, onSave, onCancel }: { initial?: Debt; onSave
   const set = <K extends keyof Debt>(k: K, v: Debt[K] | null) => setD((x) => ({ ...x, [k]: v }))
 
   const save = async () => {
-    const e = { lender: !d.lender?.trim(), balance: !(d.balance && d.balance > 0), minPayment: d.minPayment == null }
+    const e = {
+      lender: !d.lender?.trim(), lenderText: Boolean(d.lender?.trim()) && !LABEL.test(d.lender!.trim()),
+      label: Boolean(d.label?.trim()) && !LABEL.test(d.label!.trim()),
+      balance: !(d.balance && d.balance > 0), minPayment: d.minPayment == null,
+    }
     setErrors(e)
     if (Object.values(e).some(Boolean)) return showFirstError()
     setBusy(true)
@@ -36,10 +41,11 @@ export function DebtForm({ initial, onSave, onCancel }: { initial?: Debt; onSave
     } finally { setBusy(false) }
   }
   const req = (k: string) => (errors[k] ? t('field.required') : undefined)
+  const text = (k: string) => (errors[k] ? t('field.hasLetters') : undefined)
 
   return (
     <div className="stack">
-      <Field label={t('debt.lender')} error={req('lender')}>
+      <Field label={t('debt.lender')} error={req('lender') ?? text('lenderText')}>
         <div className="banks" role="group" aria-label={t('debt.lender')}>
           {THAI_BANKS.map((b) => {
             const on = !other && d.lender === b.en
@@ -61,10 +67,10 @@ export function DebtForm({ initial, onSave, onCancel }: { initial?: Debt; onSave
         <Choice title={t('debt.type')} placeholder={t('debt.type')} value={d.type} onChange={(v) => set('type', v)}
           options={TYPES.map((v) => ({ v, label: t(`type.${v}` as const) }))} />
       </Field>
-      <Field label={t('debt.label')}><TextInput value={d.label ?? ''} onChange={(v) => set('label', v)} placeholder={t('ph.label')} /></Field>
-      <Field label={t('debt.balance')} error={req('balance')}><NumInput value={d.balance} onChange={(v) => set('balance', v ?? 0)} /></Field>
+      <Field label={t('debt.label')} error={text('label')}><TextInput value={d.label ?? ''} onChange={(v) => set('label', v)} placeholder={t('ph.label')} /></Field>
+      <Field label={t('debt.balance')} error={req('balance')}><NumInput value={d.balance} onChange={(v) => set('balance', v)} /></Field>
       <Field label={t('debt.rate')}><NumInput value={d.ratePct} onChange={(v) => set('ratePct', v)} /></Field>
-      <Field label={t('debt.minPayment')} error={req('minPayment')}><NumInput value={d.minPayment} onChange={(v) => set('minPayment', v ?? 0)} /></Field>
+      <Field label={t('debt.minPayment')} error={req('minPayment')}><NumInput value={d.minPayment} onChange={(v) => set('minPayment', v)} /></Field>
       <Field label={t('debt.dueDay')}>
         <Choice title={t('picker.day')} placeholder={t('ph.pickDay')} cols={7} value={d.dueDay} onChange={(v) => set('dueDay', v)}
           options={range(1, 31).map((n) => ({ v: n, label: String(n) }))} />

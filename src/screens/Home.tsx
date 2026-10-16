@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { formatBaht } from '../engine'
+import { allowanceTotal, formatBaht } from '../engine'
 import { useT } from '../i18n'
 import { daysUntilDue, summarize } from '../lib/derive'
 import { buildIcs } from '../lib/ics'
@@ -10,9 +10,9 @@ import { Card, Icon, Page, Row } from '../ui'
 export default function Home() {
   const t = useT()
   const nav = useNavigate()
-  const { profile, debts, store, oneOffs, clearOneOffs } = useApp()
+  const { profile, debts, store, oneOffs, clearOneOffs, taxAnswers } = useApp()
   const oneOff = oneOffTotal(oneOffs)
-  const s = profile ? summarize(profile, debts, oneOff) : null
+  const s = profile ? summarize(profile, debts, oneOff, allowanceTotal(taxAnswers)) : null
   const month = new Date().toISOString().slice(0, 7)
 
   useEffect(() => {

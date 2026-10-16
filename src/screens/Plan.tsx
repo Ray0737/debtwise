@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { OFFERS } from '../data/sample/offers'
-import { formatBaht, refinance, type Debt } from '../engine'
+import { allowanceTotal, formatBaht, refinance, type Debt } from '../engine'
 import { useT } from '../i18n'
 import { summarize } from '../lib/derive'
 import { buildLenderMessage } from '../lib/lenderMessage'
@@ -40,13 +40,13 @@ function Refi({ debt }: { debt: Debt }) {
 
 export default function Plan() {
   const t = useT()
-  const { profile, debts, store, oneOffs } = useApp()
+  const { profile, debts, store, oneOffs, taxAnswers } = useApp()
   const [saved, setSaved] = useState(false)
   const [draft, setDraft] = useState(false)
   const [copied, setCopied] = useState(false)
   const { lang } = useApp()
   if (!profile) return null
-  const s = summarize(profile, debts, oneOffTotal(oneOffs))
+  const s = summarize(profile, debts, oneOffTotal(oneOffs), allowanceTotal(taxAnswers))
   const byId = new Map(debts.map((d) => [d.id, d]))
   const atRisk = s.plan.shortfall > 0
     ? byId.get(s.plan.allocations.find((a) => a.reason === 'unpaid' || a.reason === 'partial_minimum')?.debtId ?? '') ?? [...debts].sort((a, b) => b.minPayment - a.minPayment)[0]

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { formatBaht } from '../engine'
+import { allowanceTotal, formatBaht } from '../engine'
 import { useT } from '../i18n'
 import { consult } from '../lib/ai'
 import { loadBreaks, saveBreaks, splitSessions } from '../lib/chatSessions'
@@ -15,7 +15,7 @@ type Item = Message & { flagged?: string[]; proposal?: Proposal | null; cites?: 
 
 export function Consultant({ notice }: { notice?: string }) {
   const t = useT()
-  const { store, profile, debts, lang, refresh, oneOffs, addOneOff } = useApp()
+  const { store, profile, debts, lang, refresh, oneOffs, addOneOff, taxAnswers } = useApp()
   // items holds every saved message. The screen and the history sent to the AI use the current chat only.
   const [items, setItems] = useState<Item[]>([])
   const itemsRef = useRef<Item[]>([])
@@ -47,7 +47,7 @@ export function Consultant({ notice }: { notice?: string }) {
       commit([...itemsRef.current, mine])
       const r = await consult({
         messages: history.slice(-10).map((m) => ({ role: m.role, text: m.content })),
-        facts: buildFacts(profile, debts, oneOff), names: [profile.displayName], lang,
+        facts: buildFacts(profile, debts, oneOff, allowanceTotal(taxAnswers)), names: [profile.displayName], lang,
       })
       const saved = await store.addMessage({ role: 'assistant', content: r.reply, maskedPayload: r.maskedPayload })
       commit([...itemsRef.current, { ...saved, flagged: r.flagged, proposal: r.proposal, cites: r.cites }])

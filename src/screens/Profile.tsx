@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useT } from '../i18n'
 import { loadDemo, removeDemo } from '../lib/demo'
-import { validateProfile, type ProfileField } from '../lib/validate'
+import { cleanName, validateProfile, type ProfileField } from '../lib/validate'
 import type { Profile as ProfileT } from '../store/types'
 import { useApp } from '../store/useApp'
 import { Card, Choice, Field, Icon, Modal, NumInput, Page, Row, Seg, TextInput, range, showFirstError } from '../ui'
@@ -22,7 +22,7 @@ export default function Profile() {
   if (!profile || !store) return null
 
   const set = <K extends keyof ProfileT>(k: K, v: ProfileT[K] | null) => { setSaved(false); setDraft((d) => ({ ...d, [k]: v })) }
-  const err = (f: ProfileField) => (errors[f] ? t(errors[f] === 'required' ? 'field.required' : 'field.invalid') : undefined)
+  const err = (f: ProfileField) => (errors[f] ? t(errors[f] === 'required' ? 'field.required' : f === 'displayName' ? 'field.nameLetters' : 'field.invalid') : undefined)
 
   const save = async () => {
     const e = validateProfile(draft, FIELDS)
@@ -47,7 +47,7 @@ export default function Profile() {
   return (
     <Page icon="person" title={t('profile.title')} desc={t('desc.profile')} hero={<><span className="big">{profile.displayName || t('app.name')}</span><span className="small">{t('profile.dataLine')}</span></>}>
       <Card title={t('profile.title')} icon="person">
-        <Field label={t('field.displayName')}><TextInput value={draft.displayName ?? ''} onChange={(v) => set('displayName', v)} placeholder={t('ph.name')} /></Field>
+        <Field label={t('field.displayName')}><TextInput value={draft.displayName ?? ''} onChange={(v) => set('displayName', cleanName(v))} placeholder={t('ph.name')} /></Field>
         <Field label={t('field.birthYear')} error={err('birthYear')}>
           <Choice title={t('picker.year')} placeholder={t('ph.pickYear')} cols={4} value={draft.birthYear} onChange={(v) => set('birthYear', v)}
             options={range(thisYear - 16, thisYear - 90).map((y) => ({ v: y, label: String(y) }))} />
@@ -58,7 +58,7 @@ export default function Profile() {
             options={[{ v: 'salary', label: t('field.income.salary') }, { v: 'freelance', label: t('field.income.freelance') }, { v: 'both', label: t('field.income.both') }]} />
         </Field>
         <Field label={t('field.monthlyIncome')} error={err('monthlyIncome')}><NumInput value={draft.monthlyIncome} onChange={(v) => set('monthlyIncome', v)} /></Field>
-        <Field label={t('field.otherIncome')}><NumInput value={draft.otherIncome} onChange={(v) => set('otherIncome', v ?? 0)} /></Field>
+        <Field label={t('field.otherIncome')}><NumInput value={draft.otherIncome} onChange={(v) => set('otherIncome', v)} /></Field>
         <Field label={t('field.payDay')} error={err('payDay')}>
           <Choice title={t('picker.day')} placeholder={t('ph.pickDay')} cols={7} value={draft.payDay} onChange={(v) => set('payDay', v)}
             options={range(1, 31).map((d) => ({ v: d, label: String(d) }))} />
